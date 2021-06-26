@@ -5,13 +5,19 @@
  */
 package com.group04.Controller;
 
+
+import com.group04.repositories.UserRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -19,7 +25,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "RessetPasswordServlet", urlPatterns = {"/RessetPasswordServlet"})
 public class RessetPasswordServlet extends HttpServlet {
-
+    public static final String SUCCESS = "index";
+    public static final String FAIL = "resetpassword";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,19 +39,29 @@ public class RessetPasswordServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RessetPasswordServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RessetPasswordServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        ServletContext context = request.getServletContext();
+        Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
+        String url = mapping.get(FAIL);
+        try {
+            UserRepositoryImp dao=new UserRepositoryImp();
+            String code=request.getParameter("code");
+            String usermail=request.getParameter("usermail");
+            String newpassword=request.getParameter("newpassword");
+            if(code.equals("1234")){
+                dao.resetPassword(usermail, newpassword);
+                url=SUCCESS;
+            }else{
+                session.setAttribute("mess","Wrong code bae, try again");               
+            }
+        } catch (Exception e) {
+        }finally{
+            request.getRequestDispatcher(url).forward(request, response);
+            out.close();
         }
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

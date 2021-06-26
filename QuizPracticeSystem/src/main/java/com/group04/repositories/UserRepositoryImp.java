@@ -212,8 +212,31 @@ Transaction transaction = null;
         
     }
 
+    @Override
+    public void resetPassword(String usermail, String newpassword) {
+        Transaction transaction = null;
+       try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("SELECT u FROM User u WHERE u.email = :mail");
+    query.setParameter("mail", usermail);
+    //query.getSingleResult();
+
+    User user = (User) query.getSingleResult();
+    user.setPassword(newpassword);
+    session.persist(user);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }  
+    }
+
+    
+    }
+
     
    
    
     
-}
+

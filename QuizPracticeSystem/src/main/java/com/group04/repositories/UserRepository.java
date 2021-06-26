@@ -24,4 +24,5 @@ public interface UserRepository {
     void deleteUser(Long id);
     void updatePassword(String password, String newpassword);
     void SendMail(String email);
+    void resetPassword(String usermail, String newpassword);
 }

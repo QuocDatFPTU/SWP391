@@ -27,7 +27,8 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "ResetPasswordServlet", urlPatterns = {"/ResetPasswordServlet"})
 public class SendEmailServlet extends HttpServlet {
-
+    public static final String SUCCESS = "resetpassword";
+    //public static final String FAIL = "registerPage";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,7 +45,7 @@ public class SendEmailServlet extends HttpServlet {
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
         Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
-        String url = mapping.get(FAIL);
+        String url = mapping.get(SUCCESS);
         try {
             String email=request.getParameter("email");            
         } finally {
