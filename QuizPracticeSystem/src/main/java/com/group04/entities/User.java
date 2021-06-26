@@ -55,7 +55,7 @@ public class User{
     @Column(name = "firstname")
     private String firstName;
     @NotBlank
-    @Size(max = 40)
+    @Size(max = 40, message = "LastName has 40 length only")
     @Column(name = "lastname")
     private String lastName;
     @NotBlank

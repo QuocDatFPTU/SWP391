@@ -126,10 +126,10 @@ public class UserRepositoryImp implements UserRepository {
 
     @Override
     public void updateUser(User user) {
- Transaction transaction = null;
+    Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.update(user);
+            session.merge(user);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -183,27 +183,16 @@ Transaction transaction = null;
         // Tạo đối tượng Email
         
         Email email = new SimpleEmail();
- 
-        // Cấu hình thông tin Email Server
         email.setHostName(MailConfig.HOST_NAME);
         email.setSmtpPort(MailConfig.SSL_PORT);
         email.setAuthenticator(new DefaultAuthenticator("quizpracticesystem@gmail.com", "QuizPracticeSystem"));
         email.setSSLOnConnect(true);
         try{
-        // Người gửi
         email.setFrom("quizpracticesystem@gmail.com");
- 
-        // Người nhận
         email.addTo("quizpracticesystem@gmail.com");
- 
-        // Tiêu đề
-        email.setSubject("Testing Subject");
- 
-        // Nội dung email
-        email.setMsg("Code reset password : 1234");
- 
-        // send message
-        email.send();
+         email.setSubject("Testing Subject");
+         email.setMsg("Code reset password : 1234");
+         email.send();
         }catch(EmailException Em){
             
         }finally{

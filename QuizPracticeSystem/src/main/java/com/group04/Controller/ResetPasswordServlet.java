@@ -23,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author HP
  */
-@WebServlet(name = "RessetPasswordServlet", urlPatterns = {"/RessetPasswordServlet"})
-public class RessetPasswordServlet extends HttpServlet {
+@WebServlet(name = "ResetPasswordServlet", urlPatterns = {"/ResetPasswordServlet"})
+public class ResetPasswordServlet extends HttpServlet {
     public static final String SUCCESS = "index";
     public static final String FAIL = "resetpassword";
     /**
