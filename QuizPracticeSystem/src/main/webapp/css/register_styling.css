@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    pad: 0;
+    box-sizing: border-box;  
+}
+
+.input-group input{
+    outline: none;
+    background: none;
+    border-radius: 55px;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title{
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+}
