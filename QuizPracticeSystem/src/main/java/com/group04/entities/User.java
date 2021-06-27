@@ -44,32 +44,40 @@ public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = "username can't be empty")
+    @Size(max = 100, min = 5, message="username must have more than 5 characters")
     @Column(name = "username")
     private String username;
-    @NotBlank(message = "anh oi, lap day em di")
-    @Size(max = 100,min = 5,message = "cannot be blank")
+    @NotBlank(message = "Password cant be empty")
+    @Size(max = 100,min = 5,message = "Password must be have more than 5 character")
     @Column(name = "password")
     private String password;
     @NotBlank
-    @Size(max = 40, message = "FirstName has 40 length only")
+    @Size(max = 40,min=1, message = "FirstName must have more than 1 character")
     @Column(name = "firstname")
     private String firstName;
     @NotBlank
-    @Size(max = 40, message = "LastName has 40 length only")
+    @Size(max = 40, min=1, message ="LastName must have more than 1 character")
     @Column(name = "lastname")
     private String lastName;
     @NotBlank
     @Size(max = 40)
-    @Email
+    @Email(message="email must be in the correct format")
     @Column(name = "email")
     private String email;
-
+    
+    @NotBlank
+    @Size(max = 12,min=10, message = "phonenumber must have atleast than 10 number")
     @Column(name = "phone")
     private String phone;
-
+    
+    @NotBlank
+    @Size(max = 40,min=1, message = "Gender cant be empty")
     @Column(name = "gender")
     private String gender;
-
+    
+    @NotBlank
+    @Size(max = 40,min=1, message = "avatar must not be empty")
     @Column(name = "avatar")
     private String avatar;
 

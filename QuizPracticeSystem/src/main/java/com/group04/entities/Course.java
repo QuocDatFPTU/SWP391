@@ -4,154 +4,93 @@
  * and open the template in the editor.
  */
 package com.group04.entities;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.mapping.Set;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 /**
  *
  * @author HP
  */
 @Entity
-@Table(name = "tblCourse")
+@Table(name = "course")
+@Getter
+@Setter 
+@NoArgsConstructor
+@AllArgsConstructor
 public class Course {
+
     @Id
-    @Column(name = "courseID")
-    private String courseID;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long courseID;
     
+    @NotBlank(message = "coursename cannot be empty")
+    @Size(max = 100, min = 5, message = "course name must be 5 characters")
     @Column(name = "courseName")
     private String courseName;
     
-    @Column(name = "thumbnail")
-    private String thumbnail;
-    
+    @NotBlank(message = "category cannot be empty")
+    @Size(max = 100)
     @Column(name = "category")
     private String category;
     
+    @NotBlank(message = "featuredFlag cannot be empty")
+    @Size(max = 40, min = 1, message = "featuredFlag must have more than 1 character")
     @Column(name = "featuredFlag")
-    private String featuredFlag;
+    private boolean featuredFlag;
+
+    @Column(name = "isActive")
+    private boolean isActive;
     
-    @Column(name = "owner")
-    private String owner;
-    
-    @Column(name = "status")
-    private String status;
-    
+    @NotBlank(message = "description cannot be empty")
+    @Size(max = 100, min = 10)
+    @Email
     @Column(name = "description")
     private String description;
+
+    @NotBlank(message = "price cannot be empty")
+    @Size(max = 12, min = 1, message = "cannot be lower than 1 dollar")
+    @Column(name = "price")
+    private String price;
+
+    @NotBlank(message = "idSale cant be empty")
+    @Size(max = 40, min = 1)
+    @Column(name = "idSale")
+    private String idSale;
+
+    @Column(name = "createDate")
+    private String createDate;
     
-    @Column(name = "originalPrice")
-    private String originalPrice;
-    
-    @Column(name = "salePrice")
-    private String salePrice;
-    
-    @Column(name = "subjectID")
-    private String subjectID;
+    @Column(name = "updateDate")
+    private String updateDate;
 
-    public Course() {
-    }
-
-    public Course(String courseID, String courseName, String thumbnail, String category, String featuredFlag, String owner, String status, String description, String originalPrice, String salePrice, String subjectID) {
-        this.courseID = courseID;
-        this.courseName = courseName;
-        this.thumbnail = thumbnail;
-        this.category = category;
-        this.featuredFlag = featuredFlag;
-        this.owner = owner;
-        this.status = status;
-        this.description = description;
-        this.originalPrice = originalPrice;
-        this.salePrice = salePrice;
-        this.subjectID = subjectID;
-    }
-
-    public String getCourseID() {
-        return courseID;
-    }
-
-    public void setCourseID(String courseID) {
-        this.courseID = courseID;
-    }
-
-    public String getCourseName() {
-        return courseName;
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
-    public String getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getFeaturedFlag() {
-        return featuredFlag;
-    }
-
-    public void setFeaturedFlag(String featuredFlag) {
-        this.featuredFlag = featuredFlag;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public void setOriginalPrice(String originalPrice) {
-        this.originalPrice = originalPrice;
-    }
-
-    public String getSalePrice() {
-        return salePrice;
-    }
-
-    public void setSalePrice(String salePrice) {
-        this.salePrice = salePrice;
-    }
-
-    public String getSubjectID() {
-        return subjectID;
-    }
-
-    public void setSubjectID(String subjectID) {
-        this.subjectID = subjectID;
+    @OneToMany(mappedBy = "Course")
+    private Set<Register> register;
+    public Course(Course course) {
+        this.courseID = course.courseID;
+        this.courseName = course.courseName;
+        this.category = course.category;
+        this.featuredFlag = course.featuredFlag;
+        this.isActive = course.isActive;
+        this.description = course.description;
+        this.price = course.price;
+        this.idSale = course.idSale;
+        this.createDate = course.createDate;
+        this.updateDate = course.updateDate;
     }
     
 }

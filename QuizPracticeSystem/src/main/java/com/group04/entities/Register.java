@@ -5,37 +5,48 @@
  */
 package com.group04.entities;
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  *
  * @author HP
  */
 @Entity
-@Table(name = "roles")
-@Getter @Setter
-@ToString @NoArgsConstructor
+@Table(name = "Register")
+@Getter
+@Setter 
+@NoArgsConstructor
 @AllArgsConstructor
-public class Role{
+public class Register {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long RegisterID;
+    
+    @Column(name = "id")
     private Long id;
+    
+    @Column(name = "courseID")
+    private long courseID;
+    
+    @Column(name = "registerDay")
+    private String registerDay;
+
+    @
+    public Register(Register register) {
+        this.RegisterID = register.RegisterID;
+        this.id = register.id;
+        this.courseID = register.courseID;
+        this.registerDay = register.registerDay;
+    }
+    
    
-    @Column(name="name",length = 60)
-    private String name;
-    @ManyToMany(mappedBy ="roles")
-    private Set<User> users = new HashSet<>();
 }
