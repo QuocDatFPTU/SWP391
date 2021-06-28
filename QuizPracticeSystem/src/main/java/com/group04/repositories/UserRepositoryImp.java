@@ -219,26 +219,7 @@ Transaction transaction = null;
                 transaction.rollback();
             }
         }  
-    }
-
-    @Override
-    public List<Course> getAllCourse() { 
-        Transaction transaction = null;
-        List <Course> listOfCourse = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            listOfCourse = session.createQuery("from Course").getResultList();
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        }
-        return listOfCourse;
-    }
-    
-
-    
+    } 
     }
 
     

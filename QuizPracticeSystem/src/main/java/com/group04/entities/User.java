@@ -67,29 +67,17 @@ public class User{
     private String email;
     
     @NotBlank
-<<<<<<< HEAD
-    @Size(max = 40,min=1, message = "FirstName must have more than 1 character")
-=======
     @Size(max = 12,min=10, message = "phonenumber must have atleast than 10 number")
->>>>>>> 8d018dba882c8107ca84e9fe0b29ea949db86764
     @Column(name = "phone")
     private String phone;
     
     @NotBlank
-<<<<<<< HEAD
-    @Size(max = 40,min=1, message = "FirstName must have more than 1 character")
-=======
     @Size(max = 40,min=1, message = "Gender cant be empty")
->>>>>>> 8d018dba882c8107ca84e9fe0b29ea949db86764
     @Column(name = "gender")
     private String gender;
     
     @NotBlank
-<<<<<<< HEAD
-    @Size(max = 40,min=1, message = "FirstName must have more than 1 character")
-=======
     @Size(max = 40,min=1, message = "avatar must not be empty")
->>>>>>> 8d018dba882c8107ca84e9fe0b29ea949db86764
     @Column(name = "avatar")
     private String avatar;
 
