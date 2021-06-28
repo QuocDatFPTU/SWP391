@@ -5,6 +5,7 @@
  */
 package com.group04.repositories;
 
+import com.group04.entities.Course;
 import com.group04.entities.Role;
 import com.group04.entities.User;
 import java.util.List;
@@ -25,4 +26,5 @@ public interface UserRepository {
     void updatePassword(String password, String newpassword);
     void SendMail(String email);
     void resetPassword(String usermail, String newpassword);
+    List<Course> getAllCourse();
 }

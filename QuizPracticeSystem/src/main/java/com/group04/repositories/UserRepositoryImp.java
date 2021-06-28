@@ -6,6 +6,7 @@
 package com.group04.repositories;
 
 import com.group04.email.MailConfig;
+import com.group04.entities.Course;
 import com.group04.entities.Role;
 import com.group04.entities.User;
 import com.group04.utiils.HibernateUtil;
@@ -219,8 +220,7 @@ Transaction transaction = null;
             transaction = session.beginTransaction();
             Query query = session.createQuery("SELECT u FROM User u WHERE u.email = :mail");
     query.setParameter("mail", usermail);
-    //query.getSingleResult();
-
+    
     User user = (User) query.getSingleResult();
     user.setPassword(newpassword);
     session.persist(user);
@@ -231,6 +231,23 @@ Transaction transaction = null;
             }
         }  
     }
+
+    @Override
+    public List<Course> getAllCourse() { 
+        Transaction transaction = null;
+        List <Course> listOfCourse = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            listOfCourse = session.createQuery("from Course").getResultList();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return listOfCourse;
+    }
+    
 
     
     }

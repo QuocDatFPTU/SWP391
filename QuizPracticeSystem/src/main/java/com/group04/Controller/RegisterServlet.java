@@ -5,18 +5,15 @@
  */
 package com.group04.Controller;
 
-import static com.group04.Controller.LoginServlet.FAIL;
 import com.group04.entities.Role;
 import com.group04.entities.User;
 import com.group04.repositories.UserRepositoryImp;
 import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

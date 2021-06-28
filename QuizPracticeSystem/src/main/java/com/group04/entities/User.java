@@ -46,12 +46,12 @@ public class User{
     private Long id;
     @Column(name = "username")
     private String username;
-    @NotBlank(message = "anh oi, lap day em di")
-    @Size(max = 100,min = 5,message = "cannot be blank")
+    @NotBlank(message = "Password cant be empty")
+    @Size(max = 100,min = 5,message = "Password must be have more than 5 character")
     @Column(name = "password")
     private String password;
     @NotBlank
-    @Size(max = 40, message = "FirstName has 40 length only")
+    @Size(max = 40,min=1, message = "FirstName must have more than 1 character")
     @Column(name = "firstname")
     private String firstName;
     @NotBlank
@@ -63,13 +63,19 @@ public class User{
     @Email
     @Column(name = "email")
     private String email;
-
+    
+    @NotBlank
+    @Size(max = 40,min=1, message = "FirstName must have more than 1 character")
     @Column(name = "phone")
     private String phone;
-
+    
+    @NotBlank
+    @Size(max = 40,min=1, message = "FirstName must have more than 1 character")
     @Column(name = "gender")
     private String gender;
-
+    
+    @NotBlank
+    @Size(max = 40,min=1, message = "FirstName must have more than 1 character")
     @Column(name = "avatar")
     private String avatar;
 
