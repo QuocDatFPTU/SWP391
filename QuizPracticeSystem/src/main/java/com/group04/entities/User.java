@@ -44,6 +44,8 @@ public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = "username can't be empty")
+    @Size(max = 100, min = 5, message="username must have more than 5 characters")
     @Column(name = "username")
     private String username;
     @NotBlank(message = "Password cant be empty")
@@ -55,27 +57,39 @@ public class User{
     @Column(name = "firstname")
     private String firstName;
     @NotBlank
-    @Size(max = 40)
+    @Size(max = 40, min=1, message ="LastName must have more than 1 character")
     @Column(name = "lastname")
     private String lastName;
     @NotBlank
     @Size(max = 40)
-    @Email
+    @Email(message="email must be in the correct format")
     @Column(name = "email")
     private String email;
     
     @NotBlank
+<<<<<<< HEAD
     @Size(max = 40,min=1, message = "FirstName must have more than 1 character")
+=======
+    @Size(max = 12,min=10, message = "phonenumber must have atleast than 10 number")
+>>>>>>> 8d018dba882c8107ca84e9fe0b29ea949db86764
     @Column(name = "phone")
     private String phone;
     
     @NotBlank
+<<<<<<< HEAD
     @Size(max = 40,min=1, message = "FirstName must have more than 1 character")
+=======
+    @Size(max = 40,min=1, message = "Gender cant be empty")
+>>>>>>> 8d018dba882c8107ca84e9fe0b29ea949db86764
     @Column(name = "gender")
     private String gender;
     
     @NotBlank
+<<<<<<< HEAD
     @Size(max = 40,min=1, message = "FirstName must have more than 1 character")
+=======
+    @Size(max = 40,min=1, message = "avatar must not be empty")
+>>>>>>> 8d018dba882c8107ca84e9fe0b29ea949db86764
     @Column(name = "avatar")
     private String avatar;
 
