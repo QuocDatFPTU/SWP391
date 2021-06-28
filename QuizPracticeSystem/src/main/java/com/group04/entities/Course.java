@@ -78,8 +78,8 @@ public class Course {
     @Column(name = "updateDate")
     private String updateDate;
 
-    @OneToMany(mappedBy = "Course")
-    private Set<Register> register;
+    //@OneToMany(mappedBy = "Course")
+    //private Set<Register> register;
     public Course(Course course) {
         this.courseID = course.courseID;
         this.courseName = course.courseName;
