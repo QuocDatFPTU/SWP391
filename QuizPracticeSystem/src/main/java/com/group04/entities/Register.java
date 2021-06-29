@@ -40,7 +40,7 @@ public class Register {
     @Column(name = "registerDay")
     private String registerDay;
 
-    @
+    
     public Register(Register register) {
         this.RegisterID = register.RegisterID;
         this.id = register.id;
