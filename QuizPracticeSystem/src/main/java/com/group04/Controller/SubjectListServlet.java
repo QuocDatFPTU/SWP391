@@ -50,6 +50,7 @@ public class SubjectListServlet extends HttpServlet {
             dao.getSubjectById(id);
             url = mapping.get(SUCCESS);
         } catch (Exception e) {
+            System.out.println("Error: "+e);
         }finally{
             request.getRequestDispatcher(url).forward(request, response);
             out.close();

@@ -56,6 +56,7 @@ public class ResetPasswordServlet extends HttpServlet {
                 session.setAttribute("mess","Wrong code bae, try again");               
             }
         } catch (Exception e) {
+            System.out.println("Error: "+e);
         }finally{
             request.getRequestDispatcher(url).forward(request, response);
             out.close();

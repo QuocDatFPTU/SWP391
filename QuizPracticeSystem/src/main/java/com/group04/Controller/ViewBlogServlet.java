@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author HP
  */
 @WebServlet(name = "BlogListServlet", urlPatterns = {"/BlogListServlet"})
-public class BlogListServlet extends HttpServlet {
+public class ViewBlogServlet extends HttpServlet {
 private final String HOME_PAGE = "homePage";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,7 +48,8 @@ private final String HOME_PAGE = "homePage";
             BlogRepositoryImp dao = new BlogRepositoryImp();
             List<Blog> list = dao.getAllBlog();
             request.setAttribute("BLOG_LIST", list);
-         
+        }catch (Exception e){  
+            System.out.println("Error: "+e);
         }finally{
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

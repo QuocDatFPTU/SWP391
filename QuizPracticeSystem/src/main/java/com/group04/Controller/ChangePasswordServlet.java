@@ -51,7 +51,8 @@ public class ChangePasswordServlet extends HttpServlet {
             UserRepositoryImp dao = new UserRepositoryImp();
             dao.updatePassword(oldPassword, newPassword); 
             url = mapping.get(SUCCESS);
-        }catch (Exception e){       
+        }catch (Exception e){  
+            System.out.println("Error: "+e);
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
