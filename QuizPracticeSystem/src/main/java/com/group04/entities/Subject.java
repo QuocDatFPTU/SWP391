@@ -61,5 +61,18 @@ public class Subject {
     
     @Column(name = "courseID")
     private String courseID;
+
+    public Subject(Subject subject) {
+        this.id = subject.id;
+        this.subjectName = subject.subjectName;
+        this.category = subject.category;
+        this.owner = subject.owner;
+        this.status = subject.status;
+        this.dimension = subject.dimension;
+        this.description = subject.description;
+        this.courseID = subject.courseID;
+    }
+    
+    
        
 }

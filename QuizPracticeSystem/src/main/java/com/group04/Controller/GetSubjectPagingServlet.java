@@ -7,10 +7,12 @@ package com.group04.Controller;
 
 import static com.group04.Controller.ChangePasswordServlet.FAIL;
 import static com.group04.Controller.ChangePasswordServlet.SUCCESS;
+import com.group04.entities.Subject;
 import com.group04.repositories.SubjectRepositoryImp;
 import com.group04.repositories.UserRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -19,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -26,7 +29,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "GetSubjectPagingServlet", urlPatterns = {"/GetSubjectPagingServlet"})
 public class GetSubjectPagingServlet extends HttpServlet {
-
+    public static final String SUCCESS = "viewdetailcourse";
+    public static final String FAIL = "error";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,14 +44,18 @@ public class GetSubjectPagingServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();       
+        HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
         Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
         String url = mapping.get(FAIL);
         SubjectRepositoryImp dao=new SubjectRepositoryImp();
         try {
             String courseID = request.getParameter("courseID");
-            dao.getAllSubjectPaging(courseID, 0, );
-        }catch (Exception e){       
+            List<Subject> subject=dao.getAllSubjectPaging(courseID, 0, 5);
+            session.setAttribute("listSubjectPaging", subject);
+            url = mapping.get(SUCCESS);
+        }catch (Exception e){
+            System.out.println("Error: "+e);
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
