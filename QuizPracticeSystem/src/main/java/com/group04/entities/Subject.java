@@ -6,117 +6,60 @@
 package com.group04.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.validator.constraints.NotBlank;
 /**
  *
  * @author HP
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "tblSubject")
+@Table(name = "subject")
 public class Subject {
     @Id
-    @Column(name = "subjectID")
-    private String subjectID;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String id;
     
+    @NotBlank(message = "subjectname can't be empty")
+    @Size(max = 100, min = 5, message="subjectname must have more than 5 characters")
     @Column(name = "subjectName")
     private String subjectName;
     
+    @NotBlank(message = "category can't be empty")
+    @Size(max = 100, min = 1, message="category must have more than 1 characters")
     @Column(name = "category")
     private String category;
     
+    @NotBlank(message = "owner can't be empty")
+    @Size(max = 100, min = 1, message="owner must have more than 1 characters")
     @Column(name = "owner")
     private String owner;
     
     @Column(name = "status")
     private String status;
     
+    @NotBlank(message = "dimension can't be empty")
+    @Size(max = 100, min = 5, message="dimension must have more than 5 characters")
     @Column(name = "dimension")
     private String dimension;
     
+    @NotBlank(message = "description can't be empty")
+    @Size(max = 100, min = 5, message="description must have more than 5 characters")
     @Column(name = "description")
     private String description;
     
     @Column(name = "courseID")
     private String courseID;
-
-    public Subject() {
-    }
-
-    public Subject(String subjectID, String subjectName, String category, String owner, String status, String dimension, String description, String courseID) {
-        this.subjectID = subjectID;
-        this.subjectName = subjectName;
-        this.category = category;
-        this.owner = owner;
-        this.status = status;
-        this.dimension = dimension;
-        this.description = description;
-        this.courseID = courseID;
-    }
-
-    public String getSubjectID() {
-        return subjectID;
-    }
-
-    public void setSubjectID(String subjectID) {
-        this.subjectID = subjectID;
-    }
-
-    public String getSubjectName() {
-        return subjectName;
-    }
-
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDimension() {
-        return dimension;
-    }
-
-    public void setDimension(String dimension) {
-        this.dimension = dimension;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCourseID() {
-        return courseID;
-    }
-
-    public void setCourseID(String courseID) {
-        this.courseID = courseID;
-    }
-    
-    
+       
 }
