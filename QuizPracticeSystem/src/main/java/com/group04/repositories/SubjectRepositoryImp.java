@@ -10,28 +10,38 @@ import com.group04.utiils.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 /**
  *
  * @author ntdun
  */
 public class SubjectRepositoryImp implements SubjectRepository {
-
+    
     @Override
-    public List<Subject> getAllSubject() {
+    public List<Subject> getAllSubjectPaging(String courseID, int position, int pageSize) {
         Transaction transaction = null;
-        List <Subject> listOfSubject = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        Subject Subject = null;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            listOfSubject = session.createQuery("from Subject").getResultList();
+            Query query = session.createQuery("FROM Subject S WHERE S.courseID =: courseId").setParameter("courseId", courseID);
+    query.setFirstResult(position);
+    query.setMaxResults(pageSize);
+        if(query.list() !=null){
+            return query.list();
+        }
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
+                System.out.println("Loop Function");
                 transaction.rollback();
             }
         }
-        return listOfSubject;
+        return null;
     }
+
+    
 
     @Override
     public Subject getSubjectById(String subjectId) {
@@ -76,7 +86,6 @@ public class SubjectRepositoryImp implements SubjectRepository {
         }
         return null;
     }
-
-    
+   
     
 }

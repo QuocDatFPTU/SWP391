@@ -13,7 +13,7 @@ import java.util.List;
  * @author ntdun
  */
 public interface SubjectRepository {
-   List<Subject> getAllSubject();
+   List<Subject> getAllSubjectPaging(String courseID, int position, int pageSize);
    Subject getSubjectById(String subjectId);
    List<Subject> getSubjectByCourseId(String courseId);
 }
