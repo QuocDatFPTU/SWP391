@@ -5,8 +5,16 @@
  */
 package com.group04.Controller;
 
+import com.group04.entities.Blog;
+import com.group04.repositories.BlogRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "BlogListServlet", urlPatterns = {"/BlogListServlet"})
 public class BlogListServlet extends HttpServlet {
-
+private final String HOME_PAGE = "homePage";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,17 +40,19 @@ public class BlogListServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet BlogListServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet BlogListServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PrintWriter out = response.getWriter();
+        ServletContext context = request.getServletContext();
+        Map<String, String> listmapping = (Map<String, String>) context.getAttribute("MAPPING");
+        String url = listmapping.get(HOME_PAGE);
+        try {
+            BlogRepositoryImp dao = new BlogRepositoryImp();
+            List<Blog> list = dao.getAllBlog();
+            request.setAttribute("BLOG_LIST", list);
+         
+        }finally{
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+            out.close();
         }
     }
 

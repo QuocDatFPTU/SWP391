@@ -16,7 +16,7 @@ import org.hibernate.Transaction;
  * @author HP
  */
 public class BlogRepositoryImp implements BlogRepository {
-
+    
     @Override
     public List<Blog> getAllBlog() {
         Transaction transaction = null;
