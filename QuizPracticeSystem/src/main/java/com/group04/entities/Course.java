@@ -5,6 +5,7 @@
  */
 package com.group04.entities;
 
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.mapping.Set;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -78,8 +79,8 @@ public class Course {
     @Column(name = "updateDate")
     private String updateDate;
 
-    //@OneToMany(mappedBy = "Course")
-    //private Set<Register> register;
+    @OneToMany(mappedBy = "Course")
+    private Set<Register> register;
     public Course(Course course) {
         this.courseID = course.courseID;
         this.courseName = course.courseName;
