@@ -79,7 +79,7 @@ public class Course {
     private String updateDate;
 
     @OneToMany(mappedBy = "course")
-    private Set<Register> register;
+    private Set<StudentRegistration> register;
     
     public Course(Course course) {
         this.courseID = course.courseID;
@@ -92,6 +92,5 @@ public class Course {
         this.idSale = course.idSale;
         this.createDate = course.createDate;
         this.updateDate = course.updateDate;
-    }
-    
+    }   
 }
