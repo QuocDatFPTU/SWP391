@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,32 +24,45 @@ import lombok.Setter;
  * @author HP
  */
 @Entity
-@Table(name = "Register")
+@Table(name = "StudentRegistration")
 @Getter
 @Setter 
 @NoArgsConstructor
 @AllArgsConstructor
-public class Register {
+public class StudentRegistration {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long RegisterID;
-    
-    @Column(name = "id")
     private Long id;
+    
+    @Column(name = "StudentID")
+    private Long StudentID;
     
     @Column(name = "courseID")
     private long courseID;
     
-    @Column(name = "registerDay")
-    private String registerDay;
-
+    @Column(name = "PaymentID")
+    private String PaymentID;
     
-    public Register(Register register) {
-        this.RegisterID = register.RegisterID;
+    @Column(name = "FeeStatus")
+    private boolean FeeStatus;
+    
+    @Column(name = "registerDate")
+    private String registerDate;
+    
+    @ManyToOne
+    @JoinTable(
+     name = "users",
+     joinColumns = {@JoinColumn(name = "id")}    
+    )
+    
+    private Course course;
+      
+    public StudentRegistration(StudentRegistration register) {
         this.id = register.id;
+        this.StudentID = register.StudentID;
         this.courseID = register.courseID;
-        this.registerDay = register.registerDay;
+        this.registerDate = register.registerDate;
+        this.FeeStatus = register.FeeStatus;
     }
-    
-   
+      
 }

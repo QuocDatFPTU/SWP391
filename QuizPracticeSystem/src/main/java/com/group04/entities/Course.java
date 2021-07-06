@@ -13,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -79,8 +78,6 @@ public class Course {
     @Column(name = "updateDate")
     private String updateDate;
 
-    @OneToMany(mappedBy = "Course")
-    private Set<Register> register;
     public Course(Course course) {
         this.courseID = course.courseID;
         this.courseName = course.courseName;
@@ -92,6 +89,5 @@ public class Course {
         this.idSale = course.idSale;
         this.createDate = course.createDate;
         this.updateDate = course.updateDate;
-    }
-    
+    }   
 }
