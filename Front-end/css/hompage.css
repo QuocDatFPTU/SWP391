@@ -1,0 +1,27 @@
+h2 {
+  font-family: "Jost", sans-serif;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+#carouselExampleIndicators {
+  padding-bottom: 90px;
+}
+
+.slide-show {
+  background-color: #1e8ff1;
+}
+
+.swiper-container {
+  width: 900px;
+  height: 500px;
+}
+
+.swiper-container p {
+  text-align: center;
+  font-style: italic;
+}
+
+.card {
+  height: 300px;
+}
