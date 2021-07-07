@@ -29,7 +29,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private String subjectID;
     
     @NotBlank(message = "subjectname can't be empty")
     @Size(max = 100, min = 5, message="subjectname must have more than 5 characters")
@@ -47,12 +47,10 @@ public class Subject {
     private String owner;
     
     @Column(name = "status")
-    private String status;
+    private boolean status;
     
-    @NotBlank(message = "dimension can't be empty")
-    @Size(max = 100, min = 5, message="dimension must have more than 5 characters")
-    @Column(name = "dimension")
-    private String dimension;
+    @Column(name = "updateDate")
+    private String updateDate;
     
     @NotBlank(message = "description can't be empty")
     @Size(max = 100, min = 5, message="description must have more than 5 characters")
@@ -61,16 +59,20 @@ public class Subject {
     
     @Column(name = "courseID")
     private String courseID;
+    
+    @Column(name = "isActive")
+    private boolean isActive;
 
     public Subject(Subject subject) {
-        this.id = subject.id;
+        this.subjectID = subject.subjectID;
         this.subjectName = subject.subjectName;
         this.category = subject.category;
         this.owner = subject.owner;
         this.status = subject.status;
-        this.dimension = subject.dimension;
+        this.updateDate = subject.updateDate;
         this.description = subject.description;
         this.courseID = subject.courseID;
+        this.isActive = subject.isActive;
     }
     
     

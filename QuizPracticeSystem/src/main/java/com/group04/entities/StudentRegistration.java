@@ -32,22 +32,20 @@ import lombok.Setter;
 public class StudentRegistration {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long registrationID;
     
-    @Column(name = "StudentID")
-    private Long StudentID;
+    @Column(name = "userID")
+    private Long userID;
     
     @Column(name = "courseID")
     private long courseID;
     
-    @Column(name = "PaymentID")
-    private String PaymentID;
+    @Column(name = "paymentID")
+    private String paymentID;
     
-    @Column(name = "FeeStatus")
-    private boolean FeeStatus;
+    @Column(name = "isPaid")
+    private boolean isPaid;
     
-    @Column(name = "registerDate")
-    private String registerDate;
     
     @ManyToOne
     @JoinTable(
@@ -58,11 +56,11 @@ public class StudentRegistration {
     private Course course;
       
     public StudentRegistration(StudentRegistration register) {
-        this.id = register.id;
-        this.StudentID = register.StudentID;
+        this.registrationID = register.registrationID;
+        this.userID = register.userID;
         this.courseID = register.courseID;
-        this.registerDate = register.registerDate;
-        this.FeeStatus = register.FeeStatus;
+        this.paymentID = register.paymentID;
+        this.isPaid = register.isPaid;
     }
       
 }

@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.NotBlank;
 /**
  *
  * @author HP
@@ -31,10 +32,20 @@ import lombok.Setter;
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long paymentID;
     
-    @Column(name = "paymentName")
-    private String paymentName;
+    @NotBlank(message = "paymentType can't be empty")
+    @Size(max = 100, min = 1, message="paymentType must have more than 1 characters")
+    @Column(name = "paymentType")
+    private String paymentType;
+    
+    @NotBlank(message = "paymentDescription can't be empty")
+    @Size(max = 100, min = 5, message="paymentDescription must have more than 5 characters")
+    @Column(name = "paymentDescription")
+    private String paymentDescription;
+    
+    @Column(name = "payDate")
+    private String payDate;
     
     @ManyToOne
     @JoinColumn(name = "PaymentID", nullable = false)
