@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.group04.entities;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -50,5 +53,15 @@ public class Payment {
     @ManyToOne
     @JoinColumn(name = "PaymentID", nullable = false)
     
-    private StudentRegistration register;
+    @OneToOne(mappedBy = "StudentRegistration", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn 
+    private StudentRegistration StudentRegistration;
+    
+    public Payment(Payment payment) {
+        this.paymentID = payment.paymentID;
+        this.paymentType = payment.paymentType;
+        this.paymentDescription = payment.paymentDescription;
+        this.payDate = payment.payDate;
+        
+    }
 }

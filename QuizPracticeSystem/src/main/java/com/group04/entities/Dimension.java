@@ -40,4 +40,11 @@ public class Dimension {
     
     @Column(name = "subjectID")
     private String subjectID;
+    
+    public Dimension(Dimension dimension) {
+        this.dimensionID = dimension.dimensionID;
+        this.dimensionName = dimension.dimensionName;
+        this.subjectID = dimension.subjectID;
+        
+    } 
 }

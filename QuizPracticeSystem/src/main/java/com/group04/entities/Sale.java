@@ -47,4 +47,13 @@ public class Sale {
     
     @Column(name = "packageID")
     private String packageID;
+    
+    public Sale(Sale sale) {
+        this.saleID = sale.saleID;
+        this.startSale = sale.startSale;
+        this.expiSale = sale.expiSale;
+        this.isActive = sale.isActive;
+        this.value = sale.value;
+        this.packageID = sale.packageID;
+    }
 }

@@ -73,7 +73,7 @@ public class UserRepositoryImp implements UserRepository {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.save(user);
+            session.persist(user);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -130,6 +130,7 @@ public class UserRepositoryImp implements UserRepository {
     Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
+            session.evict(user);
             session.merge(user);
             transaction.commit();
         } catch (Exception e) {

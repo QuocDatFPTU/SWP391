@@ -1,3 +1,9 @@
+<%-- 
+    Document   : register
+    Created on : Jul 7, 2021, 7:45:35 PM
+    Author     : ntdun
+--%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +17,8 @@
 <body>
     <div class="container-md">        
         <h2 class="title">Register Page</h2>
-        <form action="#">
-           
+        <form action="RegisterServlet" method="POST">
+           <p class="text-danger">${mess}</p>
             <div class="input-group">
                 <label for="username">User Name:</label>
                 <input type="text" name="username" id="username">
@@ -23,7 +29,7 @@
             </div>
             <div class="input-group">
                 <label for="re_password">Re-Password:</label>
-                <input type="password" name="password" id="re_password">
+                <input type="password" name="repassword" id="re_password">
             </div>
             <div class="input-group">
                 <label for="firstname">First Name:</label>
@@ -40,7 +46,7 @@
             </div>
             <div class="input-group">
                 <label for="phone">Phone No:</label>
-                <input type="tel" name="phone" id="phone">
+                <input type="tel" name="phonenumber" id="phone">
             </div>
 
 
@@ -49,7 +55,7 @@
                 <input
                   class="form-check-input"
                   type="radio"
-                  name="flexRadioDefault"
+                  name="gender"
                   id="male"
                   checked
                 />
@@ -61,12 +67,12 @@
                 <input
                   class="form-check-input"
                   type="radio"
-                  name="flexRadioDefault"
+                  name="gender"
                   id="female"
                 />
                 <label class="form-check-label" for="female"> Female </label>
               </div>
-              <button type="button" class="btn btn-primary">Register</button>            
+              <button type="submit" class="btn btn-primary">Register</button>            
         </form>
     </div>
 </body>
