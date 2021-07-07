@@ -43,51 +43,27 @@ public class Course {
     @Column(name = "courseName")
     private String courseName;
     
-    @NotBlank(message = "category cannot be empty")
-    @Size(max = 100)
-    @Column(name = "category")
-    private String category;
     
-    @NotBlank(message = "featuredFlag cannot be empty")
-    @Size(max = 40, min = 1, message = "featuredFlag must have more than 1 character")
-    @Column(name = "featuredFlag")
-    private boolean featuredFlag;
+    @Column(name = "isFeatured")
+    private boolean isFeatured;
 
     @Column(name = "isActive")
     private boolean isActive;
     
-    @NotBlank(message = "description cannot be empty")
     @Size(max = 100, min = 10)
-    @Email
-    @Column(name = "description")
-    private String description;
-
-    @NotBlank(message = "price cannot be empty")
-    @Size(max = 12, min = 1, message = "cannot be lower than 1 dollar")
-    @Column(name = "price")
-    private String price;
-
-    @NotBlank(message = "idSale cant be empty")
-    @Size(max = 40, min = 1)
-    @Column(name = "idSale")
-    private String idSale;
+    @Column(name = "thumbnailLink")
+    private String thumbnailLink;
 
     @Column(name = "createDate")
     private String createDate;
     
-    @Column(name = "updateDate")
-    private String updateDate;
 
     public Course(Course course) {
         this.courseID = course.courseID;
         this.courseName = course.courseName;
-        this.category = course.category;
-        this.featuredFlag = course.featuredFlag;
+        this.isFeatured = course.isFeatured;
         this.isActive = course.isActive;
-        this.description = course.description;
-        this.price = course.price;
-        this.idSale = course.idSale;
+        this.thumbnailLink = course.thumbnailLink;
         this.createDate = course.createDate;
-        this.updateDate = course.updateDate;
     }   
 }
