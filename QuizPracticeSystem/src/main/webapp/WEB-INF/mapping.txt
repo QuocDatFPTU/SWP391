@@ -18,6 +18,6 @@ index=login.jsp
 searchPage=search.jsp
 homePage=homePage.jsp
 viewCartPage=viewCart.jsp
-registerPage=Register/register.jsp
+registerPage=register.jsp
 createErrorPage=register.jsp
 errorPage=error.html

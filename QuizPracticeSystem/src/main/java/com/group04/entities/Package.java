@@ -44,4 +44,12 @@ public class Package {
     
     @Column(name = "courseID")
     private String courseID;
+    
+    public Package(Package packages) {
+        this.packageID = packages.packageID;
+        this.packageName = packages.packageName;
+        this.price = packages.price;
+        this.courseID = packages.courseID;
+        
+    }
 }

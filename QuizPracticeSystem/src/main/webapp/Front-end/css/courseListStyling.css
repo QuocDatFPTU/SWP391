@@ -1,0 +1,12 @@
+*{
+    margin: 0;
+    pad: 0;
+    box-sizing: border-box;  
+}
+.display-4{
+    color: black;
+}
+
+.nav{
+    background-color: aquamarine;
+}

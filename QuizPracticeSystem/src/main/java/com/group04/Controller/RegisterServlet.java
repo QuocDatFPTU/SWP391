@@ -45,6 +45,7 @@ public class RegisterServlet extends HttpServlet {
             
             String username = request.getParameter("username");
             String password = request.getParameter("password");
+            String repassword = request.getParameter("repassword");
             String lastname = request.getParameter("lastname");
             String firstname = request.getParameter("firstname");
             String gender = request.getParameter("gender");
@@ -52,7 +53,8 @@ public class RegisterServlet extends HttpServlet {
             String phonenumber = request.getParameter("phonenumber");
             String avatar = "";
             User newUser = new User();
-            //New User
+            if(repassword.equals(password)){
+                //New User
             newUser.setUsername(username);
             UserRepositoryImp urp = new UserRepositoryImp();
             Role newUserRole = urp.getRole("Customer");
@@ -81,6 +83,8 @@ public class RegisterServlet extends HttpServlet {
                 url = mapping.get(SUCCESS);
                 
             }
+            }else
+            request.setAttribute("mess", "Check your re-password again pls.");
         } finally {
             System.out.println(url);
                       RequestDispatcher rd = request.getRequestDispatcher(url);

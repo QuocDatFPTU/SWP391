@@ -57,10 +57,12 @@ public class Course {
     @Column(name = "createDate")
     private String createDate;
     
-
-    @OneToMany(mappedBy = "course")
-    private Set<StudentRegistration> register;
+    @OneToMany(mappedBy="Course")
+    private Set<Package> packages;
     
+    @OneToMany(mappedBy="Course")
+    private Set<Subject> subject;
+
     public Course(Course course) {
         this.courseID = course.courseID;
         this.courseName = course.courseName;
