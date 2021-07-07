@@ -31,12 +31,12 @@
 </head>
 
 <body style="background-color: #f5f5f5"  class="text-center" data-new-gr-c-s-check-loaded="14.1016.0" data-gr-ext-installed="">
-<form action="login" method="POST">
+<form action="LoginServlet" method="POST">
     <img class="mb-4" src="https://lh3.googleusercontent.com/proxy/wIs8-k2bUkZpQxeZIoYXpuEChdqH9XUhCVdTu9XQ5ClPMntFj-fd5dDFAjSRTEaQx06ovHZgd-LH1rY8jsRttj49vva0p0Ob85_5AJ0T7kT_JpRuzdWkb0swYw" alt="" width="150" height="150">
     <h1 class="h3 mb-3 font-weight-normal">Login</h1>
     <div  style="display: inline-block;" borde>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" name="username" id="inputEmail" class="form-control" placeholder="abc@xyz.com" required="" autofocus="">
+        <input type="text" name="username" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
         <div >
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" name="password" id="inputPassword" class="form-control"S placeholder="Password" required="">
@@ -58,7 +58,7 @@
         </div>
     </div>
     <p class="mt-5 mb-3 text-muted">
-        Doens't have an account yet? <a href="registerPage">Sign up now</a>
+        Doesn't have an account yet? <a href="registerPage">Sign up now</a>
     </p>
     <p class="mt-5 mb-3 text-muted">©Tam</p>
 </form>

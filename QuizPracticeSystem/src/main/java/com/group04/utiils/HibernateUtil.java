@@ -5,7 +5,21 @@
  */
 package com.group04.utiils;
 
+import com.group04.entities.Blog;
+import com.group04.entities.Course;
+import com.group04.entities.Dimension;
+import com.group04.entities.Exam;
+import com.group04.entities.Lesson;
+import com.group04.entities.Option;
+import com.group04.entities.Payment;
+import com.group04.entities.Question;
+import com.group04.entities.Quiz;
+import com.group04.entities.QuizOption;
+import com.group04.entities.QuizQuestion;
 import com.group04.entities.Role;
+import com.group04.entities.Sale;
+import com.group04.entities.StudentRegistration;
+import com.group04.entities.Subject;
 import com.group04.entities.User;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
@@ -40,6 +54,21 @@ public class HibernateUtil {
                 configuration.setProperties(settings);
                 configuration.addAnnotatedClass(User.class);
                 configuration.addAnnotatedClass(Role.class);
+                configuration.addAnnotatedClass(StudentRegistration.class);
+                configuration.addAnnotatedClass(Sale.class);
+                configuration.addAnnotatedClass(Subject.class);
+                configuration.addAnnotatedClass(QuizQuestion.class);
+                configuration.addAnnotatedClass(QuizOption.class);
+                configuration.addAnnotatedClass(Quiz.class);
+                configuration.addAnnotatedClass(Question.class);
+                configuration.addAnnotatedClass(Payment.class);
+                configuration.addAnnotatedClass(Package.class);
+                configuration.addAnnotatedClass(Option.class);
+                configuration.addAnnotatedClass(Lesson.class);
+                configuration.addAnnotatedClass(Exam.class);
+                configuration.addAnnotatedClass(Dimension.class);
+                configuration.addAnnotatedClass(Course.class);
+                configuration.addAnnotatedClass(Blog.class);
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
                 System.out.println("Hibernate Java Config serviceRegistry created");

@@ -5,10 +5,11 @@
  */
 package com.group04.entities;
 
+import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,10 +42,7 @@ public class StudentRegistration {
     
     @Column(name = "userID")
     private Long userID;
-    
-    @Column(name = "courseID")
-    private long courseID;
-    
+      
     @Column(name = "paymentID")
     private String paymentID;
     
@@ -52,7 +50,7 @@ public class StudentRegistration {
     private boolean isPaid;
     
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(
      name = "users",
      joinColumns = {@JoinColumn(name = "id")}    
@@ -70,7 +68,6 @@ public class StudentRegistration {
     public StudentRegistration(StudentRegistration register) {
         this.registrationID = register.registrationID;
         this.userID = register.userID;
-        this.courseID = register.courseID;
         this.paymentID = register.paymentID;
         this.isPaid = register.isPaid;
     }

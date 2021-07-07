@@ -36,6 +36,7 @@ public class Role{
    
     @Column(name="name",length = 60)
     private String name;
+    
     @ManyToMany(mappedBy ="roles")
     private Set<User> users = new HashSet<>();
 }
