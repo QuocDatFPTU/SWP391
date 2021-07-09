@@ -5,6 +5,7 @@
  */
 package com.group04.entities;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -42,7 +43,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User{
+public class User implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -93,10 +94,9 @@ public class User{
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")}            
     )
-    
     private Set<Role> roles = new HashSet<>();
     
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "userID",fetch = FetchType.EAGER)
     private Set<StudentRegistration> Register = new HashSet<>();
        
     public User(User user) {

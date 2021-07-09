@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.group04.entities;
+import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +29,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @AllArgsConstructor
 @Entity
 @Table(name = "subject")
-public class Subject {
+public class Subject implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String subjectID;
@@ -66,7 +67,7 @@ public class Subject {
     private boolean isActive;
     
     
-    @OneToMany(mappedBy="Subject")
+    @OneToMany(mappedBy="subjectID")
     private Set<Dimension> dimension;
 
     public Subject(Subject subject) {

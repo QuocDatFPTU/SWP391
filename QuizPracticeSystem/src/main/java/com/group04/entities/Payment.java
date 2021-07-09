@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.group04.entities;
+import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +33,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Setter 
 @NoArgsConstructor
 @AllArgsConstructor
-public class Payment {
+public class Payment implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long paymentID;
