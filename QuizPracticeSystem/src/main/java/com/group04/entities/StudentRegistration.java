@@ -5,10 +5,12 @@
  */
 package com.group04.entities;
 
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,35 +36,25 @@ import lombok.Setter;
 @Setter 
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentRegistration {
+public class StudentRegistration implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long registrationID;
     
     @Column(name = "userID")
     private Long userID;
-    
-    @Column(name = "courseID")
-    private long courseID;
-    
-    @Column(name = "paymentID")
-    private String paymentID;
+      
+ 
     
     @Column(name = "isPaid")
     private boolean isPaid;
     
     
-    @ManyToOne
-    @JoinTable(
-     name = "users",
-     joinColumns = {@JoinColumn(name = "id")}    
-    )
     
     @OneToMany(mappedBy = "StudentRegistration")
     private Set<Course> Course;
     
     @OneToOne
-    @MapsId
     @JoinColumn(name = "paymentID")
     private Payment payment;
     
@@ -70,8 +62,7 @@ public class StudentRegistration {
     public StudentRegistration(StudentRegistration register) {
         this.registrationID = register.registrationID;
         this.userID = register.userID;
-        this.courseID = register.courseID;
-        this.paymentID = register.paymentID;
+        this.payment = register.payment;
         this.isPaid = register.isPaid;
     }
       

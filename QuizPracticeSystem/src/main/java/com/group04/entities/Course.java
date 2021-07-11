@@ -5,12 +5,16 @@
  */
 package com.group04.entities;
 
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -32,7 +36,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Setter 
 @NoArgsConstructor
 @AllArgsConstructor
-public class Course {
+public class Course implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -56,11 +60,12 @@ public class Course {
 
     @Column(name = "createDate")
     private String createDate;
-    
-    @OneToMany(mappedBy="Course")
-    private Set<Package> packages;
-    
-    @OneToMany(mappedBy="Course")
+    @ManyToOne
+    @JoinColumn(name="registrationID")
+    private StudentRegistration StudentRegistration;
+    @OneToMany(mappedBy="courseID")
+    private Set<Package> packages ; //Set Package 
+    @OneToMany(mappedBy="courseID")
     private Set<Subject> subject;
 
     public Course(Course course) {

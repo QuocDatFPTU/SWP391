@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.group04.entities;
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,7 +15,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tblBlog")
-public class Blog {
+public class Blog implements Serializable{
     @Id
     @Column(name = "blogID")
     private String blogID;

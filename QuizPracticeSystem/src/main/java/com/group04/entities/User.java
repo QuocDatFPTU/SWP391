@@ -5,11 +5,13 @@
  */
 package com.group04.entities;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,7 +43,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User{
+public class User implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -86,17 +88,16 @@ public class User{
     @Column(name = "isActive")
     private boolean isActive;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")}            
     )
-    
     private Set<Role> roles = new HashSet<>();
     
-    @OneToMany(mappedBy = "user")
-    private Set<StudentRegistration> Register;
+    @OneToMany(mappedBy = "userID",fetch = FetchType.EAGER)
+    private Set<StudentRegistration> Register = new HashSet<>();
        
     public User(User user) {
         this.id = user.id;

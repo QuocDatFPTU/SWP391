@@ -5,6 +5,7 @@
  */
 package com.group04.entities;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Setter 
 @NoArgsConstructor
 @AllArgsConstructor
-public class Package {
+public class Package implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long packageID;
