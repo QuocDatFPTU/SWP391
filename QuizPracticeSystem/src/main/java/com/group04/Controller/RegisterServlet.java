@@ -71,17 +71,20 @@ public class RegisterServlet extends HttpServlet {
             System.out.println("New User: "+newUser.getFirstName()+newUser.getLastName());
             System.out.println("Before Error");
             List<String> errors = DoValidate.validate(newUser);
-            for (String error : errors) {
-                System.out.println("Loi: "+error);
-            }
-            System.out.println("After Error");
-            System.out.println("Number of Error: "+errors.size());
+                for (String error : errors) {
+                    System.out.println(error.toString());
+                }
             if (!errors.isEmpty()) {                
                 session.setAttribute("ERROR_REGISTER", errors);
             } else {
                 urp.register(newUser);
+                boolean checkAvail = urp.checkLogin(username, password);
+                if(checkAvail){
+                    System.out.println("The user is existed");        
+                }else{
+                    System.out.println("The user is not");
+                }
                 url = mapping.get(SUCCESS);
-                
             }
             }else
             request.setAttribute("mess", "Check your re-password again pls.");

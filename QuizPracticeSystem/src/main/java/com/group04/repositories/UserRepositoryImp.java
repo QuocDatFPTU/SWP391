@@ -73,7 +73,7 @@ public class UserRepositoryImp implements UserRepository {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.persist(user);
+            session.save(user);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
