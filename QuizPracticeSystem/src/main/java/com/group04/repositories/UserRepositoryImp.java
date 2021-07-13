@@ -221,6 +221,27 @@ public class UserRepositoryImp implements UserRepository {
             }
         }  
     } 
+
+    @Override
+    public boolean checkUsernameExist(String username) {
+       Transaction transaction = null;
+        User user = null;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            user = (User) session.createQuery("FROM User U WHERE U.username = :username").setParameter("username", username)
+                    .uniqueResult();
+            if (user != null){
+                return true;
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return false; 
+    }
     }
 
     
