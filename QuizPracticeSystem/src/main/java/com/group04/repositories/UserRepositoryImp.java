@@ -142,7 +142,7 @@ public class UserRepositoryImp implements UserRepository {
 
     @Override
     public void deleteUser(Long id) {
-Transaction transaction = null;
+    Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             User user = session.get(User.class, id);
