@@ -26,5 +26,5 @@ public interface UserRepository {
     void updatePassword(String password, String newpassword);
     void SendMail(String email);
     void resetPassword(String usermail, String newpassword);
-    
+    boolean checkUsernameExist(String username);
 }

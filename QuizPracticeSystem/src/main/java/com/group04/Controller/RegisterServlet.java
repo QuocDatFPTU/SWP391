@@ -39,10 +39,10 @@ public class RegisterServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
-        Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
+        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
         String url = mapping.get(FAIL);
         try {
-            
+            UserRepositoryImp urp = new UserRepositoryImp();
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String repassword = request.getParameter("repassword");
@@ -53,41 +53,49 @@ public class RegisterServlet extends HttpServlet {
             String phonenumber = request.getParameter("phonenumber");
             String avatar = "";
             User newUser = new User();
-            if(repassword.equals(password)){
-                //New User
-            newUser.setUsername(username);
-            UserRepositoryImp urp = new UserRepositoryImp();
-            Role newUserRole = urp.getRole("Customer");
-            System.out.println("Role: "+newUserRole.toString());
-            newUser.setRoles(Collections.singleton(newUserRole));
-            newUser.setPassword(password);
-            newUser.setFirstName(firstname);
-            newUser.setGender(gender.isEmpty() ? "Male" : "Female");
-            newUser.setEmail(email);
-            newUser.setPhone(phonenumber);
-            newUser.setAvatar(avatar);
-            newUser.setActive(true);
-            newUser.setLastName(lastname);
-            System.out.println("New User: "+newUser.getFirstName()+newUser.getLastName());
-            System.out.println("Before Error");
-            List<String> errors = DoValidate.validate(newUser);
-            for (String error : errors) {
-                System.out.println("Loi: "+error);
-            }
-            System.out.println("After Error");
-            System.out.println("Number of Error: "+errors.size());
-            if (!errors.isEmpty()) {                
-                session.setAttribute("ERROR_REGISTER", errors);
+            if (urp.checkUsernameExist(username)) {
+                request.setAttribute("mess", "The username already existed, try another one.");
             } else {
-                urp.register(newUser);
-                url = mapping.get(SUCCESS);
-                
+                if (repassword.equals(password)) {
+                    //New User
+                    newUser.setUsername(username);
+                    //UserRepositoryImp urp = new UserRepositoryImp();
+                    Role newUserRole = urp.getRole("Customer");
+                    System.out.println("Role: " + newUserRole.toString());
+                    newUser.setRoles(Collections.singleton(newUserRole));
+                    newUser.setPassword(password);
+                    newUser.setFirstName(firstname);
+                    newUser.setGender(gender.isEmpty() ? "Male" : "Female");
+                    newUser.setEmail(email);
+                    newUser.setPhone(phonenumber);
+                    newUser.setAvatar(avatar);
+                    newUser.setActive(true);
+                    newUser.setLastName(lastname);
+                    System.out.println("New User: " + newUser.getFirstName() + newUser.getLastName());
+                    System.out.println("Before Error");
+                    List<String> errors = DoValidate.validate(newUser);
+                    for (String error : errors) {
+                        System.out.println(error.toString());
+                    }
+                    if (!errors.isEmpty()) {
+                        session.setAttribute("ERROR_REGISTER", errors);
+                    } else {
+                        urp.register(newUser);
+                        boolean checkAvail = urp.checkLogin(username, password);
+                        if (checkAvail) {
+                            System.out.println("The user is existed");
+                        } else {
+                            System.out.println("The user is not");
+                        }
+                        url = mapping.get(SUCCESS);
+                    }
+                } else {
+                    request.setAttribute("mess", "Check your re-password again pls.");
+                }
             }
-            }else
-            request.setAttribute("mess", "Check your re-password again pls.");
         } finally {
             System.out.println(url);
-                      RequestDispatcher rd = request.getRequestDispatcher(url);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();
         }

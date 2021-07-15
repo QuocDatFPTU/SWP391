@@ -16,4 +16,6 @@ public interface SubjectRepository {
    List<Subject> getAllSubjectPaging(String courseID, int position, int pageSize);
    Subject getSubjectById(String subjectId);
    List<Subject> getSubjectByCourseId(String courseId);
+   public void deleteSubject(Long id);
+   public void updateSubject(Subject subject);
 }

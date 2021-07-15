@@ -46,8 +46,9 @@ import org.hibernate.validator.constraints.NotBlank;
 public class User implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="userID", nullable = false,updatable = false)
+    private Long userID;
     @NotBlank(message = "username can't be empty")
     @Size(max = 100, min = 5, message="username must have more than 5 characters")
     @Column(name = "username")
@@ -80,8 +81,6 @@ public class User implements Serializable{
     @Column(name = "gender")
     private String gender;
     
-    @NotBlank
-    @Size(max = 40,min=1, message = "avatar must not be empty")
     @Column(name = "avatar")
     private String avatar;
 
@@ -100,7 +99,7 @@ public class User implements Serializable{
     private Set<StudentRegistration> Register = new HashSet<>();
        
     public User(User user) {
-        this.id = user.id;
+        this.userID = user.userID;
         this.username = user.username;
         this.password = user.password;
         this.firstName = user.firstName;
