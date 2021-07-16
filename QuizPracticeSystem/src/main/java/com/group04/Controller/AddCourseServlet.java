@@ -65,7 +65,7 @@ public class AddCourseServlet extends HttpServlet {
             NewCourse.setThumbnailLink(thumbnailLink);
             NewCourse.setCreateDate(createDate);
 
-            System.out.println("Course update: " + NewCourse.getCourseName());
+            System.out.println("Course new: " + NewCourse.getCourseName());
             System.out.println("Before Error");
             List<String> errors = DoValidate.validateC(NewCourse);
             for (String error : errors) {
