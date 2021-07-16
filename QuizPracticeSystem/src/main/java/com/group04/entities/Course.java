@@ -33,7 +33,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @Table(name = "course")
 @Getter
-@Setter 
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Course implements Serializable {
@@ -41,31 +41,32 @@ public class Course implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long courseID;
-    
+
     @NotBlank(message = "coursename cannot be empty")
     @Size(max = 100, min = 5, message = "course name must be 5 characters")
     @Column(name = "courseName")
     private String courseName;
-    
-    
+
     @Column(name = "isFeatured")
     private boolean isFeatured;
 
     @Column(name = "isActive")
     private boolean isActive;
-    
-    @Size(max = 100, min = 10)
+
+    @Size(max = 100, min = 5)
     @Column(name = "thumbnailLink")
     private String thumbnailLink;
 
     @Column(name = "createDate")
     private String createDate;
-    @ManyToOne
-    @JoinColumn(name="registrationID")
-    private StudentRegistration StudentRegistration;
-    @OneToMany(mappedBy="courseID")
-    private Set<Package> packages ; //Set Package 
-    @OneToMany(mappedBy="courseID")
+
+    @OneToMany(mappedBy = "courseID")
+    private Set<StudentRegistration> StudentRegistration;
+    
+    @OneToMany(mappedBy = "courseID")
+    private Set<Package> packages; //Set Package
+    
+    @OneToMany(mappedBy = "courseID")
     private Set<Subject> subject;
 
     public Course(Course course) {
@@ -75,5 +76,5 @@ public class Course implements Serializable {
         this.isActive = course.isActive;
         this.thumbnailLink = course.thumbnailLink;
         this.createDate = course.createDate;
-    }   
+    }
 }

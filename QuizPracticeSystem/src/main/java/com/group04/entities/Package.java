@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -31,7 +33,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @AllArgsConstructor
 public class Package implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long packageID;
     
     @NotBlank(message = "packageName can't be empty")
@@ -45,6 +47,10 @@ public class Package implements Serializable{
     
     @Column(name = "courseID")
     private String courseID;
+    
+    @ManyToOne
+    @JoinColumn(name="registrationID")
+    private StudentRegistration register;   
     
     public Package(Package packages) {
         this.packageID = packages.packageID;

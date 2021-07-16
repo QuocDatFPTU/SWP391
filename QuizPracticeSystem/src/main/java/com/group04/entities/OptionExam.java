@@ -5,7 +5,6 @@
  */
 package com.group04.entities;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,40 +13,43 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
  * @author HP
  */
 @Entity
-@Table(name = "Dimension")
+@Table(name = "OptionExam")
 @Getter
 @Setter 
 @NoArgsConstructor
 @AllArgsConstructor
-public class Dimension implements Serializable{
-     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long dimensionID;
+public class OptionExam {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long optionID;
     
-    @NotBlank(message = "dimensionName can't be empty")
-    @Size(max = 100, min = 5, message="dimensionName must have more than 5 characters")
-    @Column(name = "dimensionName")
-    private String dimensionName;
+    @Column(name = "content")
+    private String content;
     
+    @Column(name = "isRight")
+    private boolean isRight;
+    
+    @Column(name = "questionID")
+    private String questionID;
+       
     @ManyToOne
-    @JoinColumn(name="subjectID")
-    private Subject subject;
+    @JoinColumn(name = "questionID")
+    private QuestionExam questionExam;
     
-    public Dimension(Dimension dimension) {
-        this.dimensionID = dimension.dimensionID;
-        this.dimensionName = dimension.dimensionName;
-        
-    } 
+    public OptionExam(OptionExam option) {
+        this.optionID = option.optionID;
+        this.content = option.content;
+        this.isRight = option.isRight;
+        this.questionID = option.questionID;
+}
 }
