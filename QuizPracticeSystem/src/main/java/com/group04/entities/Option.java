@@ -4,73 +4,51 @@
  * and open the template in the editor.
  */
 package com.group04.entities;
+
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  *
  * @author HP
  */
 @Entity
-@Table(name = "tblOption")
-public class Option implements Serializable{
+@Table(name = "Option")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Option implements Serializable {
+
     @Id
-    @Column(name = "OptionID")
-    private String OptionID;
-    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long optionID;
+
     @Column(name = "content")
     private String content;
-    
-    @Column(name = "isCorrect")
-    private String isCorrect;
-    
-    @Column(name = "questionID")
-    private String questionID;
 
-    public Option() {
+    @Column(name = "isRight")
+    private boolean isRight;
+
+    @ManyToOne
+    @JoinColumn(name = "questionID")
+    private Question question;
+
+    public Option(Option option) {
+        this.optionID = option.optionID;
+        this.content = option.content;
+        this.isRight = option.isRight;
+
     }
-
-    public Option(String OptionID, String content, String isCorrect, String questionID) {
-        this.OptionID = OptionID;
-        this.content = content;
-        this.isCorrect = isCorrect;
-        this.questionID = questionID;
-    }
-
-    
-
-    public String getOptionID() {
-        return OptionID;
-    }
-
-    public void setOptionID(String OptionID) {
-        this.OptionID = OptionID;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getIsCorrect() {
-        return isCorrect;
-    }
-
-    public void setIsCorrect(String isCorrect) {
-        this.isCorrect = isCorrect;
-    }
-
-    public String getQuestionID() {
-        return questionID;
-    }
-
-    public void setQuestionID(String questionID) {
-        this.questionID = questionID;
-    }
-    
 }

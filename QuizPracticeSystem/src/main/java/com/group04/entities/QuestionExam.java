@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.group04.entities;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,23 +20,24 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 /**
  *
  * @author HP
  */
 @Entity
-@Table(name = "Question")
+@Table(name = "QuestionExam")
 @Getter
 @Setter 
 @NoArgsConstructor
 @AllArgsConstructor
-public class Question implements Serializable{
+public class QuestionExam implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionID;
     
     @Column(name = "status")
-    private String status;
+    private boolean status;
     
     @Column(name = "content")
     private String content;
@@ -46,18 +48,18 @@ public class Question implements Serializable{
     @Column(name = "explanation")
     private String explanation;
     
-    @Column(name = "lessonID")
-    private String lessonID;
-
-   @OneToMany(mappedBy = "questionID", fetch = FetchType.EAGER)
-    private Set<Option> Option = new HashSet<>();
-   
-   public Question(Question question) {
+    @Column(name = "examDetailID")
+    private String examDetailID;
+    
+    @OneToMany(mappedBy = "questionID", fetch = FetchType.EAGER)
+    private Set<OptionExam> OptionExam = new HashSet<>();
+    
+    public QuestionExam(QuestionExam question) {
         this.questionID = question.questionID;
         this.status = question.status;
         this.content = question.content;
         this.level = question.level;
         this.explanation = question.explanation;
-        this.lessonID = question.lessonID;
+        this.examDetailID = question.examDetailID;
     }
 }
