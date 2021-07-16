@@ -120,6 +120,20 @@ public class SubjectRepositoryImp implements SubjectRepository {
             }
         }   
     }
+
+    @Override
+    public void addSubject(Subject subject) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.save(subject);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }   
+    }
     
     
 }

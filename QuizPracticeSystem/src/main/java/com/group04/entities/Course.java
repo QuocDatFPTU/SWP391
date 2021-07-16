@@ -60,6 +60,7 @@ public class Course implements Serializable {
 
     @Column(name = "createDate")
     private String createDate;
+    
     @ManyToOne
     @JoinColumn(name="registrationID")
     private StudentRegistration StudentRegistration;

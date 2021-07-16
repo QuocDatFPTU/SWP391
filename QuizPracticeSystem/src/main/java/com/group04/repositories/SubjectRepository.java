@@ -18,4 +18,5 @@ public interface SubjectRepository {
    List<Subject> getSubjectByCourseId(String courseId);
    public void deleteSubject(Long id);
    public void updateSubject(Subject subject);
+   public void addSubject(Subject subject);
 }

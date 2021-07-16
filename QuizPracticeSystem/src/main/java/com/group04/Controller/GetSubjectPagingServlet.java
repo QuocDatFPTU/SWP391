@@ -5,11 +5,8 @@
  */
 package com.group04.Controller;
 
-import static com.group04.Controller.ChangePasswordServlet.FAIL;
-import static com.group04.Controller.ChangePasswordServlet.SUCCESS;
 import com.group04.entities.Subject;
 import com.group04.repositories.SubjectRepositoryImp;
-import com.group04.repositories.UserRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
