@@ -25,8 +25,8 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
-    public static final String SUCCESS = "homePage";
-    public static final String FAIL = "index";
+    public static final String SUCCESS = "index";
+    public static final String FAIL = "loginPage";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
