@@ -5,9 +5,6 @@
  */
 package com.group04.Controller;
 
-import static com.group04.Controller.ResetPasswordServlet.FAIL;
-import static com.group04.Controller.ResetPasswordServlet.SUCCESS;
-import com.group04.repositories.SubjectRepository;
 import com.group04.repositories.SubjectRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;

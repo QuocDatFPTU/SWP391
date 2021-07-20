@@ -5,9 +5,14 @@
  */
 package com.group04.Controller;
 
-import com.group04.repositories.UserRepositoryImp;
+import static com.group04.Controller.EditUserServlet.FAIL;
+import static com.group04.Controller.EditUserServlet.SUCCESS;
+import com.group04.entities.Course;
+import com.group04.repositories.CourseRepositoryImp;
+import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -16,14 +21,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author HP
+ * @author ntdun
  */
-@WebServlet(name = "ChangePasswordServlet", urlPatterns = {"/ChangePasswordServlet"})
-public class ChangePasswordServlet extends HttpServlet {
-    public static final String SUCCESS = "viewprofile";
+@WebServlet(name = "EditCourseServlet", urlPatterns = {"/EditCourseServlet"})
+public class EditCourseServlet extends HttpServlet {
+    public static final String SUCCESS = "detailpage";
     public static final String FAIL = "error";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,25 +43,50 @@ public class ChangePasswordServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();       
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
-        Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
+        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
         String url = mapping.get(FAIL);
         try {
-            String oldPassword = request.getParameter("oldpassword");
-            String newPassword = request.getParameter("newpassword");
-            UserRepositoryImp dao = new UserRepositoryImp();
-            dao.updatePassword(oldPassword, newPassword); 
-            url = mapping.get(SUCCESS);
-        }catch (Exception e){  
-            System.out.println("Error: "+e);
+
+            String courseName = request.getParameter("courseName");
+            boolean isFeatured = Boolean.parseBoolean(request.getParameter("isFeatured"));
+            boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
+            String thumbnailLink = request.getParameter("tumbnailLink");
+            String createDate = request.getParameter("createDate");
+
+            Course UpdateCourse = new Course();
+
+            CourseRepositoryImp urp = new CourseRepositoryImp();
+            UpdateCourse.setCourseName(courseName);
+            UpdateCourse.setFeatured(isFeatured);
+            UpdateCourse.setActive(isActive);
+            UpdateCourse.setThumbnailLink(thumbnailLink);
+            UpdateCourse.setCreateDate(createDate);
+
+            System.out.println("Course update: " + UpdateCourse.getCourseName());
+            System.out.println("Before Error");
+            List<String> errors = DoValidate.validateC(UpdateCourse);
+            for (String error : errors) {
+                System.out.println("Loi: " + error);
+            }
+            System.out.println("After Error");
+            System.out.println("Number of Error: " + errors.size());
+            if (!errors.isEmpty()) {
+                session.setAttribute("ERROR_UPDATE", errors);
+            } else {
+                urp.updateCourse(UpdateCourse);
+                url = mapping.get(SUCCESS);
+
+            }
         } finally {
+            System.out.println(url);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();
         }
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -97,4 +128,3 @@ public class ChangePasswordServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-

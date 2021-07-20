@@ -43,61 +43,68 @@ import org.hibernate.validator.constraints.NotBlank;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements Serializable{
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="userID", nullable = false,updatable = false)
+    @Column(name = "userID", nullable = false, updatable = false)
     private Long userID;
+
     @NotBlank(message = "username can't be empty")
-    @Size(max = 100, min = 5, message="username must have more than 5 characters")
+    @Size(max = 100, min = 5, message = "username must have more than 5 characters")
     @Column(name = "username")
     private String username;
+
     @NotBlank(message = "Password cant be empty")
-    @Size(max = 100,min = 5,message = "Password must be have more than 5 character")
+    @Size(max = 100, min = 5, message = "Password must be have more than 5 character")
     @Column(name = "password")
     private String password;
+
     @NotBlank
-    @Size(max = 40,min=1, message = "FirstName must have more than 1 character")
+    @Size(max = 40, min = 1, message = "FirstName must have more than 1 character")
     @Column(name = "firstname")
     private String firstName;
+
     @NotBlank
-    @Size(max = 40, min=1, message ="LastName must have more than 1 character")
+    @Size(max = 40, min = 1, message = "LastName must have more than 1 character")
     @Column(name = "lastname")
     private String lastName;
+
     @NotBlank
     @Size(max = 40)
-    @Email(message="email must be in the correct format")
+    @Email(message = "email must be in the correct format")
     @Column(name = "email")
     private String email;
-    
+
     @NotBlank
-    @Size(max = 12,min=10, message = "phonenumber must have atleast than 10 number")
+    @Size(max = 12, min = 10, message = "phonenumber must have atleast than 10 number")
     @Column(name = "phone")
     private String phone;
-    
+
     @NotBlank
-    @Size(max = 40,min=1, message = "Gender cant be empty")
+    @Size(max = 40, min = 1, message = "Gender cant be empty")
     @Column(name = "gender")
     private String gender;
-    
+
     @Column(name = "avatar")
     private String avatar;
 
     @Column(name = "isActive")
     private boolean isActive;
 
-    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id")}            
+            joinColumns = {
+                @JoinColumn(name = "user_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "role_id")}
     )
     private Set<Role> roles = new HashSet<>();
-    
-    @OneToMany(mappedBy = "userID",fetch = FetchType.EAGER)
+
+    @OneToMany(mappedBy = "userID", fetch = FetchType.EAGER)
     private Set<StudentRegistration> Register = new HashSet<>();
-       
+
     public User(User user) {
         this.userID = user.userID;
         this.username = user.username;

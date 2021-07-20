@@ -73,7 +73,7 @@ public class RegisterServlet extends HttpServlet {
                     newUser.setLastName(lastname);
                     System.out.println("New User: " + newUser.getFirstName() + newUser.getLastName());
                     System.out.println("Before Error");
-                    List<String> errors = DoValidate.validate(newUser);
+                    List<String> errors = DoValidate.validateU(newUser);
                     for (String error : errors) {
                         System.out.println(error.toString());
                     }

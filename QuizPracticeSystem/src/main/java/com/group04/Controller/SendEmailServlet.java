@@ -5,10 +5,6 @@
  */
 package com.group04.Controller;
 
-import static com.group04.Controller.LoginServlet.FAIL;
-import static com.group04.Controller.LoginServlet.SUCCESS;
-import com.group04.entities.User;
-import com.group04.repositories.UserRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
