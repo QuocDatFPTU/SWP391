@@ -41,7 +41,7 @@ public class Lesson implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lessonID", nullable = false, updatable = false)
-    private long lessonID;
+    private Long lessonID;
 
     @Column(name = "lessonName")
     private String lessonName;
@@ -90,5 +90,9 @@ public class Lesson implements Serializable {
         this.HTMLContent = lesson.HTMLContent;
         this.type = lesson.type;
         this.isActive = lesson.isActive;
-}
+    }
+    
+    public Long getLessonId(){
+        return lessonID;
+    }
 }

@@ -28,7 +28,7 @@ import lombok.Setter;
 public class Blog implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String blogID;
+    private Long blogID;
     
     @Column(name = "blogDetail")
     private String blogDetail;
