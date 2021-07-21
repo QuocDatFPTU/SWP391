@@ -14,4 +14,7 @@ import java.util.List;
  */
 public interface CourseRepository {
     List<Course> getAllCourse();
+    void addCourse(Course course);
+    void updateCourse(Course course);
+    void deleteCourse(Long courseID);
 }

@@ -32,7 +32,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Subject implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String subjectID;
+    private Long subjectID;
     
     @NotBlank(message = "subjectname can't be empty")
     @Size(max = 100, min = 5, message="subjectname must have more than 5 characters")

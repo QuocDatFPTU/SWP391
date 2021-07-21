@@ -6,15 +6,12 @@
 package com.group04.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -23,7 +20,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
@@ -33,7 +29,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @Table(name = "course")
 @Getter
-@Setter 
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Course implements Serializable {
@@ -41,31 +37,32 @@ public class Course implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long courseID;
-    
+
     @NotBlank(message = "coursename cannot be empty")
     @Size(max = 100, min = 5, message = "course name must be 5 characters")
     @Column(name = "courseName")
     private String courseName;
-    
-    
+
     @Column(name = "isFeatured")
     private boolean isFeatured;
 
     @Column(name = "isActive")
     private boolean isActive;
-    
-    @Size(max = 100, min = 10)
+
+    @Size(max = 100, min = 5)
     @Column(name = "thumbnailLink")
     private String thumbnailLink;
 
     @Column(name = "createDate")
     private String createDate;
-    @ManyToOne
-    @JoinColumn(name="registrationID")
-    private StudentRegistration StudentRegistration;
-    @OneToMany(mappedBy="courseID")
-    private Set<Package> packages ; //Set Package 
-    @OneToMany(mappedBy="courseID")
+
+    @OneToMany(mappedBy = "courseID")
+    private Set<StudentRegistration> StudentRegistration;
+    
+    @OneToMany(mappedBy = "courseID")
+    private Set<Package> packages; //Set Package
+    
+    @OneToMany(mappedBy = "courseID")
     private Set<Subject> subject;
 
     public Course(Course course) {
@@ -75,5 +72,5 @@ public class Course implements Serializable {
         this.isActive = course.isActive;
         this.thumbnailLink = course.thumbnailLink;
         this.createDate = course.createDate;
-    }   
+    }
 }

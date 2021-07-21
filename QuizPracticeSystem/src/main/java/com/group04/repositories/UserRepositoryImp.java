@@ -73,7 +73,7 @@ public class UserRepositoryImp implements UserRepository {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.persist(user);
+            session.save(user);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -141,11 +141,11 @@ public class UserRepositoryImp implements UserRepository {
     }
 
     @Override
-    public void deleteUser(Long id) {
-Transaction transaction = null;
+    public void deleteUser(Long userID) {
+    Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            User user = session.get(User.class, id);
+            User user = session.get(User.class, userID);
             if (user != null) {
                 session.delete(user);
                 System.out.println("user is deleted");
@@ -221,6 +221,27 @@ Transaction transaction = null;
             }
         }  
     } 
+
+    @Override
+    public boolean checkUsernameExist(String username) {
+       Transaction transaction = null;
+        User user = null;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            user = (User) session.createQuery("FROM User U WHERE U.username = :username").setParameter("username", username)
+                    .uniqueResult();
+            if (user != null){
+                return true;
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return false; 
+    }
     }
 
     

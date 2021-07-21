@@ -32,5 +32,54 @@ public class CourseRepositoryImp implements CourseRepository {
         }
         return listOfCourse;  
     }
+
+    @Override
+    public void addCourse(Course course) {
+    Transaction transaction = null;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.save(course);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    @Override
+    public void updateCourse(Course course) {
+Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.evict(course);
+            session.merge(course);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    @Override
+    public void deleteCourse(Long courseID) {
+    Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            Course course = session.get(Course.class, courseID);
+            if (course != null) {
+                session.delete(course);
+                System.out.println("course is deleted");
+            }            
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
+        }   
+    }
     
 }

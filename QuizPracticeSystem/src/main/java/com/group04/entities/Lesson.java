@@ -4,119 +4,95 @@
  * and open the template in the editor.
  */
 package com.group04.entities;
+
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  *
  * @author HP
  */
 @Entity
-@Table(name = "tblLesson")
-public class Lesson implements Serializable{
+@Table(name = "lesson")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Lesson implements Serializable {
+
     @Id
-    @Column(name = "lessonID")
-    private String lessonID;
-    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "lessonID", nullable = false, updatable = false)
+    private Long lessonID;
+
     @Column(name = "lessonName")
     private String lessonName;
-    
+
     @Column(name = "topic")
     private String topic;
+
+    @Column(name = "order")
+    private String order;
+
+    @Column(name = "youtubeLink")
+    private String youtubeLink;
     
+    @Column(name = "HTMLContent")
+    private String HTMLContent;
+
     @Column(name = "type")
     private String type;
     
-    @Column(name = "order")
-    private String order;
-    
-    @Column(name = "videoLink")
-    private String videoLink;
-    
-    @Column(name = "description")
-    private String description;
-    
-    @Column(name = "subjectID")
-    private String subjectID;
+    @Column(name = "isActive")
+    private boolean isActive;
 
-    public Lesson() {
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "Exams_Lessons",
+            joinColumns = {
+                @JoinColumn(name = "lessonID")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "examInfoID")}
+    )
+    private Set<ExamInfo> examInfos = new HashSet<>();
+    
+    @OneToMany(mappedBy = "lessonID", fetch = FetchType.EAGER)
+    private Set<Question> Question = new HashSet<>();
+    
+    @ManyToOne
+    @JoinColumn(name="subjectID")
+    private Subject subject;
+    
+    public Lesson(Lesson lesson) {
+        this.lessonID = lesson.lessonID;
+        this.lessonName = lesson.lessonName;
+        this.topic = lesson.topic;
+        this.order = lesson.order;
+        this.youtubeLink = lesson.youtubeLink;
+        this.HTMLContent = lesson.HTMLContent;
+        this.type = lesson.type;
+        this.isActive = lesson.isActive;
     }
-
-    public Lesson(String lessonID, String lessonName, String topic, String type, String order, String videoLink, String description, String subjectID) {
-        this.lessonID = lessonID;
-        this.lessonName = lessonName;
-        this.topic = topic;
-        this.type = type;
-        this.order = order;
-        this.videoLink = videoLink;
-        this.description = description;
-        this.subjectID = subjectID;
-    }
-
-    public String getLessonID() {
+    
+    public Long getLessonId(){
         return lessonID;
     }
-
-    public void setLessonID(String lessonID) {
-        this.lessonID = lessonID;
-    }
-
-    public String getLessonName() {
-        return lessonName;
-    }
-
-    public void setLessonName(String lessonName) {
-        this.lessonName = lessonName;
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getOrder() {
-        return order;
-    }
-
-    public void setOrder(String order) {
-        this.order = order;
-    }
-
-    public String getVideoLink() {
-        return videoLink;
-    }
-
-    public void setVideoLink(String videoLink) {
-        this.videoLink = videoLink;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getSubjectID() {
-        return subjectID;
-    }
-
-    public void setSubjectID(String subjectID) {
-        this.subjectID = subjectID;
-    }
-    
 }
