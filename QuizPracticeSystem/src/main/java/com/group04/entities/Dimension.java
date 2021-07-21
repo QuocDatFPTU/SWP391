@@ -8,6 +8,7 @@ package com.group04.entities;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,6 +41,9 @@ public class Dimension implements Serializable{
     @Size(max = 100, min = 5, message="dimensionName must have more than 5 characters")
     @Column(name = "dimensionName")
     private String dimensionName;
+    
+    @Column(name="subjectID")
+    private int subjectID;
     
     @ManyToOne
     @JoinColumn(name="subjectID")

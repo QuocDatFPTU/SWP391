@@ -5,14 +5,20 @@
  */
 package com.group04.entities;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,7 +38,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Subject implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String subjectID;
+    private int subjectID;
     
     @NotBlank(message = "subjectname can't be empty")
     @Size(max = 100, min = 5, message="subjectname must have more than 5 characters")
@@ -52,8 +58,9 @@ public class Subject implements Serializable{
     @Column(name = "status")
     private boolean status;
     
+    @Temporal(javax.persistence.TemporalType.DATE)
     @Column(name = "updateDate")
-    private String updateDate;
+    private Date updateDate;
     
     @NotBlank(message = "description can't be empty")
     @Size(max = 100, min = 5, message="description must have more than 5 characters")
@@ -61,14 +68,18 @@ public class Subject implements Serializable{
     private String description;
     
     @Column(name = "courseID")
-    private String courseID;
+    private int courseID;
     
     @Column(name = "isActive")
     private boolean isActive;
     
     
-    @OneToMany(mappedBy="subjectID")
-    private Set<Dimension> dimension;
+    @OneToMany(mappedBy="subjectID", fetch = FetchType.LAZY)
+    private Set<Dimension> dimension = new HashSet<>();
+    
+    @ManyToOne
+    @JoinColumn(name="CourseID")
+    private Course course;
 
     public Subject(Subject subject) {
         this.subjectID = subject.subjectID;

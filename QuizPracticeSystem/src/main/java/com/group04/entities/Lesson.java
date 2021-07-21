@@ -63,6 +63,9 @@ public class Lesson implements Serializable {
     
     @Column(name = "isActive")
     private boolean isActive;
+    
+    @Column(name = "subjectID")
+    private boolean subjectID;
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
@@ -90,5 +93,6 @@ public class Lesson implements Serializable {
         this.HTMLContent = lesson.HTMLContent;
         this.type = lesson.type;
         this.isActive = lesson.isActive;
+        this.subjectID = lesson.subjectID;
 }
 }

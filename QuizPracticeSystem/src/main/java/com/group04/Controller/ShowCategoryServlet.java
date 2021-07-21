@@ -5,14 +5,10 @@
  */
 package com.group04.Controller;
 
-import static com.group04.Controller.EditUserServlet.FAIL;
-import static com.group04.Controller.EditUserServlet.SUCCESS;
-import com.group04.entities.Subject;
 import com.group04.repositories.SubjectRepositoryImp;
-import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
@@ -28,10 +24,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author ntdun
  */
-@WebServlet(name = "AddSubjectServlet", urlPatterns = {"/AddSubjectServlet"})
-public class AddSubjectServlet extends HttpServlet {
-    public static final String SUCCESS = "detailpage";
-    public static final String FAIL = "error";
+@WebServlet(name = "ShowCategoryServlet", urlPatterns = {"/ShowCategoryServlet"})
+public class ShowCategoryServlet extends HttpServlet {
+    public static final String SUCCESS = "subjectdetail";
+    public static final String FAIL = "index";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,48 +41,24 @@ public class AddSubjectServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
-        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = mapping.get(FAIL);
+        HttpSession session = request.getSession();
+        Map<String, String> listmapping = (Map<String, String>) context.getAttribute("MAPPING");
+        String url = listmapping.get(FAIL);
         try {
-
-            String subjectName = request.getParameter("subjectName");
-            String category = request.getParameter("category");
-            String owner = request.getParameter("owner");          
-            Date updateDate = new Date();
-            String description = request.getParameter("description");
-            String courseID = request.getParameter("courseID");
-
-            Subject subjectnew= new Subject();
-
-            SubjectRepositoryImp urp = new SubjectRepositoryImp();
-            subjectnew.setSubjectName("CSD101");
-            subjectnew.setCategory("toan");
-            subjectnew.setOwner("thay khanh");
-            subjectnew.setStatus(true);
-            subjectnew.setUpdateDate(updateDate);
-            subjectnew.setDescription("mon nay de vl ay");
-            subjectnew.setCourseID(1);
-            subjectnew.setActive(true);
-
-            System.out.println("Subject new: " + subjectnew.getSubjectName());
-            System.out.println("Before Error");
-            List<String> errors = DoValidate.validateS(subjectnew);
-            for (String error : errors) {
-                System.out.println("Loi: " + error);
+            SubjectRepositoryImp urp=new SubjectRepositoryImp();
+            List<String> listdup;
+            listdup = urp.getAllcategory();
+            List<String> listnodup=new ArrayList<>();
+            for(String element : listdup){
+                if(!listnodup.contains(element)){
+                    listnodup.add(element);
+                }
             }
-            System.out.println("After Error");
-            System.out.println("Number of Error: " + errors.size());
-            if (!errors.isEmpty()) {
-                session.setAttribute("ERROR_UPDATE", errors);
-            } else {
-                urp.addSubject(subjectnew);
-                url = mapping.get(SUCCESS);
-
-            }
-        } finally {
-            System.out.println(url);
+            session.setAttribute("listcategory", listnodup);
+            System.out.println(listnodup);
+        }catch (Exception e){  
+        }finally{
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

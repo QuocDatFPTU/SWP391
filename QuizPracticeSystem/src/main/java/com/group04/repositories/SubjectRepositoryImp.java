@@ -5,9 +5,11 @@
  */
 package com.group04.repositories;
 
+import com.group04.entities.Dimension;
 import com.group04.entities.Subject;
 import com.group04.utiils.HibernateUtil;
 import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -102,7 +104,6 @@ public class SubjectRepositoryImp implements SubjectRepository {
             if (transaction != null) {
                 transaction.rollback();
             }
-
         }
     }
 
@@ -134,6 +135,30 @@ public class SubjectRepositoryImp implements SubjectRepository {
             }
         }   
     }
+
+    @Override
+    public List<String> getAllcategory() {
+        Transaction transaction = null;
+        List<String> category;
+        category = null;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            category = session.createQuery("FROM Subject S WHERE S.category ")
+                    .getResultList();
+            if (category != null) {
+                return category ;
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                System.out.println("Loop Function");
+                transaction.rollback();
+            }
+        }
+        return null;
+    }
+
     
     
 }

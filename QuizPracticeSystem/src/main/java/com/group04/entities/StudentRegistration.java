@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,13 +41,22 @@ public class StudentRegistration implements Serializable {
 
     @Column(name = "userID")
     private Long userID;
-
+    
     @Column(name = "isPaid")
     private boolean isPaid;
+    
+    @Column(name = "courseID")
+    private int courseID;
+
+    @Column(name = "paymentID")
+    private int paymentID;
 
     @OneToOne
     @JoinColumn(name = "paymentID")
     private Payment payment;
+    
+    @OneToMany(mappedBy="courseID", fetch = FetchType.LAZY)
+    private Set<Course> course = new HashSet<>();
 
     public StudentRegistration(StudentRegistration register) {
         this.registrationID = register.registrationID;

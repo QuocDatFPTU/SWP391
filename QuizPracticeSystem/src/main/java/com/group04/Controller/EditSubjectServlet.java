@@ -12,6 +12,8 @@ import com.group04.repositories.SubjectRepositoryImp;
 import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
@@ -54,9 +56,9 @@ public class EditSubjectServlet extends HttpServlet {
             String category = request.getParameter("category");
             String owner = request.getParameter("owner");
             boolean status = Boolean.parseBoolean(request.getParameter("status"));
-            String updateDate = request.getParameter("updateDate");
+            Date updateDate = new Date();
             String description = request.getParameter("description");
-            String courseID = request.getParameter("courseID");
+            int courseID = parseInt(request.getParameter("courseID"));
             boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
             Subject UpdateSubject = new Subject();
 

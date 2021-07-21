@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "BlogListServlet", urlPatterns = {"/BlogListServlet"})
 public class ViewBlogServlet extends HttpServlet {
-private final String HOME_PAGE = "homePage";
+private final String FAIL = "homePage";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,7 +43,7 @@ private final String HOME_PAGE = "homePage";
         PrintWriter out = response.getWriter();
         ServletContext context = request.getServletContext();
         Map<String, String> listmapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = listmapping.get(HOME_PAGE);
+        String url = listmapping.get(FAIL);
         try {
             BlogRepositoryImp dao = new BlogRepositoryImp();
             List<Blog> list = dao.getAllBlog();

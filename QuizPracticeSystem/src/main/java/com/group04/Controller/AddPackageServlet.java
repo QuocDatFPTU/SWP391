@@ -5,14 +5,14 @@
  */
 package com.group04.Controller;
 
-import static com.group04.Controller.EditUserServlet.FAIL;
-import static com.group04.Controller.EditUserServlet.SUCCESS;
-import com.group04.entities.Subject;
+import static com.group04.Controller.AddSubjectServlet.FAIL;
+import static com.group04.Controller.AddSubjectServlet.SUCCESS;
+import com.group04.entities.Packages;
+import com.group04.repositories.PackageRepositoryImp;
 import com.group04.repositories.SubjectRepositoryImp;
 import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
@@ -28,10 +28,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author ntdun
  */
-@WebServlet(name = "AddSubjectServlet", urlPatterns = {"/AddSubjectServlet"})
-public class AddSubjectServlet extends HttpServlet {
-    public static final String SUCCESS = "detailpage";
-    public static final String FAIL = "error";
+@WebServlet(name = "AddPackageServlet", urlPatterns = {"/AddPackageServlet"})
+public class AddPackageServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -51,28 +50,21 @@ public class AddSubjectServlet extends HttpServlet {
         String url = mapping.get(FAIL);
         try {
 
-            String subjectName = request.getParameter("subjectName");
-            String category = request.getParameter("category");
-            String owner = request.getParameter("owner");          
-            Date updateDate = new Date();
-            String description = request.getParameter("description");
-            String courseID = request.getParameter("courseID");
+            String packageName = request.getParameter("packageName");
+            String price = request.getParameter("price");
+            String courseID = request.getParameter("courseID");          
 
-            Subject subjectnew= new Subject();
+            Packages newpackage = new Packages();
 
-            SubjectRepositoryImp urp = new SubjectRepositoryImp();
-            subjectnew.setSubjectName("CSD101");
-            subjectnew.setCategory("toan");
-            subjectnew.setOwner("thay khanh");
-            subjectnew.setStatus(true);
-            subjectnew.setUpdateDate(updateDate);
-            subjectnew.setDescription("mon nay de vl ay");
-            subjectnew.setCourseID(1);
-            subjectnew.setActive(true);
+            PackageRepositoryImp urp = new PackageRepositoryImp();
+            newpackage.setPackageName(packageName);
+            newpackage.setPrice(price);
+            newpackage.setCourseID(courseID);
 
-            System.out.println("Subject new: " + subjectnew.getSubjectName());
+
+            System.out.println("Package new: " + newpackage.getPackageName());
             System.out.println("Before Error");
-            List<String> errors = DoValidate.validateS(subjectnew);
+            List<String> errors = DoValidate.validateP(newpackage);
             for (String error : errors) {
                 System.out.println("Loi: " + error);
             }
@@ -81,7 +73,7 @@ public class AddSubjectServlet extends HttpServlet {
             if (!errors.isEmpty()) {
                 session.setAttribute("ERROR_UPDATE", errors);
             } else {
-                urp.addSubject(subjectnew);
+                urp.addPackage(newpackage);
                 url = mapping.get(SUCCESS);
 
             }

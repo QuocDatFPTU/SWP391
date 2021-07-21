@@ -6,12 +6,16 @@
 package com.group04.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -56,14 +60,15 @@ public class Course implements Serializable {
     @Column(name = "createDate")
     private String createDate;
 
-    @OneToMany(mappedBy = "courseID")
-    private Set<StudentRegistration> StudentRegistration;
+    @ManyToOne
+    @JoinColumn(name="courseID")
+    private StudentRegistration studentRegistration;
     
     @OneToMany(mappedBy = "courseID")
-    private Set<Package> packages; //Set Package
+    private Set<Packages> packages; //Set Packages
     
-    @OneToMany(mappedBy = "courseID")
-    private Set<Subject> subject;
+    @OneToMany(mappedBy = "courseID", fetch = FetchType.LAZY)
+    private Set<Subject> subject=new HashSet<>();
 
     public Course(Course course) {
         this.courseID = course.courseID;

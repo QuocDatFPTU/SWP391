@@ -5,7 +5,9 @@
  */
 package com.group04.repositories;
 
+import com.group04.entities.Dimension;
 import com.group04.entities.Subject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,4 +21,5 @@ public interface SubjectRepository {
    public void deleteSubject(Long id);
    public void updateSubject(Subject subject);
    public void addSubject(Subject subject);
+   List<String> getAllcategory();
 }

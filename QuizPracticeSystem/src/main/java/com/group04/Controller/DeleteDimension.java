@@ -5,15 +5,11 @@
  */
 package com.group04.Controller;
 
-import static com.group04.Controller.EditUserServlet.FAIL;
-import static com.group04.Controller.EditUserServlet.SUCCESS;
-import com.group04.entities.Subject;
-import com.group04.repositories.SubjectRepositoryImp;
-import com.group04.validators.DoValidate;
+import static com.group04.Controller.DeletePackageServlet.SUCCESS;
+import com.group04.repositories.DimensionRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import java.util.List;
+import static java.lang.Long.parseLong;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -28,9 +24,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author ntdun
  */
-@WebServlet(name = "AddSubjectServlet", urlPatterns = {"/AddSubjectServlet"})
-public class AddSubjectServlet extends HttpServlet {
-    public static final String SUCCESS = "detailpage";
+@WebServlet(name = "DeleteDimension", urlPatterns = {"/DeleteDimension"})
+public class DeleteDimension extends HttpServlet {
+    public static final String SUCCESS = "viewprofile";
     public static final String FAIL = "error";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,46 +43,13 @@ public class AddSubjectServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
-        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = mapping.get(FAIL);
+        Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
+        String url = mapping.get(SUCCESS);
         try {
-
-            String subjectName = request.getParameter("subjectName");
-            String category = request.getParameter("category");
-            String owner = request.getParameter("owner");          
-            Date updateDate = new Date();
-            String description = request.getParameter("description");
-            String courseID = request.getParameter("courseID");
-
-            Subject subjectnew= new Subject();
-
-            SubjectRepositoryImp urp = new SubjectRepositoryImp();
-            subjectnew.setSubjectName("CSD101");
-            subjectnew.setCategory("toan");
-            subjectnew.setOwner("thay khanh");
-            subjectnew.setStatus(true);
-            subjectnew.setUpdateDate(updateDate);
-            subjectnew.setDescription("mon nay de vl ay");
-            subjectnew.setCourseID(1);
-            subjectnew.setActive(true);
-
-            System.out.println("Subject new: " + subjectnew.getSubjectName());
-            System.out.println("Before Error");
-            List<String> errors = DoValidate.validateS(subjectnew);
-            for (String error : errors) {
-                System.out.println("Loi: " + error);
-            }
-            System.out.println("After Error");
-            System.out.println("Number of Error: " + errors.size());
-            if (!errors.isEmpty()) {
-                session.setAttribute("ERROR_UPDATE", errors);
-            } else {
-                urp.addSubject(subjectnew);
-                url = mapping.get(SUCCESS);
-
-            }
+            Long dimensionID = parseLong(request.getParameter("dimensionID"));
+            DimensionRepositoryImp urp = new DimensionRepositoryImp();
+            urp.deleteDimension(dimensionID);
         } finally {
-            System.out.println(url);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

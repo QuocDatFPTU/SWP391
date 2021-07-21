@@ -31,7 +31,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Setter 
 @NoArgsConstructor
 @AllArgsConstructor
-public class Package implements Serializable{
+public class Packages implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long packageID;
@@ -52,7 +52,7 @@ public class Package implements Serializable{
     @JoinColumn(name="registrationID")
     private StudentRegistration register;   
     
-    public Package(Package packages) {
+    public Packages(Packages packages) {
         this.packageID = packages.packageID;
         this.packageName = packages.packageName;
         this.price = packages.price;
