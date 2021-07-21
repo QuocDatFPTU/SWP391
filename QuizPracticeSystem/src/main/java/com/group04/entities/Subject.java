@@ -39,7 +39,7 @@ public class Subject implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int subjectID;
-    
+
     @NotBlank(message = "subjectname can't be empty")
     @Size(max = 100, min = 5, message="subjectname must have more than 5 characters")
     @Column(name = "subjectName")
