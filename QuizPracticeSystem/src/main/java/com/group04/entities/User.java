@@ -48,7 +48,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userID", nullable = false, updatable = false)
-    private int userID;
+    private Long userID;
 
     @NotBlank(message = "username can't be empty")
     @Size(max = 100, min = 5, message = "username must have more than 5 characters")

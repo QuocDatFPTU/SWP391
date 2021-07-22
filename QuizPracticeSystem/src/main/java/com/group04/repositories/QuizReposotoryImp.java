@@ -24,49 +24,48 @@ public class QuizReposotoryImp implements QuizRepository {
     @Override
     public List<Question> getRandomQuestionByLessonID(Long lessonID) {
         Transaction transaction = null;
-        List <Question> listOfQuestion = null;
+        List<Question> listOfQuestion = null;
         int n = 0;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             listOfQuestion = session.createQuery("FROM Question Q WHERE Q.lessonID = :lessonID ORDER BY newid()").
-                    setParameter("lessonID", lessonID).getResultList();   
-            
+                    setParameter("lessonID", lessonID).getResultList();
+
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
         }
-        return listOfQuestion;  
-    }   
-    
+        return listOfQuestion;
+    }
+
     @Override
-    public List<Lesson> getLessonBySubject(Long subjectID){
+    public List<Lesson> getLessonBySubject(Long subjectID) {
         LessonRepository lessonRepo = new LessonRepositoryImp();
         List<Lesson> listOfLesson = lessonRepo.getLessonBySubjectId(Long.MIN_VALUE);
-        
         return listOfLesson;
     }
+
     @Override
-    public List<Question> getQuestionsBySubject(Long subjectID){
+    public List<Question> getQuestionsBySubject(Long subjectID) {
         List<Lesson> lessonList = getLessonBySubject(subjectID);
         List<Question> questions = new ArrayList<>();
         QuestionRepository questionRepo = QuestionRepository.createInstance();
         for(Lesson lesson: lessonList){
+        for (Lesson lesson : lessonList) {
             questionRepo.getQuestionByLessonId(lesson.getLessonID()).forEach(question -> {
                 questions.add(question);
             });
         }
         return questions;
-        
     }
+
     @Override
-    public List<Question> getRandomQuestionsBySubject(Long subjectID,int n){
+    public List<Question> getRandomQuestionsBySubject(Long subjectID, int n) {
         List<Question> questions = getQuestionsBySubject(subjectID);
         Collections.shuffle(questions);
         return new ArrayList(questions.subList(0, n));
     }
-   
-}
-    
 
+}

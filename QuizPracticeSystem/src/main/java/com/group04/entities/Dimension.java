@@ -42,9 +42,6 @@ public class Dimension implements Serializable{
     @Column(name = "dimensionName")
     private String dimensionName;
     
-    @Column(name="subjectID")
-    private int subjectID;
-    
     @ManyToOne
     @JoinColumn(name="subjectID")
     private Subject subject;

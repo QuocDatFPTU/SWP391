@@ -5,6 +5,7 @@
  */
 package com.group04.entities;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ import lombok.Setter;
 @Setter 
 @NoArgsConstructor
 @AllArgsConstructor
-public class OptionExam {
+public class OptionExam implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long optionID;
@@ -38,10 +39,7 @@ public class OptionExam {
     
     @Column(name = "isRight")
     private boolean isRight;
-    
-    @Column(name = "questionID")
-    private String questionID;
-       
+           
     @ManyToOne
     @JoinColumn(name = "questionID")
     private QuestionExam questionExam;
@@ -50,6 +48,5 @@ public class OptionExam {
         this.optionID = option.optionID;
         this.content = option.content;
         this.isRight = option.isRight;
-        this.questionID = option.questionID;
 }
 }

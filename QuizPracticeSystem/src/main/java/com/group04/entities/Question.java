@@ -49,7 +49,7 @@ public class Question implements Serializable{
     @Column(name = "lessonID")
     private String lessonID;
 
-   @OneToMany(mappedBy = "questionID", fetch = FetchType.LAZY)
+   @OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
     private Set<Option> Option = new HashSet<>();
    
    public Question(Question question) {

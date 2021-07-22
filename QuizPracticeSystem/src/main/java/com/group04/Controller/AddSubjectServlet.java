@@ -67,7 +67,7 @@ public class AddSubjectServlet extends HttpServlet {
             subjectnew.setStatus(true);
             subjectnew.setUpdateDate(updateDate);
             subjectnew.setDescription("mon nay de vl ay");
-            subjectnew.setCourseID(1);
+            subjectnew.setCourseID(1L);
             subjectnew.setActive(true);
 
             System.out.println("Subject new: " + subjectnew.getSubjectName());

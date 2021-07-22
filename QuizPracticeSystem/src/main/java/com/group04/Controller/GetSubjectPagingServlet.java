@@ -47,7 +47,7 @@ public class GetSubjectPagingServlet extends HttpServlet {
         String url = mapping.get(FAIL);
         SubjectRepositoryImp dao=new SubjectRepositoryImp();
         try {
-            String courseID = request.getParameter("courseID");
+            Long courseID = Long.parseLong(request.getParameter("CourseID"));
             List<Subject> subject=dao.getAllSubjectPaging(courseID, 0, 5);
             session.setAttribute("listSubjectPaging", subject);
             url = mapping.get(SUCCESS);

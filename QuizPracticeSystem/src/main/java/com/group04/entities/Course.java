@@ -11,13 +11,10 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,7 +28,9 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author HP
  */
 @Entity
-@Table(name = "course")
+@Table(name = "course", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"courseID"})
+})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -39,7 +38,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Course implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "courseID", nullable = false, updatable = false)
     private Long courseID;
 
     @NotBlank(message = "coursename cannot be empty")
@@ -60,14 +59,13 @@ public class Course implements Serializable {
     @Column(name = "createDate")
     private String createDate;
 
-    @ManyToOne
-    @JoinColumn(name="courseID")
-    private StudentRegistration studentRegistration;
+    @OneToMany(mappedBy = "course")
+    private Set<StudentRegistration> studentRegistration;
     
-    @OneToMany(mappedBy = "courseID")
-    private Set<Packages> packages; //Set Packages
+    @OneToMany(mappedBy = "course")
+    private Set<Packages> packages;
     
-    @OneToMany(mappedBy = "courseID", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
     private Set<Subject> subject=new HashSet<>();
 
     public Course(Course course) {
