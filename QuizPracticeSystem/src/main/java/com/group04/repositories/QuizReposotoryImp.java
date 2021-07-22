@@ -53,7 +53,7 @@ public class QuizReposotoryImp implements QuizRepository {
         List<Question> questions = new ArrayList<>();
         QuestionRepository questionRepo = QuestionRepository.createInstance();
         for(Lesson lesson: lessonList){
-            questionRepo.getQuestionByLessonId(lesson.getLessonId()).forEach(question -> {
+            questionRepo.getQuestionByLessonId(lesson.getLessonID()).forEach(question -> {
                 questions.add(question);
             });
         }
