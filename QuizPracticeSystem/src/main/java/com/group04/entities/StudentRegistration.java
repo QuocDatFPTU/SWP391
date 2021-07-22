@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -50,8 +51,9 @@ public class StudentRegistration implements Serializable {
     @JoinColumn(name = "paymentID")
     private Payment payment;
     
-    @OneToMany(mappedBy="courseID", fetch = FetchType.LAZY)
-    private Set<Course> course = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name="CourseID")
+    private Course course;
 
     public StudentRegistration(StudentRegistration register) {
         this.registrationID = register.registrationID;

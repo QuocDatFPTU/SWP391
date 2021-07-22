@@ -58,7 +58,6 @@ public class EditSubjectServlet extends HttpServlet {
             boolean status = Boolean.parseBoolean(request.getParameter("status"));
             Date updateDate = new Date();
             String description = request.getParameter("description");
-            Long courseID = Long.parseLong(request.getParameter("courseID"));
             boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
             Subject UpdateSubject = new Subject();
 
@@ -69,7 +68,6 @@ public class EditSubjectServlet extends HttpServlet {
             UpdateSubject.setStatus(status);
             UpdateSubject.setDescription(description);
             UpdateSubject.setUpdateDate(updateDate);
-            UpdateSubject.setCourseID(courseID);
             UpdateSubject.setActive(isActive);
 
             System.out.println("Subject update: " + UpdateSubject.getSubjectName());

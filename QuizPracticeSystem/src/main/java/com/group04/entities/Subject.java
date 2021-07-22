@@ -67,14 +67,11 @@ public class Subject implements Serializable{
     @Column(name = "description")
     private String description;
     
-    @Column(name = "courseID")
-    private Long courseID;
-    
     @Column(name = "isActive")
     private boolean isActive;
     
     
-    @OneToMany(mappedBy="subjectID", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="subject", fetch = FetchType.LAZY)
     private Set<Dimension> dimension = new HashSet<>();
     
     @ManyToOne
@@ -89,7 +86,6 @@ public class Subject implements Serializable{
         this.status = subject.status;
         this.updateDate = subject.updateDate;
         this.description = subject.description;
-        this.courseID = subject.courseID;
         this.isActive = subject.isActive;
     }
     

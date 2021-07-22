@@ -45,11 +45,10 @@ public class Packages implements Serializable{
     @Column(name = "price")
     private String price;
     
-    
     @ManyToOne
-    @JoinColumn(name="registrationID")
-    private StudentRegistration register;   
-    
+    @JoinColumn(name="courseID")
+    private Course course;
+ 
     public Packages(Packages packages) {
         this.packageID = packages.packageID;
         this.packageName = packages.packageName;

@@ -61,7 +61,7 @@ public class ExamInfo implements Serializable {
     @Column(name = "description")
     private String description;
         
-    @ManyToMany(mappedBy ="ExamInfo")
+    @ManyToMany(mappedBy ="examInfos")
     private Set<Lesson> lessons = new HashSet<>();
     
     @ManyToOne
