@@ -45,11 +45,6 @@ public class StudentRegistration implements Serializable {
     @Column(name = "isPaid")
     private boolean isPaid;
     
-    @Column(name = "courseID")
-    private int courseID;
-
-    @Column(name = "paymentID")
-    private int paymentID;
 
     @OneToOne
     @JoinColumn(name = "paymentID")

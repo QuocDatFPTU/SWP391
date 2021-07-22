@@ -45,8 +45,6 @@ public class Packages implements Serializable{
     @Column(name = "price")
     private String price;
     
-    @Column(name = "courseID")
-    private String courseID;
     
     @ManyToOne
     @JoinColumn(name="registrationID")
@@ -56,7 +54,6 @@ public class Packages implements Serializable{
         this.packageID = packages.packageID;
         this.packageName = packages.packageName;
         this.price = packages.price;
-        this.courseID = packages.courseID;
         
     }
 }

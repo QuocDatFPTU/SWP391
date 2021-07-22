@@ -9,7 +9,6 @@ import static com.group04.Controller.AddSubjectServlet.FAIL;
 import static com.group04.Controller.AddSubjectServlet.SUCCESS;
 import com.group04.entities.Packages;
 import com.group04.repositories.PackageRepositoryImp;
-import com.group04.repositories.SubjectRepositoryImp;
 import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -51,15 +50,13 @@ public class AddPackageServlet extends HttpServlet {
         try {
 
             String packageName = request.getParameter("packageName");
-            String price = request.getParameter("price");
-            String courseID = request.getParameter("courseID");          
+            String price = request.getParameter("price");         
 
             Packages newpackage = new Packages();
 
             PackageRepositoryImp urp = new PackageRepositoryImp();
             newpackage.setPackageName(packageName);
             newpackage.setPrice(price);
-            newpackage.setCourseID(courseID);
 
 
             System.out.println("Package new: " + newpackage.getPackageName());

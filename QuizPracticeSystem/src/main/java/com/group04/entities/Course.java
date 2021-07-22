@@ -18,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,7 +32,9 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author HP
  */
 @Entity
-@Table(name = "course")
+@Table(name = "course", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"courseID"})
+})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -39,7 +42,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Course implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "courseID", nullable = false, updatable = false)
     private Long courseID;
 
     @NotBlank(message = "coursename cannot be empty")

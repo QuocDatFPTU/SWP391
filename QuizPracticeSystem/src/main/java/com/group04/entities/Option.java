@@ -41,8 +41,6 @@ public class Option implements Serializable {
     @Column(name = "isRight")
     private boolean isRight;
 
-    @Column(name = "questionID")
-    private boolean questionID;
     
     @ManyToOne
     @JoinColumn(name = "questionID")

@@ -47,10 +47,7 @@ public class QuestionExam implements Serializable {
     
     @Column(name = "explanation")
     private String explanation;
-    
-    @Column(name = "examDetailID")
-    private String examDetailID;
-    
+       
     @OneToMany(mappedBy = "questionID", fetch = FetchType.EAGER)
     private Set<OptionExam> OptionExam = new HashSet<>();
     
@@ -60,6 +57,5 @@ public class QuestionExam implements Serializable {
         this.content = question.content;
         this.level = question.level;
         this.explanation = question.explanation;
-        this.examDetailID = question.examDetailID;
     }
 }

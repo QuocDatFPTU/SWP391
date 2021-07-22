@@ -1,0 +1,61 @@
+html{
+    font-family: 'Roboto', sans-serif;
+    
+}
+body{
+    background-color: #fff;
+}
+.custom-select{
+    width: 200px;
+}
+.controller{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+h2{
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+
+}
+.controller :first-child{
+    align-items: flex-start;
+}
+
+.interact-quiz :first-child{
+    margin-right: 20px;
+}
+#label-category{
+    margin-top: 10px;
+}
+
+table {
+    margin-top: 1.5rem;
+    table-layout: fixed;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+
+thead tr :first-child{
+    width: 45%;
+}
+
+.content1 p{ 
+    text-align: center;
+    margin: 0;
+    max-height: 50px;
+}
+th{
+    text-align: center;
+}
+
+.subarea p{
+   display: inline-block;
+}
+
+.subarea :last-child{
+    float: right;
+}

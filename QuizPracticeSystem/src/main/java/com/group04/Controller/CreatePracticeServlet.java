@@ -5,14 +5,12 @@
  */
 package com.group04.Controller;
 
-import com.group04.entities.Packages;
-import com.group04.repositories.PackageRepositoryImp;
-import com.group04.validators.DoValidate;
+import static com.group04.Controller.SubjectListServlet.FAIL;
+import static com.group04.Controller.SubjectListServlet.SUCCESS;
+import com.group04.repositories.SubjectRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.Map;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,14 +21,12 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ntdun
+ * @author HP
  */
-@WebServlet(name = "EditPackageServlet", urlPatterns = {"/EditPackageServlet"})
-public class EditPackageServlet extends HttpServlet {
-
-    public static final String SUCCESS = "detailpage";
-    public static final String FAIL = "error";
-
+@WebServlet(name = "CreatePractice", urlPatterns = {"/CreatePractice"})
+public class CreatePracticeServlet extends HttpServlet {
+    public static final String SUCCESS = "quizListPage";
+    public static final String FAIL = "quizListPage";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,38 +42,17 @@ public class EditPackageServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
-        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
+        Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
         String url = mapping.get(FAIL);
-        try {
-
-            String packageName = request.getParameter("packageName");
-            String price = request.getParameter("price");
-
-            Packages newpackage = new Packages();
-
-            PackageRepositoryImp urp = new PackageRepositoryImp();
-            newpackage.setPackageName(packageName);
-            newpackage.setPrice(price);
-
-            System.out.println("Package new: " + newpackage.getPackageName());
-            System.out.println("Before Error");
-            List<String> errors = DoValidate.validateP(newpackage);
-            for (String error : errors) {
-                System.out.println("Loi: " + error);
-            }
-            System.out.println("After Error");
-            System.out.println("Number of Error: " + errors.size());
-            if (!errors.isEmpty()) {
-                session.setAttribute("ERROR_UPDATE", errors);
-            } else {
-                urp.updatePackage(newpackage);
-                url = mapping.get(SUCCESS);
-
-            }
-        } finally {
-            System.out.println(url);
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+        SubjectRepositoryImp dao=new SubjectRepositoryImp();
+        try  {
+            String name = request.getParameter("subjectName");
+            dao.getSubjectByName(name);
+            url = mapping.get(SUCCESS);
+        }catch (Exception e) {
+            System.out.println("Error: "+e);
+        }finally{
+            request.getRequestDispatcher(url).forward(request, response);
             out.close();
         }
     }
