@@ -52,15 +52,14 @@ public class QuizReposotoryImp implements QuizRepository {
         List<Lesson> lessonList = getLessonBySubject(subjectID);
         List<Question> questions = new ArrayList<>();
         QuestionRepository questionRepo = QuestionRepository.createInstance();
-        for(Lesson lesson: lessonList){
-        for (Lesson lesson : lessonList) {
-            questionRepo.getQuestionByLessonId(lesson.getLessonID()).forEach(question -> {
-                questions.add(question);
-            });
-        }
+        for (Lesson lesson : lessonList) {          
+                questionRepo.getQuestionByLessonId(lesson.getLessonID()).forEach(question -> {
+                    questions.add(question);
+                });
+            }
         return questions;
-    }
-
+        }
+    
     @Override
     public List<Question> getRandomQuestionsBySubject(Long subjectID, int n) {
         List<Question> questions = getQuestionsBySubject(subjectID);

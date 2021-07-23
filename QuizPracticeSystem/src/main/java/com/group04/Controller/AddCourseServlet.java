@@ -59,6 +59,7 @@ public class AddCourseServlet extends HttpServlet {
             Course NewCourse = new Course();
 
             CourseRepositoryImp urp = new CourseRepositoryImp();
+            NewCourse.setCourseID(urp.getRandomID());
             NewCourse.setCourseName(courseName);
             NewCourse.setFeatured(isFeatured);
             NewCourse.setActive(isActive);

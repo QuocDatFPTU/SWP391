@@ -34,7 +34,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "subject")
+@Table(name = "Subject")
 public class Subject implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -76,7 +76,7 @@ public class Subject implements Serializable{
     
     @ManyToOne
     @JoinColumn(name="CourseID")
-    private Course course;
+    private Set<Course> course= new HashSet<>();
 
     public Subject(Subject subject) {
         this.subjectID = subject.subjectID;

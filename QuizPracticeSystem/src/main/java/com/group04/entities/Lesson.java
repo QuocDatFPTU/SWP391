@@ -31,7 +31,7 @@ import lombok.Setter;
  * @author HP
  */
 @Entity
-@Table(name = "lesson")
+@Table(name = "Lesson")
 @Getter
 @Setter
 @NoArgsConstructor
