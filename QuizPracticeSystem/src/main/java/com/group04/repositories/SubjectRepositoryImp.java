@@ -7,7 +7,7 @@ package com.group04.repositories;
 
 import com.group04.entities.Dimension;
 import com.group04.entities.Subject;
-import com.group04.utiils.HibernateUtil;
+import com.group04.utils.HibernateUtil;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

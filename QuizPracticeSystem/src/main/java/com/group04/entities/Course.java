@@ -28,7 +28,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author HP
  */
 @Entity
-@Table(name = "course", uniqueConstraints = {
+@Table(name = "Course", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"courseID"})
 })
 @Getter

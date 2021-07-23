@@ -56,7 +56,6 @@ public class AddSubjectServlet extends HttpServlet {
             String owner = request.getParameter("owner");          
             Date updateDate = new Date();
             String description = request.getParameter("description");
-            String courseID = request.getParameter("courseID");
 
             Subject subjectnew= new Subject();
 
@@ -67,7 +66,6 @@ public class AddSubjectServlet extends HttpServlet {
             subjectnew.setStatus(true);
             subjectnew.setUpdateDate(updateDate);
             subjectnew.setDescription("mon nay de vl ay");
-            subjectnew.setCourseID(1L);
             subjectnew.setActive(true);
 
             System.out.println("Subject new: " + subjectnew.getSubjectName());

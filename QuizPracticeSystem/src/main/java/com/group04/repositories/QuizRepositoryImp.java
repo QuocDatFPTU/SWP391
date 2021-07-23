@@ -8,7 +8,7 @@ package com.group04.repositories;
 import com.group04.entities.Course;
 import com.group04.entities.Lesson;
 import com.group04.entities.Question;
-import com.group04.utiils.HibernateUtil;
+import com.group04.utils.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +19,7 @@ import org.hibernate.Transaction;
  *
  * @author HP
  */
-public class QuizReposotoryImp implements QuizRepository {
+public class QuizRepositoryImp implements QuizRepository {
 
     @Override
     public List<Question> getRandomQuestionByLessonID(Long lessonID) {
@@ -43,7 +43,7 @@ public class QuizReposotoryImp implements QuizRepository {
     @Override
     public List<Lesson> getLessonBySubject(Long subjectID) {
         LessonRepository lessonRepo = new LessonRepositoryImp();
-        List<Lesson> listOfLesson = lessonRepo.getLessonBySubjectId(Long.MIN_VALUE);
+        List<Lesson> listOfLesson = lessonRepo.getLessonBySubjectId(subjectID);
         return listOfLesson;
     }
 
@@ -64,7 +64,10 @@ public class QuizReposotoryImp implements QuizRepository {
     public List<Question> getRandomQuestionsBySubject(Long subjectID, int n) {
         List<Question> questions = getQuestionsBySubject(subjectID);
         Collections.shuffle(questions);
+        for(Question quest : questions){
+            System.out.println(quest.toString());
+        }
         return new ArrayList(questions.subList(0, n));
     }
-
+    
 }

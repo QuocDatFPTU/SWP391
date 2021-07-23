@@ -36,7 +36,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author HP
  */
 @Entity
-@Table(name = "users", uniqueConstraints = {
+@Table(name = "Users", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"email"})
 })
 @Getter
@@ -94,7 +94,7 @@ public class User implements Serializable {
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinTable(
-            name = "users_roles",
+            name = "Users_Roles",
             joinColumns = {
                 @JoinColumn(name = "user_id")},
             inverseJoinColumns = {

@@ -31,7 +31,7 @@ import lombok.Setter;
  * @author HP
  */
 @Entity
-@Table(name = "lesson")
+@Table(name = "Lesson")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -75,7 +75,7 @@ public class Lesson implements Serializable {
     )
     private Set<ExamInfo> examInfos = new HashSet<>();
     
-    @OneToMany(mappedBy = "lessonID", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "lesson", fetch = FetchType.EAGER)
     private Set<Question> Question = new HashSet<>();
     
     @ManyToOne

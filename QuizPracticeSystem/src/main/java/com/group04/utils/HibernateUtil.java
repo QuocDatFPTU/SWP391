@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group04.utiils;
+package com.group04.utils;
 
 import com.group04.entities.Blog;
 import com.group04.entities.Course;

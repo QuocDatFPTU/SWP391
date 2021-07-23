@@ -18,4 +18,7 @@ public interface QuizRepository {
     List<Lesson> getLessonBySubject(Long subjectID);
     List<Question> getQuestionsBySubject(Long subjectID);
     List<Question> getRandomQuestionsBySubject(Long subjectID,int n);
+    public static QuizRepository createInstance(){
+        return new QuizRepositoryImp();
+    }
 }

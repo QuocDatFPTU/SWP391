@@ -26,7 +26,7 @@ import lombok.ToString;
  * @author HP
  */
 @Entity
-@Table(name = "roles")
+@Table(name = "Roles")
 @Getter @Setter
 @ToString @NoArgsConstructor
 @AllArgsConstructor
