@@ -6,8 +6,9 @@
 package com.group04.repositories;
 
 import com.group04.entities.Course;
-import com.group04.utiils.HibernateUtil;
+import com.group04.utils.HibernateUtil;
 import java.util.ArrayList;
+import com.group04.utils.HibernateUtil;
 import java.util.List;
 import java.util.Random;
 import org.hibernate.Session;

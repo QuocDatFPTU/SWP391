@@ -5,8 +5,6 @@
  */
 package com.group04.Controller;
 
-import static com.group04.Controller.EditUserServlet.FAIL;
-import static com.group04.Controller.EditUserServlet.SUCCESS;
 import com.group04.entities.Course;
 import com.group04.entities.Subject;
 import com.group04.repositories.CourseRepositoryImp;

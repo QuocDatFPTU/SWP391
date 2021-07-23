@@ -7,7 +7,7 @@ package com.group04.repositories;
 
 import com.group04.entities.Lesson;
 import com.group04.entities.Subject;
-import com.group04.utiils.HibernateUtil;
+import com.group04.utils.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -25,7 +25,7 @@ public class LessonRepositoryImp implements LessonRepository{
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Lesson = session.createQuery("FROM Lesson L WHERE L.subjectID = :id").setParameter("id", subjectId)
+            Lesson = session.createQuery("FROM Lesson WHERE subjectID = :id").setParameter("id", subjectId)
                     .getResultList();
             if (Lesson != null) {
                 return Lesson;
@@ -33,6 +33,8 @@ public class LessonRepositoryImp implements LessonRepository{
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
+                e.printStackTrace();
+                System.err.println(e.getMessage());
                 System.out.println("Loop Function");
                 transaction.rollback();
             }

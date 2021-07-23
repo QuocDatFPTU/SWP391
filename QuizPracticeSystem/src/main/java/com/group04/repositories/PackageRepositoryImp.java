@@ -6,7 +6,7 @@
 package com.group04.repositories;
 
 import com.group04.entities.Packages;
-import com.group04.utiils.HibernateUtil;
+import com.group04.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
