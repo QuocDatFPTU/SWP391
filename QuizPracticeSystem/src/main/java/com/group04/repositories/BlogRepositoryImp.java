@@ -25,6 +25,7 @@ public class BlogRepositoryImp implements BlogRepository {
             transaction = session.beginTransaction();
             listOfBlog = session.createQuery("from Blog").getResultList();
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();

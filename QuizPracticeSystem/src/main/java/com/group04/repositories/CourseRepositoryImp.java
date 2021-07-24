@@ -28,6 +28,7 @@ public class CourseRepositoryImp implements CourseRepository {
             transaction = session.beginTransaction();
             listOfCourse = session.createQuery("from Course").getResultList();
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -44,6 +45,7 @@ public class CourseRepositoryImp implements CourseRepository {
             transaction = session.beginTransaction();
             session.save(course);
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -59,6 +61,7 @@ public class CourseRepositoryImp implements CourseRepository {
             session.evict(course);
             session.merge(course);
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -77,6 +80,7 @@ public class CourseRepositoryImp implements CourseRepository {
                 System.out.println("course is deleted");
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -110,6 +114,7 @@ public class CourseRepositoryImp implements CourseRepository {
                 return course;
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 System.out.println("Loop Function");
