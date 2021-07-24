@@ -50,7 +50,7 @@ public class User implements Serializable {
     private Long userID;
 
     @NotBlank(message = "username can't be empty")
-    @Size(max = 100, min = 5, message = "username must have more than 5 characters")
+    @Size(max = 100, min = 3, message = "username must have more than 3 characters")
     @Column(name = "username")
     private String username;
 
@@ -91,7 +91,7 @@ public class User implements Serializable {
     @Column(name = "isActive")
     private boolean isActive;
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "Users_Roles",
             joinColumns = {
@@ -101,7 +101,7 @@ public class User implements Serializable {
     )
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<StudentRegistration> Register = new HashSet<>();
 //    private StudentRegistration Register;
 

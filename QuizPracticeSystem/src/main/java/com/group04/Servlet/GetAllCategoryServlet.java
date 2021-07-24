@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
  * @author ntdun
  */
 @WebServlet(name = "ShowCategoryServlet", urlPatterns = {"/ShowCategoryServlet"})
-public class ShowCategoryServlet extends HttpServlet {
+public class GetAllCategoryServlet extends HttpServlet {
     public static final String SUCCESS = "subjectdetail";
     public static final String FAIL = "index";
     /**

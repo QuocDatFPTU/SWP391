@@ -50,7 +50,6 @@ public class AdddDimensionServlet extends HttpServlet {
         try {
 
             String dimensionName = request.getParameter("dimensonName");
-
             Dimension newdimension = new Dimension();
 
             DimensionRepositoryImp urp = new DimensionRepositoryImp();

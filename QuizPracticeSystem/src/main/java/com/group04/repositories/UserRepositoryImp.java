@@ -38,6 +38,7 @@ public class UserRepositoryImp implements UserRepository {
                 return true;
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -59,6 +60,7 @@ public class UserRepositoryImp implements UserRepository {
                 return user;
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -92,6 +94,7 @@ public class UserRepositoryImp implements UserRepository {
             transaction = session.beginTransaction();
             listOfUser = session.createQuery("from User").getResultList();
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -118,6 +121,7 @@ public class UserRepositoryImp implements UserRepository {
                 return Role;
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 System.out.println("Loop Function");
@@ -135,6 +139,7 @@ public class UserRepositoryImp implements UserRepository {
             session.evict(user);
             session.merge(user);
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -153,6 +158,7 @@ public class UserRepositoryImp implements UserRepository {
                 System.out.println("user is deleted");
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -175,6 +181,7 @@ public class UserRepositoryImp implements UserRepository {
             user.setPassword(newpassword);
             session.persist(user);
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -217,6 +224,7 @@ public class UserRepositoryImp implements UserRepository {
             user.setPassword(newpassword);
             session.persist(user);
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();

@@ -23,5 +23,5 @@ public interface SubjectRepository {
    public void addSubject(Subject subject);
    List<String> getAllcategory();
    Subject getSubjectByName(String subjectName);
-//   Course getCourseID();
+   List<Subject> getAllSubject();
 }

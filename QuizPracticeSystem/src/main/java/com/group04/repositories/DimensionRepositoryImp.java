@@ -23,6 +23,7 @@ public class DimensionRepositoryImp implements DimensionRepository {
             transaction = session.beginTransaction();
             session.save(dimension);
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -41,6 +42,7 @@ public class DimensionRepositoryImp implements DimensionRepository {
                 System.out.println("dimension is deleted");
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -57,6 +59,7 @@ public class DimensionRepositoryImp implements DimensionRepository {
             session.evict(dimension);
             session.merge(dimension);
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
