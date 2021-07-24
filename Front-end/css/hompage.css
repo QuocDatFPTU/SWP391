@@ -106,3 +106,8 @@ footer {
 .mail-footer {
   display: inline-block;
 }
+#logo-name {
+  display: inline-block;
+  
+  margin-bottom:0;
+}
