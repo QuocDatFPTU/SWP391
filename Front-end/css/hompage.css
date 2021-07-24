@@ -1,3 +1,5 @@
+
+
 h2 {
   font-family: "Jost", sans-serif;
   text-align: center;
@@ -22,10 +24,12 @@ h2 {
   font-style: italic;
 }
 
-.card {
-  height: 300px;
-}
 
+
+.container.wish-list .card-body{
+  padding: 0.5rem;
+  
+}
 .wish-list p {
   text-align: initial;
   font-style: italic;
@@ -33,6 +37,8 @@ h2 {
 
 footer {
   background-color: #03045e;
+  max-height: fit-content;
+  margin-top: 1.5rem;
 }
 .footer-wraper {
   height: 270px;

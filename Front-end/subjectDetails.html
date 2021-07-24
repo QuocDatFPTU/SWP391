@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/subjectDetails.css">
+
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Subject Details</h2>    
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'Overview')" id="openDefault">Overview</button>
+        <button class="tablinks" onclick="openCity(event, 'dimension')">Dimension</button>
+        <button class="tablinks" onclick="openCity(event, 'pricePackage')">Price Package</button>
+      </div>
+      
+      <!-- Tab content -->
+      <div id="Overview" class="tabcontent">
+        <form action="#"> 
+            <div class="mainSection">
+                <div class="firstSection">
+                    <div class="subjectNameContet">                
+                        <!--Subject name section-->  
+                        <label for="subjectName">Subject Name</label>
+                        <input type="text" id="subjectName" placeholder="Please input your subject name here.">
+                    </div><!--end of subject section-->              
+                <!--Category section-->
+                <div class="categoryContent">   
+                    <label for="category">Category</label>
+                    <select name="category" id="category">
+                        <option value="" selected="selected">Please select category</option>
+                        <!--.........-->
+                    </select>
+                </div>
+                </div>
+                <div class="secondSection">
+                    <div class="imageSection">
+                        <img src="img/asp-mvc.jpg" alt="">
+                    </div>
+                </div>
+            </div>      
+            
+            
+            
+                
+            <!--end of category section-->   
+            <div class="attributeSubjectContent">
+                <div class="attributeSubject">
+                    <input type="checkbox" id="isFeature" name="isFeature" value="Featured">
+                    <label for="vehicle1"> Featured subject</label><br>
+                </div>
+                    <div class="statusSection">
+                        <label for="status">Status</label>
+                        <select name="status" id="status">
+                            <option value="" selected="selected">Status</option>
+                            <!--.........-->
+                        </select>
+                    </div>
+                   
+                
+            </div>
+            
+          
+            <div class="description">
+                <label for="descriptionSection">Description:</label><br>
+
+                <textarea id="descriptionSection" name="description" rows="6" cols="139">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit suscipit odit est cupiditate sequi?
+                 Nemo quia, dicta cum totam eligendi beatae consectetur autem placeat tempora similique perferendis natus maxime impedit.
+                </textarea>
+            </div>
+
+            <div class="buttonSection">
+                <button type="submit">Submit</button>
+                <button type="button">Cancel</button>
+            </div>
+        </form>
+      </div>
+      
+      <!--Dimension section-->
+      <div id="dimension" class="tabcontent">
+          <div class="dimensionContent">
+            <a href="" id="addNewAction">Add new</a>
+            <table border="1">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Type</th>
+                  <th>Dimension</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Domain</td>
+                  <td>Business</td>
+                  <td  class = "dimensionAction">
+                    <a href="#">Edit</a>
+                    <a href="#">Delete</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>Domain</td>
+                  <td>Business</td>
+                  <td  class = "dimensionAction">
+                    <a href="#">Edit</a>
+                    <a href="#">Delete</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>Domain</td>
+                  <td>Business</td>
+                  <td  class = "dimensionAction">
+                    <a href="#">Edit</a>
+                    <a href="#">Delete</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>Domain</td>
+                  <td>Business</td>
+                  <td  class = "dimensionAction">
+                    <a href="#">Edit</a>
+                    <a href="#">Delete</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>Domain</td>
+                  <td>Business</td>
+                  <td class = "dimensionAction">
+                    <a href="#">Edit</a>
+                    <a href="#">Delete</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+      
+      <div id="pricePackage" class="tabcontent">
+        <div class="pricePackageContent">      
+        <a href="" id="addNewPricePackageAction">Add new</a>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Package</th>
+              <th>Duration</th>
+              <th>List Price</th>
+              <th>Sale Price</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><a href="#">Gói truy cập 3 tháng</a></td>
+              <td>3</td>
+              <td>3000</td>
+              <td>3200</td>
+              <td>Active</td>
+              <td class="pricePackageAction">
+                <a href="#">Edit</a>
+                <a href="#">Deactivate</a>
+              </td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td><a href="#">Gói truy cập 3 tháng</a></td>
+              <td>3</td>
+              <td>3000</td>
+              <td>3200</td>
+              <td>Active</td>
+              <td class="pricePackageAction">
+                <a href="#">Edit</a>
+                <a href="#">Deactivate</a>
+              </td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td><a href="#">Gói truy cập 3 tháng</a></td>
+              <td>3</td>
+              <td>3000</td>
+              <td>3200</td>
+              <td>Active</td>
+              <td class="pricePackageAction">
+                <a href="#">Edit</a>
+                <a href="#">Deactivate</a>
+              </td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td><a href="#">Gói truy cập 3 tháng</a></td>
+              <td>3</td>
+              <td>3000</td>
+              <td>3200</td>
+              <td>Active</td>
+              <td class="pricePackageAction">
+                <a href="#">Edit</a>
+                <a href="#">Deactivate</a>
+              </td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td><a href="#">Gói truy cập 3 tháng</a></td>
+              <td>3</td>
+              <td>3000</td>
+              <td>3200</td>
+              <td>Active</td>
+              <td class="pricePackageAction">
+                <a href="#">Edit</a>
+                <a href="#">Deactivate</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+      <script>
+        function openCity(evt, tabname) {
+          var i, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+          document.getElementById(tabname).style.display = "block";
+          evt.currentTarget.className += " active";
+        }
+        document.getElementById("openDefault").click();
+        </script>
+</body>
+</html>
