@@ -5,8 +5,6 @@
  */
 package com.group04.Servlet;
 
-import static com.group04.Servlet.EditUserServlet.FAIL;
-import static com.group04.Servlet.EditUserServlet.SUCCESS;
 import com.group04.entities.Course;
 import com.group04.repositories.CourseRepositoryImp;
 import com.group04.validators.DoValidate;

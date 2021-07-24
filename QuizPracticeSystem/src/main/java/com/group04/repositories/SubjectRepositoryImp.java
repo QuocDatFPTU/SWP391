@@ -187,6 +187,22 @@ public class SubjectRepositoryImp implements SubjectRepository {
         return null;
     }
 
+    @Override
+    public List<Subject> getAllSubject() {
+Transaction transaction = null;
+        List<Subject> listOfSubject = null;
+        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            listOfSubject = session.createQuery("from Subject").getResultList();
+            transaction.commit();
+            session.close();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return listOfSubject;    }
+
     
     
 }

@@ -37,7 +37,8 @@ import org.hibernate.validator.constraints.NotBlank;
 @Table(name = "Subject")
 public class Subject implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "subjectID", nullable = false, updatable = false)
     private Long subjectID;
 
     @NotBlank(message = "subjectname can't be empty")
