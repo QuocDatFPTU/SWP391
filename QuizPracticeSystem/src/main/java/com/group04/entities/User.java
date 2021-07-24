@@ -45,7 +45,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userID", nullable = false, updatable = false)
     private Long userID;
 
