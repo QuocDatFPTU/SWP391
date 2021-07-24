@@ -78,6 +78,9 @@ public class Subject implements Serializable{
     @JoinColumn(name="courseID")
     private Course course;
 
+    @OneToMany(mappedBy = "user")
+    private Set<StudentRegistration> studentRegistration;
+   
     public Subject(Subject subject) {
         this.subjectID = subject.subjectID;
         this.subjectName = subject.subjectName;

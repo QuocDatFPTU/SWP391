@@ -59,7 +59,7 @@ public class ExamDetail implements Serializable {
     
     @OneToOne(mappedBy = "examDetail", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn 
-    private ExamInfo ExamInfo;
+    private ExamInfo examInfo;
     
     @OneToMany(mappedBy = "examDetail", fetch = FetchType.EAGER)
     private Set<QuestionExam> QuestionExam = new HashSet<>();

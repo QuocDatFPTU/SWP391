@@ -32,6 +32,7 @@ public class QuizRepositoryImp implements QuizRepository {
                     setParameter("lessonID", lessonID).getResultList();
 
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();

@@ -21,41 +21,39 @@
            <p class="text-danger">${mess}</p>
             <div class="input-group">
                 <label for="username">User Name:</label>
-                <input type="text" name="username" id="username">
+                <input type="text" name="txtUsername" value="${param.txtUsername}" id="username">
             </div>
             <div class="input-group">
                 <label for="password">Password:</label>
-                <input type="password" name="password" id="password">
+                <input type="password" name="txtPassword" value="${param.txtPassword}" id="password">
             </div>
             <div class="input-group">
                 <label for="re_password">Re-Password:</label>
-                <input type="password" name="repassword" id="re_password">
+                <input type="password" name="txtRePassword" value="${param.txtRepassword}"id="re_password">
             </div>
             <div class="input-group">
                 <label for="firstname">First Name:</label>
-                <input type="text" name="firstname" id="firstname">
+                <input type="text" name="txtFirstname" value="${param.txtFirstname}" id="firstname">
             </div>
             <div class="input-group">
                 <label for="lastname">Last Name:</label>
-                <input type="text" name="lastname" id="lastname">
+                <input type="text" name="txtLastname" id="lastname" value="${param.txtLastname}">
             </div>
 
             <div class="input-group">
                 <label for="email">Email:</label>
-                <input type="email" name="email" id="email">
+                <input type="email" name="txtEmail" id="email" value="${param.txtEmail}">
             </div>
             <div class="input-group">
                 <label for="phone">Phone No:</label>
-                <input type="tel" name="phonenumber" id="phone">
+                <input type="tel" name="txtPhone" id="phone" value="${param.txtPhone}">
             </div>
-
-
               <!-- Default checked radio -->
               <div class="form-check">
                 <input
                   class="form-check-input"
                   type="radio"
-                  name="gender"
+                  name="txtGender"
                   id="male"
                   checked
                 />
@@ -67,7 +65,7 @@
                 <input
                   class="form-check-input"
                   type="radio"
-                  name="gender"
+                  name="txtGender"
                   id="female"
                 />
                 <label class="form-check-label" for="female"> Female </label>

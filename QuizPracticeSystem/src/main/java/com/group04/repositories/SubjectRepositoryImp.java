@@ -34,6 +34,7 @@ public class SubjectRepositoryImp implements SubjectRepository {
                 return query.list();
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 System.out.println("Loop Function");
@@ -56,6 +57,7 @@ public class SubjectRepositoryImp implements SubjectRepository {
                 return Subject;
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 System.out.println("Loop Function");
@@ -78,6 +80,7 @@ public class SubjectRepositoryImp implements SubjectRepository {
                 return Subject;
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 System.out.println("Loop Function");
@@ -98,6 +101,7 @@ public class SubjectRepositoryImp implements SubjectRepository {
                 System.out.println("subject is deleted");
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -113,6 +117,7 @@ public class SubjectRepositoryImp implements SubjectRepository {
             session.evict(subject);
             session.merge(subject);
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -127,6 +132,7 @@ public class SubjectRepositoryImp implements SubjectRepository {
             transaction = session.beginTransaction();
             session.save(subject);
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -148,6 +154,7 @@ public class SubjectRepositoryImp implements SubjectRepository {
                 return category ;
             }
             transaction.commit();
+            session.close();
         } catch (HibernateException e) {
             if (transaction != null) {
                 System.out.println("Loop Function");
@@ -170,6 +177,7 @@ public class SubjectRepositoryImp implements SubjectRepository {
                 return Subject;
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 System.out.println("Loop Function");

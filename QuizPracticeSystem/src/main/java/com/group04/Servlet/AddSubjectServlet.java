@@ -75,7 +75,6 @@ public class AddSubjectServlet extends HttpServlet {
 
             Course course = crs.getCourse(courseID);
             subjectnew.setCourse(course);
-
             System.out.println("Subject new: " + subjectnew.getSubjectName());
             System.out.println("Before Error");
             List<String> errors = DoValidate.validateS(subjectnew);

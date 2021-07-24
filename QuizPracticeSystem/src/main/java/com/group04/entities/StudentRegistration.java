@@ -52,9 +52,9 @@ public class StudentRegistration implements Serializable {
     private Payment payment;
     
     @ManyToOne
-    @JoinColumn(name="CourseID")
+    @JoinColumn(name="courseID")
     private Course course;
-
+    
     public StudentRegistration(StudentRegistration register) {
         this.registrationID = register.registrationID;
         this.payment = register.payment;

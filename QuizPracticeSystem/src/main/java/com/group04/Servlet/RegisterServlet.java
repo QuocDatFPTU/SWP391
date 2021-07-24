@@ -42,23 +42,28 @@ public class RegisterServlet extends HttpServlet {
         Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
         String url = mapping.get(FAIL);
         try {
+            System.out.println("Stating bug");
             UserRepositoryImp urp = new UserRepositoryImp();
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String repassword = request.getParameter("repassword");
-            String lastname = request.getParameter("lastname");
-            String firstname = request.getParameter("firstname");
-            String gender = request.getParameter("gender");
-            String email = request.getParameter("email");
-            String phonenumber = request.getParameter("phonenumber");
+            String username = request.getParameter("txtUsername");
+            String password = request.getParameter("txtPassword");
+            String repassword = request.getParameter("txtRePassword");
+            String lastname = request.getParameter("txtLastname");
+            String firstname = request.getParameter("txtFirstname");
+            String gender = request.getParameter("txtGender");
+            String email = request.getParameter("txtEmail");
+            String phonenumber = request.getParameter("txtPhone");
             String avatar = "";
             User newUser = new User();
+            System.out.println("Begin");
+            System.out.println("Username"+username);
             if (urp.checkUsernameExist(username)) {
+                System.out.println("Done check exist");
                 request.setAttribute("mess", "The username already existed, try another one.");
             } else {
                 if (repassword.equals(password)) {
                     newUser.setUsername(username);
                     Role newUserRole = urp.getRole("Customer");
+                    System.out.println("Role: " + newUserRole.toString());
                     newUser.setRoles(Collections.singleton(newUserRole));
                     newUser.setPassword(password);
                     newUser.setFirstName(firstname);
@@ -68,7 +73,7 @@ public class RegisterServlet extends HttpServlet {
                     newUser.setAvatar(avatar);
                     newUser.setActive(true);
                     newUser.setLastName(lastname);
-                    System.out.println("New User: " + newUser.getFirstName() + newUser.getLastName());
+                    System.out.println("New User: " + newUser.toString());
                     System.out.println("Before Error");
                     List<String> errors = DoValidate.validateU(newUser);
                     for (String error : errors) {
@@ -91,6 +96,8 @@ public class RegisterServlet extends HttpServlet {
                     request.setAttribute("mess", "Check your re-password again pls.");
                 }
             }
+        } catch (Exception e) {
+            log("Register: " + e);
         } finally {
             System.out.println(url);
             RequestDispatcher rd = request.getRequestDispatcher(url);

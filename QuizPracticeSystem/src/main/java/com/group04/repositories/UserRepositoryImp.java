@@ -74,10 +74,11 @@ public class UserRepositoryImp implements UserRepository {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.save(user);
-            transaction.commit();
-            session.flush();
+            transaction.commit();        
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
+                System.out.println(e);
                 transaction.rollback();
             }
         }
@@ -86,8 +87,8 @@ public class UserRepositoryImp implements UserRepository {
     @Override
     public List<User> getAllUser() {
         Transaction transaction = null;
-        List <User> listOfUser = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        List<User> listOfUser = null;
+        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             listOfUser = session.createQuery("from User").getResultList();
             transaction.commit();
@@ -128,8 +129,8 @@ public class UserRepositoryImp implements UserRepository {
 
     @Override
     public void updateUser(User user) {
-    Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        Transaction transaction = null;
+        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             session.evict(user);
             session.merge(user);
@@ -138,19 +139,19 @@ public class UserRepositoryImp implements UserRepository {
             if (transaction != null) {
                 transaction.rollback();
             }
-        }    
+        }
     }
 
     @Override
     public void deleteUser(Long userID) {
-    Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        Transaction transaction = null;
+        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             User user = session.get(User.class, userID);
             if (user != null) {
                 session.delete(user);
                 System.out.println("user is deleted");
-            }            
+            }
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -163,90 +164,87 @@ public class UserRepositoryImp implements UserRepository {
     @Override
     public void updatePassword(String password, String newpassword) {
         Transaction transaction = null;
-    
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             Query query = session.createQuery("SELECT u FROM User u WHERE u.password = :password");
-    query.setParameter("password", password);
-    //query.getSingleResult();
+            query.setParameter("password", password);
+            //query.getSingleResult();
 
-    User user = (User) query.getSingleResult();
-    user.setPassword(newpassword);
-    session.persist(user);
+            User user = (User) query.getSingleResult();
+            user.setPassword(newpassword);
+            session.persist(user);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-        }  
+        }
     }
 
     @Override
     public void SendMail(String string) {
         // Tạo đối tượng Email
-        
+
         Email email = new SimpleEmail();
         email.setHostName(MailConfig.HOST_NAME);
         email.setSmtpPort(MailConfig.SSL_PORT);
         email.setAuthenticator(new DefaultAuthenticator("quizpracticesystem@gmail.com", "QuizPracticeSystem"));
         email.setSSLOnConnect(true);
-        try{
-        email.setFrom("quizpracticesystem@gmail.com");
-        email.addTo("quizpracticesystem@gmail.com");
-         email.setSubject("Testing Subject");
-         email.setMsg("Code reset password : 1234");
-         email.send();
-        }catch(EmailException Em){
-            
-        }finally{
+        try {
+            email.setFrom("quizpracticesystem@gmail.com");
+            email.addTo("quizpracticesystem@gmail.com");
+            email.setSubject("Testing Subject");
+            email.setMsg("Code reset password : 1234");
+            email.send();
+        } catch (EmailException Em) {
+
+        } finally {
             System.out.println("Message sent successfully");
         }
-        
+
     }
 
     @Override
     public void resetPassword(String usermail, String newpassword) {
         Transaction transaction = null;
-       try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             Query query = session.createQuery("SELECT u FROM User u WHERE u.email = :mail");
-    query.setParameter("mail", usermail);
-    
-    User user = (User) query.getSingleResult();
-    user.setPassword(newpassword);
-    session.persist(user);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        }  
-    } 
+            query.setParameter("mail", usermail);
 
-    @Override
-    public boolean checkUsernameExist(String username) {
-       Transaction transaction = null;
-        User user = null;
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            user = (User) session.createQuery("FROM User U WHERE U.username = :username").setParameter("username", username)
-                    .uniqueResult();
-            if (user != null){
-                return true;
-            }
+            User user = (User) query.getSingleResult();
+            user.setPassword(newpassword);
+            session.persist(user);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
         }
-        return false; 
-    }
     }
 
-    
-   
-   
-    
-
+    @Override
+    public boolean checkUsernameExist(String username) {
+        Transaction transaction = null;
+        User user = null;
+        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
+            System.out.println("Check UsernameExist");
+            transaction = session.beginTransaction();
+            user = (User) session.createQuery("FROM User U WHERE U.username = :username").setParameter("username", username)
+                    .uniqueResult();
+            if (user != null) {
+                System.out.println("Done check");
+                return true;
+            }
+            transaction.commit();
+            session.close();
+        } catch (Exception e) {
+            System.out.println("Logging: " + e.getMessage());
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return false;
+    }
+}

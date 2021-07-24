@@ -19,7 +19,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
@@ -40,7 +39,7 @@ import org.hibernate.validator.constraints.NotBlank;
     @UniqueConstraint(columnNames = {"email"})
 })
 @Getter
-@Setter
+@Setter 
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements Serializable {
@@ -104,6 +103,7 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<StudentRegistration> Register = new HashSet<>();
+//    private StudentRegistration Register;
 
     public User(User user) {
         this.userID = user.userID;
@@ -117,4 +117,10 @@ public class User implements Serializable {
         this.avatar = user.avatar;
         this.isActive = user.isActive;
     }
+
+    @Override
+    public String toString() {
+        return "User{" + "userID=" + userID + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + ", gender=" + gender + ", avatar=" + avatar + ", isActive=" + isActive + ", roles=" + roles + ", Register=" + Register + '}';
+    }
+    
 }
