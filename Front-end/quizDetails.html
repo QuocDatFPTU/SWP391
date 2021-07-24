@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/quizDetails.css">
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    
+    <div class="container border-1">   
+        <h2 class="title mt-5">Quiz Details</h2>
+        <div class="mainSection">
+
+        
+            <ul class="nav nav-tabs " id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">Overview</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="setting-tab" data-bs-toggle="tab" data-bs-target="#setting" type="button" role="tab" aria-controls="setting" aria-selected="false">Setting</button>
+                </li>
+                
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                    <div class = "overViewName">
+                        <label for="quizName">Name</label>
+                        <input type="text">
+                    </div>
+                    <div class="overViewSubject">
+                        <label for="overSubjectId">Subject</label>
+                        <select class="form-select" id="overSubjectId" aria-label="Default select example">
+                            <option selected>Subject Name</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                    </div>
+
+                    <div class="firstBlock">
+                        <div class="examLevel">
+                            <label for="examLevelID">Exam Level</label>
+                            <select class="form-select" id="examLevelID" aria-label="Default select example">
+                                <option selected>Medium</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                              </select>
+                        </div>
+                        <div class="duration">
+                            <label for="durationID">Duration(Minutes)</label>
+                            <input type="number" >
+                        </div>
+                    </div>
+
+                    <div class="secondBlock">
+                        <div class="passRate">
+                            <label for="passRateID">Pass Rate(%)</label>
+                            <input type="number" >
+                        </div>
+                        <div class="quizType">
+                            <label for="quizTypeID">Quiz Type</label>
+                            <select class="form-select" id="quizTypeID" aria-label="Default select example">
+                                <option selected>Medium</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <div class="form-floating">                      
+                            <textarea class="form-control" placeholder="Leave a comment here" id="description" style="height: 100px"></textarea>
+                            <label for="description">Description</label>
+                          </div>
+                    </div>
+                    
+                   <div class="actionSection">
+                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary">Back</button>
+                   </div>
+                </div>
+
+                <!---Setting-->
+                <div class="tab-pane fade" id="setting" role="tabpanel" aria-labelledby="setting-tab">
+                    <form action="#">
+                        <div class="numberOfQuestion">
+                            <label for="sumbOfQuestion">Number of question:</label>
+                            <input type="number" id="sumbOfQuestion">
+                        </div>
+                   <div class="typeOfQuiz">
+
+                   
+                    <p id="typeOfQuestion">Type of question:</p>
+                    <div class="chooseTypeOfQuiz">
+                  
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="topic">
+                        <label class="form-check-label" for="inlineRadio1">By Topic</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="group">
+                        <label class="form-check-label" for="inlineRadio2">By Group</label>
+                      </div>   
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="domain">
+                        <label class="form-check-label" for="inlineRadio2">By Domain</label>
+                      </div>
+                    </div>
+                </div>
+                      <div class="questionSection">
+                          <p>Choose number of question</p>
+                        <div class="firstChoose">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                              </select>
+                              <input type="number">
+                              <button type="button" class="btn btn-primary">Delete</button>
+                          </div>
+                        <div class="secondChoose">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                              </select> 
+                              <input type="number">
+                              <button type="button" class="btn btn-primary">Delete</button>
+                          </div>
+                        <div class="thirdChoose">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                              </select> 
+                              <input type="number">
+                              <button type="button" class="btn btn-primary">Add</button>
+                          </div>
+                      </div>
+                      <div class="actionSection">
+                        <button type="button" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary">Back</button>
+                       </div>                                       
+                </form>
+                </div>               
+            </div>
+    </div>
+</div>
+   
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  
+  </body>
+</html>
