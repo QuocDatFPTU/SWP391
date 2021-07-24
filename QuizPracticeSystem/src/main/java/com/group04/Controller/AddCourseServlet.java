@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -59,6 +59,7 @@ public class AddCourseServlet extends HttpServlet {
             Course NewCourse = new Course();
 
             CourseRepositoryImp urp = new CourseRepositoryImp();
+            NewCourse.setCourseID(urp.getRandomID());
             NewCourse.setCourseName(courseName);
             NewCourse.setFeatured(isFeatured);
             NewCourse.setActive(isActive);

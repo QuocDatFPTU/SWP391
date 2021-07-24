@@ -1,0 +1,10 @@
+#fname{
+    width: 100%;
+}
+textarea {
+    overflow-y: scroll; /* Vertical scrollbar */
+      
+}
+#subject{
+    width: 100%;
+}

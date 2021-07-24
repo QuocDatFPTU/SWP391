@@ -5,13 +5,16 @@
  */
 package com.group04.Controller;
 
-import static com.group04.Controller.EditUserServlet.FAIL;
-import static com.group04.Controller.EditUserServlet.SUCCESS;
+import com.group04.entities.Course;
 import com.group04.entities.Subject;
+import com.group04.repositories.CourseRepositoryImp;
 import com.group04.repositories.SubjectRepositoryImp;
 import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Long.parseLong;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
@@ -29,8 +32,10 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "AddSubjectServlet", urlPatterns = {"/AddSubjectServlet"})
 public class AddSubjectServlet extends HttpServlet {
+
     public static final String SUCCESS = "detailpage";
     public static final String FAIL = "error";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -52,26 +57,28 @@ public class AddSubjectServlet extends HttpServlet {
 
             String subjectName = request.getParameter("subjectName");
             String category = request.getParameter("category");
-            String owner = request.getParameter("owner");          
-            String updateDate = request.getParameter("updateDate");
+            String owner = request.getParameter("owner");
+            Date updateDate = new Date();
             String description = request.getParameter("description");
-            String courseID = request.getParameter("courseID");
-
-            Subject NewSubject = new Subject();
+            Long courseID = parseLong(request.getParameter("courseID"));
+            Subject subjectnew = new Subject();
+            CourseRepositoryImp crs = new CourseRepositoryImp();
 
             SubjectRepositoryImp urp = new SubjectRepositoryImp();
-            NewSubject.setSubjectName(subjectName);
-            NewSubject.setCategory(category);
-            NewSubject.setOwner(owner);
-            NewSubject.setStatus(true);
-            NewSubject.setUpdateDate(updateDate);
-            NewSubject.setDescription(description);
-            NewSubject.setCourseID(courseID);
-            NewSubject.setActive(true);
+            subjectnew.setSubjectName("CSD101");
+            subjectnew.setCategory("toan");
+            subjectnew.setOwner("thay khanh");
+            subjectnew.setStatus(true);
+            subjectnew.setUpdateDate(updateDate);
+            subjectnew.setDescription("mon nay de vl ay");
+            subjectnew.setActive(true);
 
-            System.out.println("Subject new: " + NewSubject.getSubjectName());
+            Course course = crs.getCourse(courseID);
+            subjectnew.setCourse((Collections.singleton(course)));
+
+            System.out.println("Subject new: " + subjectnew.getSubjectName());
             System.out.println("Before Error");
-            List<String> errors = DoValidate.validateS(NewSubject);
+            List<String> errors = DoValidate.validateS(subjectnew);
             for (String error : errors) {
                 System.out.println("Loi: " + error);
             }
@@ -80,7 +87,7 @@ public class AddSubjectServlet extends HttpServlet {
             if (!errors.isEmpty()) {
                 session.setAttribute("ERROR_UPDATE", errors);
             } else {
-                urp.addSubject(NewSubject);
+                urp.addSubject(subjectnew);
                 url = mapping.get(SUCCESS);
 
             }

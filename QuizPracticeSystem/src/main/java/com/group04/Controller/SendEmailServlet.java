@@ -5,6 +5,7 @@
  */
 package com.group04.Controller;
 
+import com.group04.repositories.UserRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
@@ -43,7 +44,9 @@ public class SendEmailServlet extends HttpServlet {
         Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
         String url = mapping.get(SUCCESS);
         try {
-            String email=request.getParameter("email");            
+            String email=request.getParameter("email");
+            UserRepositoryImp urp= new UserRepositoryImp();
+            urp.SendMail(email);
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

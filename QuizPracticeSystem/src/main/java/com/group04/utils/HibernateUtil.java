@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group04.utiils;
+package com.group04.utils;
 
 import com.group04.entities.Blog;
 import com.group04.entities.Course;
@@ -18,7 +18,7 @@ import com.group04.entities.Question;
 import com.group04.entities.Role;
 import com.group04.entities.Sale;
 import com.group04.entities.StudentRegistration;
-import com.group04.entities.Package;
+import com.group04.entities.Packages;
 import com.group04.entities.QuestionExam;
 import com.group04.entities.Subject;
 import com.group04.entities.User;
@@ -60,7 +60,7 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(Subject.class);
                 configuration.addAnnotatedClass(Question.class);
                 configuration.addAnnotatedClass(Payment.class);
-                configuration.addAnnotatedClass(Package.class);
+                configuration.addAnnotatedClass(Packages.class);
                 configuration.addAnnotatedClass(Option.class);
                 configuration.addAnnotatedClass(Lesson.class);
                 configuration.addAnnotatedClass(Dimension.class);

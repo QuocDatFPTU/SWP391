@@ -13,6 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -46,10 +48,11 @@ public class Question implements Serializable{
     @Column(name = "explanation")
     private String explanation;
     
-    @Column(name = "lessonID")
-    private String lessonID;
+    @ManyToOne
+    @JoinColumn(name = "lessonID")
+    private Lesson lesson;
 
-   @OneToMany(mappedBy = "questionID", fetch = FetchType.EAGER)
+   @OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
     private Set<Option> Option = new HashSet<>();
    
    public Question(Question question) {
@@ -58,6 +61,5 @@ public class Question implements Serializable{
         this.content = question.content;
         this.level = question.level;
         this.explanation = question.explanation;
-        this.lessonID = question.lessonID;
     }
 }

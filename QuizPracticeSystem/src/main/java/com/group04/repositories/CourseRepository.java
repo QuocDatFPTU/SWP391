@@ -17,4 +17,6 @@ public interface CourseRepository {
     void addCourse(Course course);
     void updateCourse(Course course);
     void deleteCourse(Long courseID);
+    public Long getRandomID();
+    Course getCourse(Long id);
 }

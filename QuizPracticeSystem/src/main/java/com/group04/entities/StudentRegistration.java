@@ -10,10 +10,12 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -40,13 +42,18 @@ public class StudentRegistration implements Serializable {
 
     @Column(name = "userID")
     private Long userID;
-
+    
     @Column(name = "isPaid")
     private boolean isPaid;
+    
 
     @OneToOne
     @JoinColumn(name = "paymentID")
     private Payment payment;
+    
+    @ManyToOne
+    @JoinColumn(name="CourseID")
+    private Course course;
 
     public StudentRegistration(StudentRegistration register) {
         this.registrationID = register.registrationID;

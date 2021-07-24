@@ -5,8 +5,11 @@
  */
 package com.group04.Controller;
 
-import com.group04.entities.Subject;
-import com.group04.repositories.SubjectRepositoryImp;
+import static com.group04.Controller.AddSubjectServlet.FAIL;
+import static com.group04.Controller.AddSubjectServlet.SUCCESS;
+import com.group04.entities.Packages;
+import com.group04.repositories.PackageRepositoryImp;
+import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -24,10 +27,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author ntdun
  */
-@WebServlet(name = "GetSubjectPagingServlet", urlPatterns = {"/GetSubjectPagingServlet"})
-public class GetSubjectPagingServlet extends HttpServlet {
-    public static final String SUCCESS = "viewdetailcourse";
-    public static final String FAIL = "error";
+@WebServlet(name = "AddPackageServlet", urlPatterns = {"/AddPackageServlet"})
+public class AddPackageServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,20 +42,40 @@ public class GetSubjectPagingServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();       
+        PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
-        Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
+        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
         String url = mapping.get(FAIL);
-        SubjectRepositoryImp dao=new SubjectRepositoryImp();
         try {
-            Long courseID = Long.parseLong(request.getParameter("CourseID"));
-            List<Subject> subject=dao.getAllSubjectPaging(courseID, 0, 5);
-            session.setAttribute("listSubjectPaging", subject);
-            url = mapping.get(SUCCESS);
-        }catch (Exception e){
-            System.out.println("Error: "+e);
+
+            String packageName = request.getParameter("packageName");
+            String price = request.getParameter("price");         
+
+            Packages newpackage = new Packages();
+
+            PackageRepositoryImp urp = new PackageRepositoryImp();
+            newpackage.setPackageName(packageName);
+            newpackage.setPrice(price);
+
+
+            System.out.println("Package new: " + newpackage.getPackageName());
+            System.out.println("Before Error");
+            List<String> errors = DoValidate.validateP(newpackage);
+            for (String error : errors) {
+                System.out.println("Loi: " + error);
+            }
+            System.out.println("After Error");
+            System.out.println("Number of Error: " + errors.size());
+            if (!errors.isEmpty()) {
+                session.setAttribute("ERROR_UPDATE", errors);
+            } else {
+                urp.addPackage(newpackage);
+                url = mapping.get(SUCCESS);
+
+            }
         } finally {
+            System.out.println(url);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

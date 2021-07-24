@@ -59,9 +59,7 @@ public class RegisterServlet extends HttpServlet {
                 if (repassword.equals(password)) {
                     //New User
                     newUser.setUsername(username);
-                    //UserRepositoryImp urp = new UserRepositoryImp();
                     Role newUserRole = urp.getRole("Customer");
-                    System.out.println("Role: " + newUserRole.toString());
                     newUser.setRoles(Collections.singleton(newUserRole));
                     newUser.setPassword(password);
                     newUser.setFirstName(firstname);

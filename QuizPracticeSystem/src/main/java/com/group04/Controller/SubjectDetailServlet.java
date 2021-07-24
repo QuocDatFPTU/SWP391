@@ -44,7 +44,7 @@ public class SubjectDetailServlet extends HttpServlet {
         String url = mapping.get(FAIL);
         SubjectRepositoryImp dao=new SubjectRepositoryImp();
         try {
-            String id = request.getParameter("subjectId");
+            Long id = Long.parseLong(request.getParameter("subjectID"));
             dao.getSubjectById(id);
             url = mapping.get(SUCCESS);
         } catch (Exception e) {

@@ -127,7 +127,7 @@
             aria-label="Search"
           />
           <button type="submit" class="btn btn-secondary">Search</button>
-          <button type="submit" class="btn btn-secondary mx-3">Login</button>
+          <a href="loginPage" type="submit" class="btn btn-secondary mx-3">Login</a>
           <button type="submit" class="btn btn-secondary mx-2">Register</button>
         </form>
       </div>

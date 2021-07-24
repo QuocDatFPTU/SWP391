@@ -6,7 +6,7 @@
 package com.group04.repositories;
 
 import com.group04.entities.Blog;
-import com.group04.utiils.HibernateUtil;
+import com.group04.utils.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

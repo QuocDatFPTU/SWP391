@@ -60,11 +60,8 @@ public class ExamInfo implements Serializable {
     
     @Column(name = "description")
     private String description;
-    
-    @Column(name = "examDetailID")
-    private float examDetailID;
-    
-    @ManyToMany(mappedBy ="ExamInfo")
+        
+    @ManyToMany(mappedBy ="examInfos")
     private Set<Lesson> lessons = new HashSet<>();
     
     @ManyToOne
@@ -84,6 +81,5 @@ public class ExamInfo implements Serializable {
         this.examLevel = examInfoID.examLevel;
         this.examType = examInfoID.examType;
         this.description = examInfoID.description;
-        this.examDetailID = examInfoID.examDetailID;
     }
 }

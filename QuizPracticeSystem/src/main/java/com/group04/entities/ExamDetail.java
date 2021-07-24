@@ -57,11 +57,11 @@ public class ExamDetail implements Serializable {
     @Column(name = "totalTime")
     private String totalTime;
     
-    @OneToOne(mappedBy = "ExamInfo", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "examDetail", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn 
     private ExamInfo ExamInfo;
     
-    @OneToMany(mappedBy = "examDetailID", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "examDetail", fetch = FetchType.EAGER)
     private Set<QuestionExam> QuestionExam = new HashSet<>();
     
     public ExamDetail(ExamDetail examDetail) {

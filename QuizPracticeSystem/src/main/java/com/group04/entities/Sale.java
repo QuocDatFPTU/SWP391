@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author HP
  */
 @Entity
-@Table(name = "sale")
+@Table(name = "Sale")
 @Getter
 @Setter 
 @NoArgsConstructor

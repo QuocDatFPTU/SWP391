@@ -5,9 +5,11 @@
  */
 package com.group04.repositories;
 
+import com.group04.entities.Dimension;
 import com.group04.entities.Subject;
-import com.group04.utiils.HibernateUtil;
+import com.group04.utils.HibernateUtil;
 import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -19,7 +21,7 @@ import org.hibernate.query.Query;
 public class SubjectRepositoryImp implements SubjectRepository {
 
     @Override
-    public List<Subject> getAllSubjectPaging(String courseID, int position, int pageSize) {
+    public List<Subject> getAllSubjectPaging(Long courseID, int position, int pageSize) {
         Transaction transaction = null;
         Subject Subject = null;
         try {
@@ -42,7 +44,7 @@ public class SubjectRepositoryImp implements SubjectRepository {
     }
 
     @Override
-    public Subject getSubjectById(String subjectId) {
+    public Subject getSubjectById(Long subjectId) {
         Transaction transaction = null;
         Subject Subject = null;
         try {
@@ -64,13 +66,13 @@ public class SubjectRepositoryImp implements SubjectRepository {
     }
 
     @Override
-    public List<Subject> getSubjectByCourseId(String courseId) {
+    public List<Subject> getSubjectByCourseId(Long courseId) {
         Transaction transaction = null;
         List<Subject> Subject = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Subject = session.createQuery("FROM Subjec S WHERE S.courseID = :id").setParameter("id", courseId)
+            Subject = session.createQuery("FROM Subject S WHERE S.courseID = :id").setParameter("id", courseId)
                     .getResultList();
             if (Subject != null) {
                 return Subject;
@@ -100,7 +102,6 @@ public class SubjectRepositoryImp implements SubjectRepository {
             if (transaction != null) {
                 transaction.rollback();
             }
-
         }
     }
 
@@ -133,4 +134,51 @@ public class SubjectRepositoryImp implements SubjectRepository {
         }
     }
 
+    @Override
+    public List<String> getAllcategory() {
+        Transaction transaction = null;
+        List<String> category;
+        category = null;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            category = session.createQuery("FROM Subject S WHERE S.category ")
+                    .getResultList();
+            if (category != null) {
+                return category ;
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                System.out.println("Loop Function");
+                transaction.rollback();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Subject getSubjectByName(String subjectName) {
+        Transaction transaction = null;
+        Subject Subject = null;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Subject = (Subject) session.createQuery("FROM Subject S WHERE S.subjectName = :name").setParameter("name", subjectName)
+                    .uniqueResult();
+            if (Subject != null) {
+                return Subject;
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                System.out.println("Loop Function");
+                transaction.rollback();
+            }
+        }
+        return null;
+    }
+
+    
+    
 }

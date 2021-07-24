@@ -31,7 +31,7 @@ import lombok.Setter;
  * @author HP
  */
 @Entity
-@Table(name = "lesson")
+@Table(name = "Lesson")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -63,6 +63,7 @@ public class Lesson implements Serializable {
     
     @Column(name = "isActive")
     private boolean isActive;
+    
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
@@ -74,7 +75,7 @@ public class Lesson implements Serializable {
     )
     private Set<ExamInfo> examInfos = new HashSet<>();
     
-    @OneToMany(mappedBy = "lessonID", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "lesson", fetch = FetchType.EAGER)
     private Set<Question> Question = new HashSet<>();
     
     @ManyToOne
@@ -90,9 +91,5 @@ public class Lesson implements Serializable {
         this.HTMLContent = lesson.HTMLContent;
         this.type = lesson.type;
         this.isActive = lesson.isActive;
-    }
-    
-    public Long getLessonId(){
-        return lessonID;
-    }
 }
+    }

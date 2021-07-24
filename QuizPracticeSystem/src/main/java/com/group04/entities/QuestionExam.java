@@ -14,6 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -47,11 +49,12 @@ public class QuestionExam implements Serializable {
     
     @Column(name = "explanation")
     private String explanation;
+       
+    @ManyToOne
+    @JoinColumn(name = "examDetailID")
+    private ExamDetail examDetail;
     
-    @Column(name = "examDetailID")
-    private String examDetailID;
-    
-    @OneToMany(mappedBy = "questionID", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "questionExam", fetch = FetchType.EAGER)
     private Set<OptionExam> OptionExam = new HashSet<>();
     
     public QuestionExam(QuestionExam question) {
@@ -60,6 +63,5 @@ public class QuestionExam implements Serializable {
         this.content = question.content;
         this.level = question.level;
         this.explanation = question.explanation;
-        this.examDetailID = question.examDetailID;
     }
 }

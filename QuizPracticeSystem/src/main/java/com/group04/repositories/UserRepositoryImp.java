@@ -9,7 +9,7 @@ import com.group04.email.MailConfig;
 import com.group04.entities.Course;
 import com.group04.entities.Role;
 import com.group04.entities.User;
-import com.group04.utiils.HibernateUtil;
+import com.group04.utils.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

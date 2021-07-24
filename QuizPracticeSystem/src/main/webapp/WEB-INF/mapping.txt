@@ -21,3 +21,6 @@ registerPage=register.jsp
 createErrorPage=register.jsp
 errorPage=error.html
 loginPage=login.jsp
+practiceDetail=CreatePracticeServlet
+quizListPage=quizlist.jsp
+quizPage=QuizPage.jsp

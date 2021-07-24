@@ -1,0 +1,33 @@
+.timer {
+  font-size: larger;
+  display: block;
+}
+.container.d-flex  {
+  display: flex;
+  justify-content: space-between;
+}
+.question{
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  border-style: solid;
+  border-radius: 10px;
+  width: 100%;
+  padding:10px 15px;
+  align-items: center;
+}
+.question p{
+  margin-bottom:0;
+}
+.questionDetail{
+  border-style: solid;
+  margin-right: 100px;
+  margin-left: 100px;
+  padding: 1rem;
+} 
+.answer{
+  margin-right: 5px;
+}
+.button4th{
+  margin-left: 0px;
+}   
