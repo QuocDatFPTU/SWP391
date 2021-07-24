@@ -39,7 +39,7 @@ import org.hibernate.validator.constraints.NotBlank;
     @UniqueConstraint(columnNames = {"email"})
 })
 @Getter
-@Setter 
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements Serializable {
@@ -103,7 +103,6 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<StudentRegistration> Register = new HashSet<>();
-//    private StudentRegistration Register;
 
     public User(User user) {
         this.userID = user.userID;
@@ -122,5 +121,5 @@ public class User implements Serializable {
     public String toString() {
         return "User{" + "userID=" + userID + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + ", gender=" + gender + ", avatar=" + avatar + ", isActive=" + isActive + ", roles=" + roles + ", Register=" + Register + '}';
     }
-    
+
 }

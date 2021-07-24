@@ -35,7 +35,8 @@ import org.hibernate.validator.constraints.NotBlank;
 @AllArgsConstructor
 public class Payment implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "paymentID", nullable = false, updatable = false)
     private Long paymentID;
     
     @NotBlank(message = "paymentType can't be empty")

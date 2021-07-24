@@ -36,6 +36,7 @@ import lombok.Setter;
 public class QuestionExam implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "questionID", nullable = false, updatable = false)
     private Long questionID;
     
     @Column(name = "status")

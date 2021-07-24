@@ -79,9 +79,12 @@ public class Subject implements Serializable{
     @JoinColumn(name="courseID")
     private Course course;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
     private Set<StudentRegistration> studentRegistration;
    
+    @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
+    private Set<Packages> packages;
+    
     public Subject(Subject subject) {
         this.subjectID = subject.subjectID;
         this.subjectName = subject.subjectName;
