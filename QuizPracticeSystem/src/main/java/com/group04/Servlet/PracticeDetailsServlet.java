@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group04.Controller;
+package com.group04.Servlet;
 
-import static com.group04.Controller.DeletePackageServlet.SUCCESS;
-import com.group04.repositories.DimensionRepositoryImp;
+import com.group04.repositories.LessonRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Long.parseLong;
 import java.util.Map;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,12 +19,12 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ntdun
+ * @author HP
  */
-@WebServlet(name = "DeleteDimension", urlPatterns = {"/DeleteDimension"})
-public class DeleteDimension extends HttpServlet {
-    public static final String SUCCESS = "viewprofile";
-    public static final String FAIL = "error";
+@WebServlet(name = "NewPracticeServlet", urlPatterns = {"/NewPracticeServlet"})
+public class PracticeDetailsServlet extends HttpServlet {
+public static final String SUCCESS = "quizListPage";
+    public static final String FAIL = "quizListPage";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,14 +41,16 @@ public class DeleteDimension extends HttpServlet {
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
         Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
-        String url = mapping.get(SUCCESS);
+        String url = mapping.get(FAIL);
+        LessonRepositoryImp dao=new LessonRepositoryImp();
         try {
-            Long dimensionID = parseLong(request.getParameter("dimensionID"));
-            DimensionRepositoryImp urp = new DimensionRepositoryImp();
-            urp.deleteDimension(dimensionID);
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            Long id = Long.parseLong(request.getParameter("subjectID"));
+            dao.getLessonBySubjectId(id);
+            url = mapping.get(SUCCESS);
+        } catch (Exception e) {
+            System.out.println("Error: "+e);
+        }finally{
+            request.getRequestDispatcher(url).forward(request, response);
             out.close();
         }
     }

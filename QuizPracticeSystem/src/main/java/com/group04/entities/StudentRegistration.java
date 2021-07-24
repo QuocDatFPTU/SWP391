@@ -39,14 +39,14 @@ public class StudentRegistration implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long registrationID;
-
-    @Column(name = "userID")
-    private Long userID;
     
     @Column(name = "isPaid")
     private boolean isPaid;
     
-
+    @ManyToOne
+    @JoinColumn(name = "userID")
+    private User user;
+    
     @OneToOne
     @JoinColumn(name = "paymentID")
     private Payment payment;
@@ -57,7 +57,6 @@ public class StudentRegistration implements Serializable {
 
     public StudentRegistration(StudentRegistration register) {
         this.registrationID = register.registrationID;
-        this.userID = register.userID;
         this.payment = register.payment;
         this.isPaid = register.isPaid;
     }

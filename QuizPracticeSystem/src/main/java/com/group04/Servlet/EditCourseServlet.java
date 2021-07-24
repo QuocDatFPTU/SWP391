@@ -1,12 +1,12 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group04.Controller;
+package com.group04.Servlet;
 
-import static com.group04.Controller.EditUserServlet.FAIL;
-import static com.group04.Controller.EditUserServlet.SUCCESS;
+import static com.group04.Servlet.EditUserServlet.FAIL;
+import static com.group04.Servlet.EditUserServlet.SUCCESS;
 import com.group04.entities.Course;
 import com.group04.repositories.CourseRepositoryImp;
 import com.group04.validators.DoValidate;
@@ -27,8 +27,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author ntdun
  */
-@WebServlet(name = "AddCourseServlet", urlPatterns = {"/AddCourseServlet"})
-public class AddCourseServlet extends HttpServlet {
+@WebServlet(name = "EditCourseServlet", urlPatterns = {"/EditCourseServlet"})
+public class EditCourseServlet extends HttpServlet {
     public static final String SUCCESS = "detailpage";
     public static final String FAIL = "error";
     /**
@@ -56,19 +56,18 @@ public class AddCourseServlet extends HttpServlet {
             String thumbnailLink = request.getParameter("tumbnailLink");
             String createDate = request.getParameter("createDate");
 
-            Course NewCourse = new Course();
+            Course UpdateCourse = new Course();
 
             CourseRepositoryImp urp = new CourseRepositoryImp();
-            NewCourse.setCourseID(urp.getRandomID());
-            NewCourse.setCourseName(courseName);
-            NewCourse.setFeatured(isFeatured);
-            NewCourse.setActive(isActive);
-            NewCourse.setThumbnailLink(thumbnailLink);
-            NewCourse.setCreateDate(createDate);
+            UpdateCourse.setCourseName(courseName);
+            UpdateCourse.setFeatured(isFeatured);
+            UpdateCourse.setActive(isActive);
+            UpdateCourse.setThumbnailLink(thumbnailLink);
+            UpdateCourse.setCreateDate(createDate);
 
-            System.out.println("Course new: " + NewCourse.getCourseName());
+            System.out.println("Course update: " + UpdateCourse.getCourseName());
             System.out.println("Before Error");
-            List<String> errors = DoValidate.validateC(NewCourse);
+            List<String> errors = DoValidate.validateC(UpdateCourse);
             for (String error : errors) {
                 System.out.println("Loi: " + error);
             }
@@ -77,7 +76,7 @@ public class AddCourseServlet extends HttpServlet {
             if (!errors.isEmpty()) {
                 session.setAttribute("ERROR_UPDATE", errors);
             } else {
-                urp.addCourse(NewCourse);
+                urp.updateCourse(UpdateCourse);
                 url = mapping.get(SUCCESS);
 
             }

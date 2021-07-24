@@ -75,8 +75,8 @@ public class Subject implements Serializable{
     private Set<Dimension> dimension = new HashSet<>();
     
     @ManyToOne
-    @JoinColumn(name="CourseID")
-    private Set<Course> course= new HashSet<>();
+    @JoinColumn(name="courseID")
+    private Course course;
 
     public Subject(Subject subject) {
         this.subjectID = subject.subjectID;

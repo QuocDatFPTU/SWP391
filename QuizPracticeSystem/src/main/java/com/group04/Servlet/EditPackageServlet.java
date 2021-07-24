@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group04.Controller;
+package com.group04.Servlet;
 
-import com.group04.repositories.LessonRepositoryImp;
+import com.group04.entities.Packages;
+import com.group04.repositories.PackageRepositoryImp;
+import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,12 +23,14 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author HP
+ * @author ntdun
  */
-@WebServlet(name = "NewPracticeServlet", urlPatterns = {"/NewPracticeServlet"})
-public class PracticeDetailsServlet extends HttpServlet {
-public static final String SUCCESS = "quizListPage";
-    public static final String FAIL = "quizListPage";
+@WebServlet(name = "EditPackageServlet", urlPatterns = {"/EditPackageServlet"})
+public class EditPackageServlet extends HttpServlet {
+
+    public static final String SUCCESS = "detailpage";
+    public static final String FAIL = "error";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,17 +46,38 @@ public static final String SUCCESS = "quizListPage";
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
-        Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
+        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
         String url = mapping.get(FAIL);
-        LessonRepositoryImp dao=new LessonRepositoryImp();
         try {
-            Long id = Long.parseLong(request.getParameter("subjectID"));
-            dao.getLessonBySubjectId(id);
-            url = mapping.get(SUCCESS);
-        } catch (Exception e) {
-            System.out.println("Error: "+e);
-        }finally{
-            request.getRequestDispatcher(url).forward(request, response);
+
+            String packageName = request.getParameter("packageName");
+            String price = request.getParameter("price");
+
+            Packages newpackage = new Packages();
+
+            PackageRepositoryImp urp = new PackageRepositoryImp();
+            newpackage.setPackageName(packageName);
+            newpackage.setPrice(price);
+
+            System.out.println("Package new: " + newpackage.getPackageName());
+            System.out.println("Before Error");
+            List<String> errors = DoValidate.validateP(newpackage);
+            for (String error : errors) {
+                System.out.println("Loi: " + error);
+            }
+            System.out.println("After Error");
+            System.out.println("Number of Error: " + errors.size());
+            if (!errors.isEmpty()) {
+                session.setAttribute("ERROR_UPDATE", errors);
+            } else {
+                urp.updatePackage(newpackage);
+                url = mapping.get(SUCCESS);
+
+            }
+        } finally {
+            System.out.println(url);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
             out.close();
         }
     }

@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group04.Controller;
+package com.group04.Servlet;
 
-import com.group04.entities.Blog;
-import com.group04.repositories.BlogRepositoryImp;
+import static com.group04.Servlet.AddSubjectServlet.FAIL;
+import static com.group04.Servlet.AddSubjectServlet.SUCCESS;
+import com.group04.entities.Dimension;
+import com.group04.repositories.DimensionRepositoryImp;
+import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -20,14 +21,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author HP
+ * @author ntdun
  */
-@WebServlet(name = "BlogListServlet", urlPatterns = {"/BlogListServlet"})
-public class ViewBlogServlet extends HttpServlet {
-private final String FAIL = "homePage";
+@WebServlet(name = "AdddDimensionServlet", urlPatterns = {"/AdddDimensionServlet"})
+public class AdddDimensionServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,16 +43,36 @@ private final String FAIL = "homePage";
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
-        Map<String, String> listmapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = listmapping.get(FAIL);
+        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
+        String url = mapping.get(FAIL);
         try {
-            BlogRepositoryImp dao = new BlogRepositoryImp();
-            List<Blog> list = dao.getAllBlog();
-            request.setAttribute("BLOG_LIST", list);
-        }catch (Exception e){  
-            System.out.println("Error: "+e);
-        }finally{
+
+            String dimensionName = request.getParameter("dimensonName");
+
+            Dimension newdimension = new Dimension();
+
+            DimensionRepositoryImp urp = new DimensionRepositoryImp();
+            newdimension.setDimensionName(dimensionName);
+
+            System.out.println("Dimension new: " + newdimension.getDimensionName());
+            System.out.println("Before Error");
+            List<String> errors = DoValidate.validateD(newdimension);
+            for (String error : errors) {
+                System.out.println("Loi: " + error);
+            }
+            System.out.println("After Error");
+            System.out.println("Number of Error: " + errors.size());
+            if (!errors.isEmpty()) {
+                session.setAttribute("ERROR_UPDATE", errors);
+            } else {
+                urp.addDimension(newdimension);
+                url = mapping.get(SUCCESS);
+
+            }
+        } finally {
+            System.out.println(url);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

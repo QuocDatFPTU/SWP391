@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group04.Controller;
+package com.group04.Servlet;
 
+import static com.group04.Servlet.AddSubjectServlet.FAIL;
+import static com.group04.Servlet.AddSubjectServlet.SUCCESS;
 import com.group04.entities.Packages;
 import com.group04.repositories.PackageRepositoryImp;
 import com.group04.validators.DoValidate;
@@ -25,11 +27,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author ntdun
  */
-@WebServlet(name = "EditPackageServlet", urlPatterns = {"/EditPackageServlet"})
-public class EditPackageServlet extends HttpServlet {
-
-    public static final String SUCCESS = "detailpage";
-    public static final String FAIL = "error";
+@WebServlet(name = "AddPackageServlet", urlPatterns = {"/AddPackageServlet"})
+public class AddPackageServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,13 +50,14 @@ public class EditPackageServlet extends HttpServlet {
         try {
 
             String packageName = request.getParameter("packageName");
-            String price = request.getParameter("price");
+            String price = request.getParameter("price");         
 
             Packages newpackage = new Packages();
 
             PackageRepositoryImp urp = new PackageRepositoryImp();
             newpackage.setPackageName(packageName);
             newpackage.setPrice(price);
+
 
             System.out.println("Package new: " + newpackage.getPackageName());
             System.out.println("Before Error");
@@ -70,7 +70,7 @@ public class EditPackageServlet extends HttpServlet {
             if (!errors.isEmpty()) {
                 session.setAttribute("ERROR_UPDATE", errors);
             } else {
-                urp.updatePackage(newpackage);
+                urp.addPackage(newpackage);
                 url = mapping.get(SUCCESS);
 
             }

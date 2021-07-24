@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group04.Controller;
+package com.group04.Servlet;
 
-import static com.group04.Controller.AddSubjectServlet.FAIL;
-import static com.group04.Controller.AddSubjectServlet.SUCCESS;
-import com.group04.entities.Dimension;
-import com.group04.repositories.DimensionRepositoryImp;
+import com.group04.entities.Course;
+import com.group04.entities.Subject;
+import com.group04.repositories.CourseRepositoryImp;
+import com.group04.repositories.SubjectRepositoryImp;
 import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Long.parseLong;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
@@ -27,8 +30,11 @@ import javax.servlet.http.HttpSession;
  *
  * @author ntdun
  */
-@WebServlet(name = "AdddDimensionServlet", urlPatterns = {"/AdddDimensionServlet"})
-public class AdddDimensionServlet extends HttpServlet {
+@WebServlet(name = "AddSubjectServlet", urlPatterns = {"/AddSubjectServlet"})
+public class AddSubjectServlet extends HttpServlet {
+
+    public static final String SUCCESS = "detailpage";
+    public static final String FAIL = "error";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,16 +55,30 @@ public class AdddDimensionServlet extends HttpServlet {
         String url = mapping.get(FAIL);
         try {
 
-            String dimensionName = request.getParameter("dimensonName");
+            String subjectName = request.getParameter("subjectName");
+            String category = request.getParameter("category");
+            String owner = request.getParameter("owner");
+            Date updateDate = new Date();
+            String description = request.getParameter("description");
+            Long courseID = parseLong(request.getParameter("courseID"));
+            Subject subjectnew = new Subject();
+            CourseRepositoryImp crs = new CourseRepositoryImp();
 
-            Dimension newdimension = new Dimension();
+            SubjectRepositoryImp urp = new SubjectRepositoryImp();
+            subjectnew.setSubjectName("CSD101");
+            subjectnew.setCategory("toan");
+            subjectnew.setOwner("thay khanh");
+            subjectnew.setStatus(true);
+            subjectnew.setUpdateDate(updateDate);
+            subjectnew.setDescription("mon nay de vl ay");
+            subjectnew.setActive(true);
 
-            DimensionRepositoryImp urp = new DimensionRepositoryImp();
-            newdimension.setDimensionName(dimensionName);
+            Course course = crs.getCourse(courseID);
+            subjectnew.setCourse(course);
 
-            System.out.println("Dimension new: " + newdimension.getDimensionName());
+            System.out.println("Subject new: " + subjectnew.getSubjectName());
             System.out.println("Before Error");
-            List<String> errors = DoValidate.validateD(newdimension);
+            List<String> errors = DoValidate.validateS(subjectnew);
             for (String error : errors) {
                 System.out.println("Loi: " + error);
             }
@@ -67,7 +87,7 @@ public class AdddDimensionServlet extends HttpServlet {
             if (!errors.isEmpty()) {
                 session.setAttribute("ERROR_UPDATE", errors);
             } else {
-                urp.addDimension(newdimension);
+                urp.addSubject(subjectnew);
                 url = mapping.get(SUCCESS);
 
             }

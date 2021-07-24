@@ -46,7 +46,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "userID", nullable = false, updatable = false)
     private Long userID;
 
@@ -102,7 +102,7 @@ public class User implements Serializable {
     )
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "userID", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<StudentRegistration> Register = new HashSet<>();
 
     public User(User user) {

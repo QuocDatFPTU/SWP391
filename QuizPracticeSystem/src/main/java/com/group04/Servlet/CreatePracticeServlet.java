@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group04.Controller;
+package com.group04.Servlet;
 
+import static com.group04.Servlet.SubjectListServlet.FAIL;
+import static com.group04.Servlet.SubjectListServlet.SUCCESS;
 import com.group04.repositories.SubjectRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,12 +21,12 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ntdun
+ * @author HP
  */
-@WebServlet(name = "SubjectDetailServlet", urlPatterns = {"/SubjectDetailServlet"})
-public class SubjectDetailServlet extends HttpServlet {
-    public static final String SUCCESS = "detailpage";
-    public static final String FAIL = "error";
+@WebServlet(name = "CreatePractice", urlPatterns = {"/CreatePractice"})
+public class CreatePracticeServlet extends HttpServlet {
+    public static final String SUCCESS = "quizListPage";
+    public static final String FAIL = "quizListPage";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,11 +45,11 @@ public class SubjectDetailServlet extends HttpServlet {
         Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
         String url = mapping.get(FAIL);
         SubjectRepositoryImp dao=new SubjectRepositoryImp();
-        try {
-            Long id = Long.parseLong(request.getParameter("subjectID"));
-            dao.getSubjectById(id);
+        try  {
+            String name = request.getParameter("subjectName");
+            dao.getSubjectByName(name);
             url = mapping.get(SUCCESS);
-        } catch (Exception e) {
+        }catch (Exception e) {
             System.out.println("Error: "+e);
         }finally{
             request.getRequestDispatcher(url).forward(request, response);

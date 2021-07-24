@@ -3,19 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group04.Controller;
+package com.group04.Servlet;
 
-import com.group04.entities.Course;
-import com.group04.entities.Subject;
-import com.group04.repositories.CourseRepositoryImp;
-import com.group04.repositories.SubjectRepositoryImp;
-import com.group04.validators.DoValidate;
+import com.group04.repositories.UserRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Long.parseLong;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -24,18 +16,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ntdun
+ * @author HP
  */
-@WebServlet(name = "AddSubjectServlet", urlPatterns = {"/AddSubjectServlet"})
-public class AddSubjectServlet extends HttpServlet {
-
-    public static final String SUCCESS = "detailpage";
+@WebServlet(name = "ChangePasswordServlet", urlPatterns = {"/ChangePasswordServlet"})
+public class ChangePasswordServlet extends HttpServlet {
+    public static final String SUCCESS = "viewprofile";
     public static final String FAIL = "error";
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -48,56 +37,25 @@ public class AddSubjectServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
+        PrintWriter out = response.getWriter();       
         ServletContext context = request.getServletContext();
-        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
+        Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
         String url = mapping.get(FAIL);
         try {
-
-            String subjectName = request.getParameter("subjectName");
-            String category = request.getParameter("category");
-            String owner = request.getParameter("owner");
-            Date updateDate = new Date();
-            String description = request.getParameter("description");
-            Long courseID = parseLong(request.getParameter("courseID"));
-            Subject subjectnew = new Subject();
-            CourseRepositoryImp crs = new CourseRepositoryImp();
-
-            SubjectRepositoryImp urp = new SubjectRepositoryImp();
-            subjectnew.setSubjectName("CSD101");
-            subjectnew.setCategory("toan");
-            subjectnew.setOwner("thay khanh");
-            subjectnew.setStatus(true);
-            subjectnew.setUpdateDate(updateDate);
-            subjectnew.setDescription("mon nay de vl ay");
-            subjectnew.setActive(true);
-
-            Course course = crs.getCourse(courseID);
-            subjectnew.setCourse((Collections.singleton(course)));
-
-            System.out.println("Subject new: " + subjectnew.getSubjectName());
-            System.out.println("Before Error");
-            List<String> errors = DoValidate.validateS(subjectnew);
-            for (String error : errors) {
-                System.out.println("Loi: " + error);
-            }
-            System.out.println("After Error");
-            System.out.println("Number of Error: " + errors.size());
-            if (!errors.isEmpty()) {
-                session.setAttribute("ERROR_UPDATE", errors);
-            } else {
-                urp.addSubject(subjectnew);
-                url = mapping.get(SUCCESS);
-
-            }
+            String oldPassword = request.getParameter("oldpassword");
+            String newPassword = request.getParameter("newpassword");
+            UserRepositoryImp dao = new UserRepositoryImp();
+            dao.updatePassword(oldPassword, newPassword); 
+            url = mapping.get(SUCCESS);
+        }catch (Exception e){  
+            System.out.println("Error: "+e);
         } finally {
-            System.out.println(url);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();
         }
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -139,3 +97,4 @@ public class AddSubjectServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+

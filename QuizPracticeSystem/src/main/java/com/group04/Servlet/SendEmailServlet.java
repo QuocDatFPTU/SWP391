@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group04.Controller;
+package com.group04.Servlet;
 
-import com.group04.repositories.SubjectRepositoryImp;
+import com.group04.repositories.UserRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -22,12 +20,12 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ntdun
+ * @author HP
  */
-@WebServlet(name = "ShowCategoryServlet", urlPatterns = {"/ShowCategoryServlet"})
-public class ShowCategoryServlet extends HttpServlet {
-    public static final String SUCCESS = "subjectdetail";
-    public static final String FAIL = "index";
+@WebServlet(name = "ResetPasswordServlet", urlPatterns = {"/ResetPasswordServlet"})
+public class SendEmailServlet extends HttpServlet {
+    public static final String SUCCESS = "resetpassword";
+    //public static final String FAIL = "registerPage";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,24 +39,15 @@ public class ShowCategoryServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        ServletContext context = request.getServletContext();
         HttpSession session = request.getSession();
-        Map<String, String> listmapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = listmapping.get(FAIL);
+        ServletContext context = request.getServletContext();
+        Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
+        String url = mapping.get(SUCCESS);
         try {
-            SubjectRepositoryImp urp=new SubjectRepositoryImp();
-            List<String> listdup;
-            listdup = urp.getAllcategory();
-            List<String> listnodup=new ArrayList<>();
-            for(String element : listdup){
-                if(!listnodup.contains(element)){
-                    listnodup.add(element);
-                }
-            }
-            session.setAttribute("listcategory", listnodup);
-            System.out.println(listnodup);
-        }catch (Exception e){  
-        }finally{
+            String email=request.getParameter("email");
+            UserRepositoryImp urp= new UserRepositoryImp();
+            urp.SendMail(email);
+        } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group04.Controller;
+package com.group04.Servlet;
 
-import com.group04.repositories.UserRepositoryImp;
+import com.group04.entities.Question;
+import com.group04.repositories.QuestionRepository;
+import com.group04.repositories.QuizRepository;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,10 +21,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author HP
  */
-@WebServlet(name = "ChangePasswordServlet", urlPatterns = {"/ChangePasswordServlet"})
-public class ChangePasswordServlet extends HttpServlet {
-    public static final String SUCCESS = "viewprofile";
-    public static final String FAIL = "error";
+@WebServlet(name = "GetRandomQuestionServlet", urlPatterns = {"/GetRandomQuestionServlet"})
+public class GetRandomQuestionServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,25 +36,17 @@ public class ChangePasswordServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();       
-        ServletContext context = request.getServletContext();
-        Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
-        String url = mapping.get(FAIL);
-        try {
-            String oldPassword = request.getParameter("oldpassword");
-            String newPassword = request.getParameter("newpassword");
-            UserRepositoryImp dao = new UserRepositoryImp();
-            dao.updatePassword(oldPassword, newPassword); 
-            url = mapping.get(SUCCESS);
-        }catch (Exception e){  
-            System.out.println("Error: "+e);
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-            out.close();
+        PrintWriter pw = response.getWriter();
+       
+        QuizRepository questRepo = QuizRepository.createInstance();
+        List<Question> quests = questRepo.getRandomQuestionsBySubject((Long) 4L, 10);
+        for(Question quest : quests){
+            pw.println(quest.toString());
         }
+        pw.println("lmao");
+        pw.close();
+        
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -97,4 +88,3 @@ public class ChangePasswordServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-

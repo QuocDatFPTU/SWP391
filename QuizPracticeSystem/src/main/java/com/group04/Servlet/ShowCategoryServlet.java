@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group04.Controller;
+package com.group04.Servlet;
 
-import static com.group04.Controller.EditUserServlet.FAIL;
-import static com.group04.Controller.EditUserServlet.SUCCESS;
-import com.group04.entities.Course;
-import com.group04.repositories.CourseRepositoryImp;
-import com.group04.validators.DoValidate;
+import com.group04.repositories.SubjectRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
@@ -27,10 +24,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author ntdun
  */
-@WebServlet(name = "EditCourseServlet", urlPatterns = {"/EditCourseServlet"})
-public class EditCourseServlet extends HttpServlet {
-    public static final String SUCCESS = "detailpage";
-    public static final String FAIL = "error";
+@WebServlet(name = "ShowCategoryServlet", urlPatterns = {"/ShowCategoryServlet"})
+public class ShowCategoryServlet extends HttpServlet {
+    public static final String SUCCESS = "subjectdetail";
+    public static final String FAIL = "index";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,44 +41,24 @@ public class EditCourseServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
-        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = mapping.get(FAIL);
+        HttpSession session = request.getSession();
+        Map<String, String> listmapping = (Map<String, String>) context.getAttribute("MAPPING");
+        String url = listmapping.get(FAIL);
         try {
-
-            String courseName = request.getParameter("courseName");
-            boolean isFeatured = Boolean.parseBoolean(request.getParameter("isFeatured"));
-            boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
-            String thumbnailLink = request.getParameter("tumbnailLink");
-            String createDate = request.getParameter("createDate");
-
-            Course UpdateCourse = new Course();
-
-            CourseRepositoryImp urp = new CourseRepositoryImp();
-            UpdateCourse.setCourseName(courseName);
-            UpdateCourse.setFeatured(isFeatured);
-            UpdateCourse.setActive(isActive);
-            UpdateCourse.setThumbnailLink(thumbnailLink);
-            UpdateCourse.setCreateDate(createDate);
-
-            System.out.println("Course update: " + UpdateCourse.getCourseName());
-            System.out.println("Before Error");
-            List<String> errors = DoValidate.validateC(UpdateCourse);
-            for (String error : errors) {
-                System.out.println("Loi: " + error);
+            SubjectRepositoryImp urp=new SubjectRepositoryImp();
+            List<String> listdup;
+            listdup = urp.getAllcategory();
+            List<String> listnodup=new ArrayList<>();
+            for(String element : listdup){
+                if(!listnodup.contains(element)){
+                    listnodup.add(element);
+                }
             }
-            System.out.println("After Error");
-            System.out.println("Number of Error: " + errors.size());
-            if (!errors.isEmpty()) {
-                session.setAttribute("ERROR_UPDATE", errors);
-            } else {
-                urp.updateCourse(UpdateCourse);
-                url = mapping.get(SUCCESS);
-
-            }
-        } finally {
-            System.out.println(url);
+            session.setAttribute("listcategory", listnodup);
+            System.out.println(listnodup);
+        }catch (Exception e){  
+        }finally{
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

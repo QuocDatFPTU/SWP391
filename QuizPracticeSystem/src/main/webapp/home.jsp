@@ -128,7 +128,7 @@
           />
           <button type="submit" class="btn btn-secondary">Search</button>
           <a href="loginPage" type="submit" class="btn btn-secondary mx-3">Login</a>
-          <button type="submit" class="btn btn-secondary mx-2">Register</button>
+          <a href="registerPage" type="submit" class="btn btn-secondary mx-2">Register</a>
         </form>
       </div>
     </nav>

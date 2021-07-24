@@ -75,6 +75,7 @@ public class UserRepositoryImp implements UserRepository {
             transaction = session.beginTransaction();
             session.save(user);
             transaction.commit();
+            session.flush();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();

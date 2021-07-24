@@ -3,49 +3,53 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group04.Controller;
+package com.group04.Servlet;
 
-import com.group04.entities.Question;
-import com.group04.repositories.QuestionRepository;
-import com.group04.repositories.QuizRepository;
+import com.group04.entities.User;
+import com.group04.repositories.UserRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.Map;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author HP
  */
-@WebServlet(name = "GetRandomQuestionServlet", urlPatterns = {"/GetRandomQuestionServlet"})
-public class GetRandomQuestionServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
+public class LoginServlet extends HttpServlet {
+    public static final String SUCCESS = "index";
+    public static final String FAIL = "loginPage";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter pw = response.getWriter();
-       
-        QuizRepository questRepo = QuizRepository.createInstance();
-        List<Question> quests = questRepo.getRandomQuestionsBySubject((Long) 4L, 10);
-        for(Question quest : quests){
-            pw.println(quest.toString());
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        ServletContext context = request.getServletContext();
+        Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
+        String url = mapping.get(FAIL);
+        try {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            UserRepositoryImp dao = new UserRepositoryImp();
+            boolean isExisted = dao.checkLogin(username, password);
+            if (isExisted) {
+                User currentuser = dao.login(username, password);
+                session.setAttribute("USER", currentuser);
+                url = mapping.get(SUCCESS);
+            }
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+            out.close();
         }
-        pw.println("lmao");
-        pw.close();
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

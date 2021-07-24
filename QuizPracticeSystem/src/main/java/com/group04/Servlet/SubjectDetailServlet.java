@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group04.Controller;
+package com.group04.Servlet;
 
-import com.group04.repositories.PackageRepositoryImp;
+import com.group04.repositories.SubjectRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Long.parseLong;
 import java.util.Map;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,9 +21,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author ntdun
  */
-@WebServlet(name = "DeletePackageServlet", urlPatterns = {"/DeletePackageServlet"})
-public class DeletePackageServlet extends HttpServlet {
-    public static final String SUCCESS = "viewprofile";
+@WebServlet(name = "SubjectDetailServlet", urlPatterns = {"/SubjectDetailServlet"})
+public class SubjectDetailServlet extends HttpServlet {
+    public static final String SUCCESS = "detailpage";
     public static final String FAIL = "error";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,14 +41,16 @@ public class DeletePackageServlet extends HttpServlet {
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
         Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
-        String url = mapping.get(SUCCESS);
+        String url = mapping.get(FAIL);
+        SubjectRepositoryImp dao=new SubjectRepositoryImp();
         try {
-            Long packageID = parseLong(request.getParameter("packageID"));
-            PackageRepositoryImp urp = new PackageRepositoryImp();
-            urp.deletePackage(packageID);
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            Long id = Long.parseLong(request.getParameter("subjectID"));
+            dao.getSubjectById(id);
+            url = mapping.get(SUCCESS);
+        } catch (Exception e) {
+            System.out.println("Error: "+e);
+        }finally{
+            request.getRequestDispatcher(url).forward(request, response);
             out.close();
         }
     }

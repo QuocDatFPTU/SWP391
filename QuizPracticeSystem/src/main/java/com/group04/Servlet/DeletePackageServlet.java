@@ -3,18 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group04.Controller;
+package com.group04.Servlet;
 
-import static com.group04.Controller.EditUserServlet.FAIL;
-import static com.group04.Controller.EditUserServlet.SUCCESS;
-import com.group04.entities.Subject;
-import com.group04.repositories.SubjectRepositoryImp;
-import com.group04.validators.DoValidate;
+import com.group04.repositories.PackageRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Integer.parseInt;
-import java.util.Date;
-import java.util.List;
+import static java.lang.Long.parseLong;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -29,9 +23,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author ntdun
  */
-@WebServlet(name = "EditSubjectServlet", urlPatterns = {"/EditSubjectServlet"})
-public class EditSubjectServlet extends HttpServlet {
-    public static final String SUCCESS = "detailpage";
+@WebServlet(name = "DeletePackageServlet", urlPatterns = {"/DeletePackageServlet"})
+public class DeletePackageServlet extends HttpServlet {
+    public static final String SUCCESS = "viewprofile";
     public static final String FAIL = "error";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,45 +42,13 @@ public class EditSubjectServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
-        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = mapping.get(FAIL);
+        Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
+        String url = mapping.get(SUCCESS);
         try {
-
-            String subjectName = request.getParameter("subjectName");
-            String category = request.getParameter("category");
-            String owner = request.getParameter("owner");
-            boolean status = Boolean.parseBoolean(request.getParameter("status"));
-            Date updateDate = new Date();
-            String description = request.getParameter("description");
-            boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
-            Subject UpdateSubject = new Subject();
-
-            SubjectRepositoryImp urp = new SubjectRepositoryImp();
-            UpdateSubject.setSubjectName(subjectName);
-            UpdateSubject.setCategory(category);
-            UpdateSubject.setOwner(owner);
-            UpdateSubject.setStatus(status);
-            UpdateSubject.setDescription(description);
-            UpdateSubject.setUpdateDate(updateDate);
-            UpdateSubject.setActive(isActive);
-
-            System.out.println("Subject update: " + UpdateSubject.getSubjectName());
-            System.out.println("Before Error");
-            List<String> errors = DoValidate.validateS(UpdateSubject);
-            for (String error : errors) {
-                System.out.println("Loi: " + error);
-            }
-            System.out.println("After Error");
-            System.out.println("Number of Error: " + errors.size());
-            if (!errors.isEmpty()) {
-                session.setAttribute("ERROR_UPDATE", errors);
-            } else {
-                urp.updateSubject(UpdateSubject);
-                url = mapping.get(SUCCESS);
-
-            }
+            Long packageID = parseLong(request.getParameter("packageID"));
+            PackageRepositoryImp urp = new PackageRepositoryImp();
+            urp.deletePackage(packageID);
         } finally {
-            System.out.println(url);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();
