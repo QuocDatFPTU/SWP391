@@ -15,6 +15,8 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <script src="https://kit.fontawesome.com/64bb7a6643.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="css/admin.css" />
   </head>
   <body>
@@ -26,40 +28,24 @@
       <div class="sidebar-menu">
         <ul>
           <li>
-            <a href="#" class="active"
-              ><span class="las la-igloo"></span> <span>Dashboard</span></a
+            <a href="admin.html" class="active"
+              ><i class="fas fa-user-circle"></i><span>User</span></a
+            >
+          </li>
+          <li>
+            <a href="admin_course.html"
+              ><i class="fas fa-book-open"></i><span>Course</span></a
             >
           </li>
           <li>
             <a href="#"
-              ><span class="las la-users"></span> <span>Customers</span></a
+              ><i class="fas fa-graduation-cap"></i><span>Expert</span></a
             >
           </li>
           <li>
-            <a href="#"
-              ><span class="las la-clipboard-list"></span>
-              <span>Projects</span></a
-            >
-          </li>
-          <li>
-            <a href="#"
-              ><span class="las la-shopping-bag"></span> <span>Orders</span></a
-            >
-          </li>
-          <li>
-            <a href="#"
-              ><span class="las la-receipt"></span> <span>Inventory</span></a
-            >
-          </li>
-
-          <li>
-            <a href="#"
-              ><span class="las la-user-circle"></span> <span>Accounts</span></a
-            >
-          </li>
-          <li>
-            <a href="#"
-              ><span class="las la-clipboard-list"></span> <span>Task</span></a
+            <a href="admin_subject.html" 
+              ><i class="fas fa-laptop"></i>
+              <span>Subject</span></a
             >
           </li>
         </ul>
@@ -90,6 +76,7 @@
           </div>
         </div>
       </header>
+      
       <main>
         <div class="cards">
           <div class="card-single">
@@ -136,19 +123,30 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-                <th scope="col">Update</th>
+                <th scope="col">id</th>
+                <th scope="col">full name</th>
+                <th scope="col">gender</th>
+                <th scope="col">email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">role</th>
+                <th scope="col">status</th>
                 <th scope="col">Delete</th>
+                <th scope="col">Update</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td>1</td>
+                <td>U001</td>
+                <td>Nguyen Quoc Dat</td>
+                <td>Male</td>
+                <td>datquoc3003@gmail.com</td>
+                <td>0338986715</td>
+                <td>User</td>
+                <td>Active</td>
+                <td>
+                  <button type="button" class="btn btn-primary">Delete</button>
+                </td>              
                 <td>
                   <button
                     type="button"
@@ -156,36 +154,79 @@
                     data-toggle="modal"
                     data-target="#exampleModal"
                   >
-                    Launch demo modal
+                    Update
                   </button>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-primary">Delete</button>
-                </td>
+                </td>              
               </tr>
               <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>
-                  <button type="button" class="btn btn-primary">Update</button>
-                </td>
+                <td>1</td>
+                <td>U001</td>
+                <td>Nguyen Quoc Dat</td>
+                <td>Male</td>
+                <td>datquoc3003@gmail.com</td>
+                <td>0338986715</td>
+                <td>User</td>
+                <td>Active</td>
                 <td>
                   <button type="button" class="btn btn-primary">Delete</button>
-                </td>
+                </td>              
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                  >
+                    Update
+                  </button>
+                </td>              
+              </tr>
+
+              <tr>
+                <td>1</td>
+                <td>U001</td>
+                <td>Nguyen Quoc Dat</td>
+                <td>Male</td>
+                <td>datquoc3003@gmail.com</td>
+                <td>0338986715</td>
+                <td>User</td>
+                <td>Active</td>
+                <td>
+                  <button type="button" class="btn btn-primary">Delete</button>
+                </td>              
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                  >
+                    Update
+                  </button>
+                </td>              
               </tr>
               <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <td>
-                  <button type="button" class="btn btn-primary">Update</button>
-                </td>
+                <td>1</td>
+                <td>U001</td>
+                <td>Nguyen Quoc Dat</td>
+                <td>Male</td>
+                <td>datquoc3003@gmail.com</td>
+                <td>0338986715</td>
+                <td>User</td>
+                <td>Active</td>
                 <td>
                   <button type="button" class="btn btn-primary">Delete</button>
-                </td>
+                </td>              
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                  >
+                    Update
+                  </button>
+                </td>              
               </tr>
             </tbody>
           </table>
@@ -225,9 +266,9 @@
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
-                />
-                
+                />               
               </div>
+
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <input
@@ -238,6 +279,78 @@
                 />
               </div>
              
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                />               
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                />               
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                />               
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                />               
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                />               
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                />               
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                />               
+              </div>
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
           </div>

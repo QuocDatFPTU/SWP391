@@ -55,16 +55,15 @@ public class AddSubjectServlet extends HttpServlet {
         String url = mapping.get(FAIL);
         try {
 
-            String subjectName = request.getParameter("subjectName");
-            String category = request.getParameter("category");
-            String owner = request.getParameter("owner");
+            String subjectName = request.getParameter("txtsubjectName");
+            String category = request.getParameter("txtcategory");
+            String owner = request.getParameter("txtowner");
             Date updateDate = new Date();
-            String description = request.getParameter("description");
-            Long courseID = 3L;
+            String description = request.getParameter("txtdescription");
+            Long courseID = Long.parseLong(request.getParameter("txtcourseID"));
 //                    parseLong(request.getParameter("courseID"));
             Subject subjectnew = new Subject();
             CourseRepositoryImp crs = new CourseRepositoryImp();
-
             SubjectRepositoryImp urp = new SubjectRepositoryImp();
             subjectnew.setSubjectName(subjectName);
             subjectnew.setCategory(category);

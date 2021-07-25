@@ -26,3 +26,6 @@ quizListPage=quizlist.jsp
 quizPage=QuizPage.jsp
 practiceList=PracticeListServlet
 homepage=GetAllCourseServlet
+viewdetailcourse=subjectlist.jsp
+subjectListDetail=GetSubjectPagingServlet
+

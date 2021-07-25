@@ -44,6 +44,7 @@ public class DimensionRepositoryImp implements DimensionRepository {
             transaction.commit();
             session.close();
         } catch (Exception e) {
+            System.out.println(e);
             if (transaction != null) {
                 transaction.rollback();
             }

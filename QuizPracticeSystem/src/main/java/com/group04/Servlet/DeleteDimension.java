@@ -28,15 +28,6 @@ import javax.servlet.http.HttpSession;
 public class DeleteDimension extends HttpServlet {
     public static final String SUCCESS = "viewprofile";
     public static final String FAIL = "error";
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -46,10 +37,13 @@ public class DeleteDimension extends HttpServlet {
         Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
         String url = mapping.get(SUCCESS);
         try {
-            Long dimensionID = parseLong(request.getParameter("dimensionID"));
+           // Long dimensionID = parseLong(request.getParameter("dimensionID"));
             DimensionRepositoryImp urp = new DimensionRepositoryImp();
-            urp.deleteDimension(dimensionID);
-        } finally {
+            urp.deleteDimension(4L);
+        }catch(Exception e){
+            System.out.println(e);
+        } 
+        finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

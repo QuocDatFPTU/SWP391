@@ -41,7 +41,7 @@
                     </form>
                 </div>
                 <div class="interact-quiz">             
-                    <button type="button" class="btn btn-primary">New Practice</button>
+                    <button type="button" class="btn btn-primary "  data-toggle="modal" data-target="#exampleModal">New Practice</button>
                     <button class="btn btn-primary">Simulation Exam</button>              
                 </div>
             </div>
@@ -105,7 +105,7 @@
                             </td>
                             <td ><p> 50% correct</p></td>
                             <td > 
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModal">
                                     View details
                                 </button>
                             </td>       
@@ -262,7 +262,7 @@
                                     <input type="text" class="form-control" id="number-questions">   
                                 </div>
                                 <div class="form-group">
-                                    <label class="my-1 mr-2" for="question-by-topic-dimension">Question are selected by topic(s) or a specific dimension?</label>
+                                    <label class="my-1 mr-2" for="question-by-topic-dimension">Question group(choose one or all topic/dimension)</label>
                                     <select class="custom-select my-1 mr-sm-2" id="question-by-topic-dimension">
                                         <option selected>Choose...</option>
                                         <option value="1">One</option>
@@ -271,7 +271,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="my-1 mr-2" for="question-by-all-dimension">Question group(choose one or all topic/dimension)</label>
+                                    <label class="my-1 mr-2" for="question-by-all-dimension">Question are selected by topic(s) or a specific dimension?</label>
                                     <select class="custom-select my-1 mr-sm-2" id="question-by-all-dimension">
                                         <option selected>Choose...</option>
                                         <option value="1">One</option>

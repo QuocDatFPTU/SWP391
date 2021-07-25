@@ -7,8 +7,11 @@ package com.group04.Servlet;
 
 import static com.group04.Servlet.AddSubjectServlet.FAIL;
 import static com.group04.Servlet.AddSubjectServlet.SUCCESS;
+import com.group04.entities.Course;
 import com.group04.entities.Dimension;
+import com.group04.entities.Subject;
 import com.group04.repositories.DimensionRepositoryImp;
+import com.group04.repositories.SubjectRepositoryImp;
 import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,18 +30,13 @@ import javax.servlet.http.HttpSession;
  *
  * @author ntdun
  */
-@WebServlet(name = "AdddDimensionServlet", urlPatterns = {"/AdddDimensionServlet"})
+@WebServlet(name = "AddDimensionServlet", urlPatterns = {"/AddDimensionServlet"})
 public class AddDimensionServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    public static final String SUCCESS = "detailpage";
+    public static final String FAIL = "errorPage";
+
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -46,15 +44,18 @@ public class AddDimensionServlet extends HttpServlet {
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
         Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
+        System.out.println("Map:" + mapping);
         String url = mapping.get(FAIL);
         try {
 
             String dimensionName = request.getParameter("dimensonName");
+           // Long subjectID = Long.parseLong(request.getParameter("txtsubjectID"));
             Dimension newdimension = new Dimension();
-
             DimensionRepositoryImp urp = new DimensionRepositoryImp();
-            newdimension.setDimensionName(dimensionName);
-
+            SubjectRepositoryImp srp = new SubjectRepositoryImp();
+            newdimension.setDimensionName("TestDimension");
+            Subject subject = srp.getSubjectById(3L);
+            newdimension.setSubject(subject);
             System.out.println("Dimension new: " + newdimension.getDimensionName());
             System.out.println("Before Error");
             List<String> errors = DoValidate.validateD(newdimension);
