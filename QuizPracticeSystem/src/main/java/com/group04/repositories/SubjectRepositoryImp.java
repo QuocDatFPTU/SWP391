@@ -24,8 +24,9 @@ public class SubjectRepositoryImp implements SubjectRepository {
     public List<Subject> getAllSubjectPaging(Long courseID, int position, int pageSize) {
         //Transaction transaction = null;
         Subject Subject = null;
+         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
+           
            //transaction = session.beginTransaction();
             Query query = session.createQuery("FROM Subject S WHERE S.course.courseID =:courseId").setParameter("courseId", courseID);
             query.setFirstResult(position);
@@ -35,13 +36,15 @@ public class SubjectRepositoryImp implements SubjectRepository {
                 return query.list();
             }
           // transaction.commit();
-            session.close();
+            
         } catch (Exception e) {
             System.out.println(e);
 //            if (transaction != null) {
 //                System.out.println("Loop Function");
 //                transaction.rollback();
 //            }
+        }finally{
+            session.close();
         }
         return null;
     }
