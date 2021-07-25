@@ -121,7 +121,7 @@ public class FillterDispatcher implements Filter {
             if (!resource.isEmpty()) {
                 url = map.get(resource);
             } else {
-                url = map.get("index");
+                url = map.get("homepage");
             }
             
             boolean registered = true;

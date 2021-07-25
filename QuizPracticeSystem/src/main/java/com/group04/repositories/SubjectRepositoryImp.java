@@ -114,7 +114,6 @@ public class SubjectRepositoryImp implements SubjectRepository {
         Transaction transaction = null;
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.evict(subject);
             session.merge(subject);
             transaction.commit();
             session.close();

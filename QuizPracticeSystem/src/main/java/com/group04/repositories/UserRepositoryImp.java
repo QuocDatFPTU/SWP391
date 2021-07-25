@@ -6,7 +6,6 @@
 package com.group04.repositories;
 
 import com.group04.email.MailConfig;
-import com.group04.entities.Course;
 import com.group04.entities.Role;
 import com.group04.entities.User;
 import com.group04.utils.HibernateUtil;
@@ -103,10 +102,6 @@ public class UserRepositoryImp implements UserRepository {
         return listOfUser;
     }
 
-    @Override
-    public User getListUserHaveUsernameLike(String username) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public Role getRole(String name) {
@@ -136,7 +131,6 @@ public class UserRepositoryImp implements UserRepository {
         Transaction transaction = null;
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.evict(user);
             session.merge(user);
             transaction.commit();
             session.close();
@@ -173,16 +167,16 @@ public class UserRepositoryImp implements UserRepository {
 
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            Query query = session.createQuery("SELECT u FROM User u WHERE u.password = :password");
+            Query query = session.createQuery(" FROM User u WHERE u.password = :password");
             query.setParameter("password", password);
-            //query.getSingleResult();
 
             User user = (User) query.getSingleResult();
             user.setPassword(newpassword);
-            session.persist(user);
+            session.merge(user);
             transaction.commit();
             session.close();
         } catch (Exception e) {
+            System.out.println("error : " +e);
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -255,4 +249,34 @@ public class UserRepositoryImp implements UserRepository {
         }
         return false;
     }
+
+    @Override
+    public User getOldPassword(Long userID) {
+Transaction transaction = null;
+        User user = null;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            user = (User) session.createQuery("FROM User U WHERE U.userID = :userID").setParameter("userID", userID)
+                    .uniqueResult();
+            if (user != null) {
+                return user;
+            }
+            transaction.commit();
+            session.close();
+        } catch (Exception e) {
+            if (transaction != null) {
+                System.out.println("dont work");
+                transaction.rollback();
+            }
+        }
+        return null;
+    }
+
+    
+  
 }
+
+    
+
+    

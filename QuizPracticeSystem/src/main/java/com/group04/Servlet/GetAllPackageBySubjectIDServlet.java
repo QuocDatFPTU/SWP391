@@ -5,30 +5,20 @@
  */
 package com.group04.Servlet;
 
-import static com.group04.Servlet.AddSubjectServlet.FAIL;
-import static com.group04.Servlet.AddSubjectServlet.SUCCESS;
-import com.group04.entities.Dimension;
-import com.group04.repositories.DimensionRepositoryImp;
-import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.Map;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ntdun
  */
-@WebServlet(name = "AdddDimensionServlet", urlPatterns = {"/AdddDimensionServlet"})
-public class AdddDimensionServlet extends HttpServlet {
+@WebServlet(name = "GetAllPackageBySubjectIDServlet", urlPatterns = {"/GetAllPackageBySubjectIDServlet"})
+public class GetAllPackageBySubjectIDServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,39 +32,17 @@ public class AdddDimensionServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        ServletContext context = request.getServletContext();
-        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = mapping.get(FAIL);
-        try {
-
-            String dimensionName = request.getParameter("dimensonName");
-            Dimension newdimension = new Dimension();
-
-            DimensionRepositoryImp urp = new DimensionRepositoryImp();
-            newdimension.setDimensionName(dimensionName);
-
-            System.out.println("Dimension new: " + newdimension.getDimensionName());
-            System.out.println("Before Error");
-            List<String> errors = DoValidate.validateD(newdimension);
-            for (String error : errors) {
-                System.out.println("Loi: " + error);
-            }
-            System.out.println("After Error");
-            System.out.println("Number of Error: " + errors.size());
-            if (!errors.isEmpty()) {
-                session.setAttribute("ERROR_UPDATE", errors);
-            } else {
-                urp.addDimension(newdimension);
-                url = mapping.get(SUCCESS);
-
-            }
-        } finally {
-            System.out.println(url);
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-            out.close();
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet GetAllPackageBySubjectIDServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet GetAllPackageBySubjectIDServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

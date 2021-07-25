@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -275,66 +276,23 @@
     <!--Course List-->
     <div class="container course-list">
       <h2>Course List</h2>
-      <div class="row">
-        <div class="col-md-3">
+      <div class="row"> 
+          <c:forEach var="course" items="${sessionScope.listCourse}">      
+        <div class="col-md-3" >            
           <div class="card bg-light mb-3">
-            <div class="card-header">Course Name</div>
+            <div class="card-header">${course.courseName}</div>
             <img
               class="card-img-top"
-              src="img/asp-mvc.jpg"
+              src="${course.thumbnailLink}"
               alt="Course Image"
             />
             <div class="card-body">
-              <p class="card-text">Course Description</p>
-              <a href="#" class="btn btn-primary">Payment</a>
+              <p class="card-text"></p>
+              <a href="#" class="btn btn-primary">View Subject List</a>
             </div>
           </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="card bg-light mb-3">
-            <div class="card-header">Course Name</div>
-            <img
-              class="card-img-top"
-              src="img/asp-mvc.jpg"
-              alt="Course Image"
-            />
-            <div class="card-body">
-              <p class="card-text">Course Description</p>
-              <a href="#" class="btn btn-primary">Payment</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="card bg-light mb-3">
-            <div class="card-header">Course Name</div>
-            <img
-              class="card-img-top"
-              src="img/asp-mvc.jpg"
-              alt="Course Image"
-            />
-            <div class="card-body">
-              <p class="card-text">Course Description</p>
-              <a href="#" class="btn btn-primary">Payment</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="card bg-light mb-3">
-            <div class="card-header">Course Name</div>
-            <img
-              class="card-img-top"
-              src="img/asp-mvc.jpg"
-              alt="Course Image"
-            />
-            <div class="card-body">
-              <p class="card-text">Course Description</p>
-              <a href="#" class="btn btn-primary">Payment</a>
-            </div>
-          </div>
-        </div>
+        </div>  
+         </c:forEach>
       </div>
     </div>
     <!--Wish List-->

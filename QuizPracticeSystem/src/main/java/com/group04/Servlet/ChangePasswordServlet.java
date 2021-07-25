@@ -5,6 +5,7 @@
  */
 package com.group04.Servlet;
 
+import com.group04.entities.User;
 import com.group04.repositories.UserRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,16 +39,24 @@ public class ChangePasswordServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();       
+        PrintWriter out = response.getWriter(); 
+        HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
         Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
         String url = mapping.get(FAIL);
         try {
+            String userID =request.getParameter("userID");
             String oldPassword = request.getParameter("oldpassword");
             String newPassword = request.getParameter("newpassword");
             UserRepositoryImp dao = new UserRepositoryImp();
-            dao.updatePassword(oldPassword, newPassword); 
+            User user = dao.getOldPassword(16L);
+            if(!oldPassword.equals(user.getPassword())){
+                session.setAttribute("mess", "Old password is wrong, please try again !");
+            }else{
+            dao.updatePassword("123456", "12345"); 
             url = mapping.get(SUCCESS);
+                System.out.println("update dc roi ne");
+            }
         }catch (Exception e){  
             System.out.println("Error: "+e);
         } finally {

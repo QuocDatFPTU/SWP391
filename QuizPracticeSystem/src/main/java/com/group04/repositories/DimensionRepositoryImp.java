@@ -56,7 +56,6 @@ public class DimensionRepositoryImp implements DimensionRepository {
         Transaction transaction = null;
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.evict(dimension);
             session.merge(dimension);
             transaction.commit();
             session.close();

@@ -7,6 +7,7 @@ package com.group04.repositories;
 
 import com.group04.entities.Packages;
 import com.group04.utils.HibernateUtil;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -55,7 +56,6 @@ Transaction transaction = null;
 Transaction transaction = null;
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.evict(packages);
             session.merge(packages);
             transaction.commit();
             session.close();
@@ -65,5 +65,29 @@ Transaction transaction = null;
             }
         }
     }    
+
+    @Override
+    public List<Package> getAllPackageBySubjectID(Long subjectID) {
+        Transaction transaction = null;
+        List<Package> packages = null;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            packages = session.createQuery("FROM Subject S WHERE S.subjectID = :id").setParameter("id", subjectID)
+                    .getResultList();
+            if (packages != null) {
+                return packages;
+            }
+            transaction.commit();
+            session.close();
+        } catch (Exception e) {
+            System.out.println("loi except :" +e);
+            if (transaction != null) {
+                System.out.println("Loop Function");
+                transaction.rollback();
+            }
+        }
+        return null;    
+    }
 
 }

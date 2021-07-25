@@ -11,6 +11,7 @@ import com.group04.repositories.UserRepositoryImp;
 import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Long.parseLong;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,8 @@ public class EditUserServlet extends HttpServlet {
         Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
         String url = mapping.get(FAIL);
         try {
-
+            
+            Long userID =parseLong(request.getParameter("userID"));
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String lastname = request.getParameter("lastname");

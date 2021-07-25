@@ -29,6 +29,9 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "GetAllCourseServlet", urlPatterns = {"/GetAllCourseServlet"})
 public class GetAllCourseServlet extends HttpServlet {
 
+    public static final String SUCCESS = "index";
+    public static final String FAIL = "error";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,16 +46,21 @@ public class GetAllCourseServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         ServletContext context = request.getServletContext();
-        HttpSession session = request.getSession();
         Map<String, String> listmapping = (Map<String, String>) context.getAttribute("MAPPING");
         String url = listmapping.get(FAIL);
         try {
+            HttpSession session = request.getSession();
             CourseRepositoryImp urp = new CourseRepositoryImp();
             List<Course> listcourse;
-            listcourse=urp.getAllCourse();
-            session.setAttribute("listcourse", listcourse);
-        }catch (Exception e){  
-        }finally{
+            listcourse = urp.getAllCourse();
+
+            if (!listcourse.isEmpty()) {
+                session.setAttribute("listCourse", listcourse);
+                url = listmapping.get(SUCCESS);
+            }
+        } catch (Exception e) {
+            System.out.println("Exception " + e);
+        } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

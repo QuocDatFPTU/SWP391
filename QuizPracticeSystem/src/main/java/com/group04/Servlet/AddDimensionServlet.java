@@ -5,12 +5,13 @@
  */
 package com.group04.Servlet;
 
-import static com.group04.Servlet.GetAllCategoryServlet.FAIL;
-import com.group04.entities.Subject;
-import com.group04.repositories.SubjectRepositoryImp;
+import static com.group04.Servlet.AddSubjectServlet.FAIL;
+import static com.group04.Servlet.AddSubjectServlet.SUCCESS;
+import com.group04.entities.Dimension;
+import com.group04.repositories.DimensionRepositoryImp;
+import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
@@ -26,8 +27,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author ntdun
  */
-@WebServlet(name = "GetAllSubjectServlet", urlPatterns = {"/GetAllSubjectServlet"})
-public class GetAllSubjectServlet extends HttpServlet {
+@WebServlet(name = "AdddDimensionServlet", urlPatterns = {"/AdddDimensionServlet"})
+public class AddDimensionServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,20 +43,35 @@ public class GetAllSubjectServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        ServletContext context = request.getServletContext();
         HttpSession session = request.getSession();
-        Map<String, String> listmapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = listmapping.get(FAIL);
+        ServletContext context = request.getServletContext();
+        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
+        String url = mapping.get(FAIL);
         try {
-            SubjectRepositoryImp urp = new SubjectRepositoryImp();
-            List<Subject> listsubject;
-            listsubject=urp.getAllSubject();
-                      for(int i=0;i<listsubject.size();i++){
-            System.out.println(listsubject.get(i));
-} 
-            session.setAttribute("listsubject", listsubject);
-        }catch (Exception e){  
-        }finally{
+
+            String dimensionName = request.getParameter("dimensonName");
+            Dimension newdimension = new Dimension();
+
+            DimensionRepositoryImp urp = new DimensionRepositoryImp();
+            newdimension.setDimensionName(dimensionName);
+
+            System.out.println("Dimension new: " + newdimension.getDimensionName());
+            System.out.println("Before Error");
+            List<String> errors = DoValidate.validateD(newdimension);
+            for (String error : errors) {
+                System.out.println("Loi: " + error);
+            }
+            System.out.println("After Error");
+            System.out.println("Number of Error: " + errors.size());
+            if (!errors.isEmpty()) {
+                session.setAttribute("ERROR_UPDATE", errors);
+            } else {
+                urp.addDimension(newdimension);
+                url = mapping.get(SUCCESS);
+
+            }
+        } finally {
+            System.out.println(url);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

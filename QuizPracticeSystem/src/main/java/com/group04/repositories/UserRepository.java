@@ -19,7 +19,6 @@ public interface UserRepository {
     User login(String username, String password);
     void register(User user);
     List<User> getAllUser();
-    User getListUserHaveUsernameLike(String username);
     Role getRole(String id);
     void updateUser(User user);
     void deleteUser(Long id);
@@ -27,4 +26,5 @@ public interface UserRepository {
     void SendMail(String email);
     void resetPassword(String usermail, String newpassword);
     boolean checkUsernameExist(String username);
+    User getOldPassword(Long userID);
 }

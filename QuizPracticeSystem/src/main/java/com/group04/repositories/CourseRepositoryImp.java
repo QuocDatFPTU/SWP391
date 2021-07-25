@@ -21,15 +21,16 @@ import org.hibernate.Transaction;
 public class CourseRepositoryImp implements CourseRepository {
 
     @Override
-    public List<Course> getAllCourse() {
+    public  List<Course> getAllCourse() {
         Transaction transaction = null;
         List<Course> listOfCourse = null;
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            listOfCourse = session.createQuery("from Course").getResultList();
+            listOfCourse = session.createQuery("from Course", Course.class).getResultList();
             transaction.commit();
             session.close();
         } catch (Exception e) {
+            System.out.println("loi excep :" +e);
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -58,7 +59,6 @@ public class CourseRepositoryImp implements CourseRepository {
         Transaction transaction = null;
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.evict(course);
             session.merge(course);
             transaction.commit();
             session.close();
@@ -123,5 +123,6 @@ public class CourseRepositoryImp implements CourseRepository {
         }
         return null;
     }
-
+    
+    
 }

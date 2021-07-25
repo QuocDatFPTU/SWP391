@@ -68,7 +68,6 @@ public class QuestionRepositoryImp implements QuestionRepository {
         Transaction transaction = null;
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.evict(question);
             session.merge(question);
             transaction.commit();
             session.close();
