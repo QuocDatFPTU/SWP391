@@ -12,6 +12,7 @@ import com.group04.repositories.CourseRepositoryImp;
 import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
@@ -54,7 +55,7 @@ public class EditCourseServlet extends HttpServlet {
             boolean isFeatured = Boolean.parseBoolean(request.getParameter("isFeatured"));
             boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
             String thumbnailLink = request.getParameter("tumbnailLink");
-            String createDate = request.getParameter("createDate");
+            Date createDate = new Date();
 
             Course UpdateCourse = new Course();
 

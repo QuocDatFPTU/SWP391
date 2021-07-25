@@ -37,7 +37,8 @@ import lombok.Setter;
 public class StudentRegistration implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "registrationID", nullable = false, updatable = false)
     private Long registrationID;
     
     @Column(name = "isPaid")
@@ -52,8 +53,8 @@ public class StudentRegistration implements Serializable {
     private Payment payment;
     
     @ManyToOne
-    @JoinColumn(name="courseID")
-    private Course course;
+    @JoinColumn(name="subjectID")
+    private Subject subject;
     
     public StudentRegistration(StudentRegistration register) {
         this.registrationID = register.registrationID;

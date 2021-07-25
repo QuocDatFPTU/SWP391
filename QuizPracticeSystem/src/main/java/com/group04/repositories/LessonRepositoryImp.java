@@ -31,6 +31,7 @@ public class LessonRepositoryImp implements LessonRepository{
                 return Lesson;
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 e.printStackTrace();
@@ -53,6 +54,7 @@ public class LessonRepositoryImp implements LessonRepository{
                 System.out.println("lesson is deleted");
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -69,6 +71,7 @@ public class LessonRepositoryImp implements LessonRepository{
             session.evict(lesson);
             session.merge(lesson);
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -83,6 +86,7 @@ public class LessonRepositoryImp implements LessonRepository{
             transaction = session.beginTransaction();
             session.save(lesson);
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();

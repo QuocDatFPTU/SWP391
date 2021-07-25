@@ -5,13 +5,12 @@
  */
 package com.group04.Servlet;
 
-import static com.group04.Servlet.EditUserServlet.FAIL;
-import static com.group04.Servlet.EditUserServlet.SUCCESS;
 import com.group04.entities.Course;
 import com.group04.repositories.CourseRepositoryImp;
 import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
@@ -53,13 +52,12 @@ public class AddCourseServlet extends HttpServlet {
             String courseName = request.getParameter("courseName");
             boolean isFeatured = Boolean.parseBoolean(request.getParameter("isFeatured"));
             boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
-            String thumbnailLink = request.getParameter("tumbnailLink");
-            String createDate = request.getParameter("createDate");
+            String thumbnailLink = request.getParameter("thumbnailLink");
+            Date createDate = new Date();
 
             Course NewCourse = new Course();
 
             CourseRepositoryImp urp = new CourseRepositoryImp();
-            NewCourse.setCourseID(urp.getRandomID());
             NewCourse.setCourseName(courseName);
             NewCourse.setFeatured(isFeatured);
             NewCourse.setActive(isActive);

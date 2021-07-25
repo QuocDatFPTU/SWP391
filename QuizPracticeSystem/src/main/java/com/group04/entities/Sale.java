@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,8 +31,9 @@ import org.hibernate.validator.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Sale implements Serializable{
-     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "saleID", nullable = false, updatable = false)
     private Long saleID;
     
     @Column(name = "startSale")
@@ -46,8 +49,9 @@ public class Sale implements Serializable{
     @Column(name = "value")
     private String value;
     
-    @Column(name = "packageID")
-    private String packageID;
+    @ManyToOne
+    @JoinColumn(name="packageID")
+    private Packages packages;
     
     public Sale(Sale sale) {
         this.saleID = sale.saleID;
@@ -55,6 +59,5 @@ public class Sale implements Serializable{
         this.expiSale = sale.expiSale;
         this.isActive = sale.isActive;
         this.value = sale.value;
-        this.packageID = sale.packageID;
     }
 }

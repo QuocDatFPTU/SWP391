@@ -5,11 +5,13 @@
  */
 package com.group04.Servlet;
 
-
 import com.group04.repositories.SubjectRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,10 +24,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author ntdun
  */
-@WebServlet(name = "SubjectListServlet", urlPatterns = {"/SubjectListServlet"})
-public class SubjectListServlet extends HttpServlet {
-    public static final String SUCCESS = "index";
-    public static final String FAIL = "error";
+@WebServlet(name = "ShowCategoryServlet", urlPatterns = {"/ShowCategoryServlet"})
+public class GetAllCategoryServlet extends HttpServlet {
+    public static final String SUCCESS = "subjectdetail";
+    public static final String FAIL = "index";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,19 +41,26 @@ public class SubjectListServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
-        Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
-        String url = mapping.get(FAIL);
-        SubjectRepositoryImp dao=new SubjectRepositoryImp();
+        HttpSession session = request.getSession();
+        Map<String, String> listmapping = (Map<String, String>) context.getAttribute("MAPPING");
+        String url = listmapping.get(FAIL);
         try {
-            Long id = Long.parseLong(request.getParameter("courseID"));
-            dao.getSubjectById(id);
-            url = mapping.get(SUCCESS);
-        } catch (Exception e) {
-            System.out.println("Error: "+e);
+            SubjectRepositoryImp urp=new SubjectRepositoryImp();
+            List<String> listdup;
+            listdup = urp.getAllcategory();
+            List<String> listnodup=new ArrayList<>();
+            for(String element : listdup){
+                if(!listnodup.contains(element)){
+                    listnodup.add(element);
+                }
+            }
+            session.setAttribute("listcategory", listnodup);
+            System.out.println(listnodup);
+        }catch (Exception e){  
         }finally{
-            request.getRequestDispatcher(url).forward(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
             out.close();
         }
     }

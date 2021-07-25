@@ -60,17 +60,18 @@ public class AddSubjectServlet extends HttpServlet {
             String owner = request.getParameter("owner");
             Date updateDate = new Date();
             String description = request.getParameter("description");
-            Long courseID = parseLong(request.getParameter("courseID"));
+            Long courseID = 3L;
+//                    parseLong(request.getParameter("courseID"));
             Subject subjectnew = new Subject();
             CourseRepositoryImp crs = new CourseRepositoryImp();
 
             SubjectRepositoryImp urp = new SubjectRepositoryImp();
-            subjectnew.setSubjectName("CSD101");
-            subjectnew.setCategory("toan");
-            subjectnew.setOwner("thay khanh");
+            subjectnew.setSubjectName(subjectName);
+            subjectnew.setCategory(category);
+            subjectnew.setOwner(owner);
             subjectnew.setStatus(true);
             subjectnew.setUpdateDate(updateDate);
-            subjectnew.setDescription("mon nay de vl ay");
+            subjectnew.setDescription(description);
             subjectnew.setActive(true);
 
             Course course = crs.getCourse(courseID);

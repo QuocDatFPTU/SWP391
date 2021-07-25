@@ -32,6 +32,7 @@ import lombok.Setter;
 public class OptionExam implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "optionID", nullable = false, updatable = false)
     private Long optionID;
     
     @Column(name = "content")

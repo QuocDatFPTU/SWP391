@@ -23,6 +23,7 @@ Transaction transaction = null;
             transaction = session.beginTransaction();
             session.save(packages);
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -41,6 +42,7 @@ Transaction transaction = null;
                 System.out.println("Package is deleted");
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -56,6 +58,7 @@ Transaction transaction = null;
             session.evict(packages);
             session.merge(packages);
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();

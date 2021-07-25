@@ -133,7 +133,9 @@
       </div>
     </nav>
     <!--end nav bar-->
-
+    <a href="practiceList">
+        <input type="button" value="PracticeList" />
+    </a>
     <!--Slide show-->
     <div
       id="carouselExampleIndicators"

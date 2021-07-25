@@ -31,6 +31,7 @@ public class QuestionRepositoryImp implements QuestionRepository {
                 return Question;
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 e.printStackTrace();
@@ -53,6 +54,7 @@ public class QuestionRepositoryImp implements QuestionRepository {
                 System.out.println("question is deleted");
             }
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -69,6 +71,7 @@ public class QuestionRepositoryImp implements QuestionRepository {
             session.evict(question);
             session.merge(question);
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -83,6 +86,7 @@ public class QuestionRepositoryImp implements QuestionRepository {
             transaction = session.beginTransaction();
             session.save(question);
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();

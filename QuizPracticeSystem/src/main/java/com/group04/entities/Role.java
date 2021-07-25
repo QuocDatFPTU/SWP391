@@ -37,5 +37,4 @@ public class Role implements Serializable{
    
     @Column(name="name",length = 60)
     private String name;
-    
 }

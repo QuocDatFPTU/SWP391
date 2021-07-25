@@ -5,8 +5,8 @@
  */
 package com.group04.Servlet;
 
-import static com.group04.Servlet.SubjectListServlet.FAIL;
-import static com.group04.Servlet.SubjectListServlet.SUCCESS;
+import static com.group04.Servlet.GetSubjectListByCourseIDServlet.FAIL;
+import static com.group04.Servlet.GetSubjectListByCourseIDServlet.SUCCESS;
 import com.group04.repositories.SubjectRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;

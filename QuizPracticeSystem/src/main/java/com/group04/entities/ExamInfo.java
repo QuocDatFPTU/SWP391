@@ -38,6 +38,7 @@ import lombok.Setter;
 public class ExamInfo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "examInfoID", nullable = false, updatable = false)
     private Long examInfoID;
     
     @Column(name = "numberOfQuestion")
@@ -67,6 +68,10 @@ public class ExamInfo implements Serializable {
     @ManyToOne
     @JoinColumn(name="userID")
     private User user;
+    
+    @OneToOne(mappedBy = "examInfo", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn 
+    private ExamSetting examSetting;
     
     @OneToOne
     @JoinColumn(name = "examDetailID")

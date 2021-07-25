@@ -67,7 +67,7 @@ public class RegisterServlet extends HttpServlet {
                     newUser.setRoles(Collections.singleton(newUserRole));
                     newUser.setPassword(password);
                     newUser.setFirstName(firstname);
-                    newUser.setGender(gender.isEmpty() ? "Male" : "Female");
+                    newUser.setGender(gender);
                     newUser.setEmail(email);
                     newUser.setPhone(phonenumber);
                     newUser.setAvatar(avatar);

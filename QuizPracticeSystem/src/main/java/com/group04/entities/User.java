@@ -39,18 +39,18 @@ import org.hibernate.validator.constraints.NotBlank;
     @UniqueConstraint(columnNames = {"email"})
 })
 @Getter
-@Setter 
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userID", nullable = false, updatable = false)
     private Long userID;
 
     @NotBlank(message = "username can't be empty")
-    @Size(max = 100, min = 5, message = "username must have more than 5 characters")
+    @Size(max = 100, min = 3, message = "username must have more than 3 characters")
     @Column(name = "username")
     private String username;
 
@@ -91,9 +91,9 @@ public class User implements Serializable {
     @Column(name = "isActive")
     private boolean isActive;
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
-            name = "Users_Roles",
+            name = "Users_roles",
             joinColumns = {
                 @JoinColumn(name = "user_id")},
             inverseJoinColumns = {
@@ -103,7 +103,6 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<StudentRegistration> Register = new HashSet<>();
-//    private StudentRegistration Register;
 
     public User(User user) {
         this.userID = user.userID;
@@ -122,5 +121,5 @@ public class User implements Serializable {
     public String toString() {
         return "User{" + "userID=" + userID + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + ", gender=" + gender + ", avatar=" + avatar + ", isActive=" + isActive + ", roles=" + roles + ", Register=" + Register + '}';
     }
-    
+
 }

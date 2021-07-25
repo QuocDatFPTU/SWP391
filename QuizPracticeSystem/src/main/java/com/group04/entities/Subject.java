@@ -37,7 +37,8 @@ import org.hibernate.validator.constraints.NotBlank;
 @Table(name = "Subject")
 public class Subject implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "subjectID", nullable = false, updatable = false)
     private Long subjectID;
 
     @NotBlank(message = "subjectname can't be empty")
@@ -78,9 +79,12 @@ public class Subject implements Serializable{
     @JoinColumn(name="courseID")
     private Course course;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
     private Set<StudentRegistration> studentRegistration;
    
+    @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
+    private Set<Packages> packages;
+    
     public Subject(Subject subject) {
         this.subjectID = subject.subjectID;
         this.subjectName = subject.subjectName;

@@ -5,11 +5,11 @@
  */
 package com.group04.Servlet;
 
-import static com.group04.Servlet.AddSubjectServlet.FAIL;
-import static com.group04.Servlet.AddSubjectServlet.SUCCESS;
-import com.group04.entities.Dimension;
-import com.group04.repositories.DimensionRepositoryImp;
-import com.group04.validators.DoValidate;
+import static com.group04.Servlet.GetAllCategoryServlet.FAIL;
+import com.group04.entities.Subject;
+import com.group04.entities.User;
+import com.group04.repositories.SubjectRepositoryImp;
+import com.group04.repositories.UserRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -27,8 +27,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author ntdun
  */
-@WebServlet(name = "AdddDimensionServlet", urlPatterns = {"/AdddDimensionServlet"})
-public class AdddDimensionServlet extends HttpServlet {
+@WebServlet(name = "GetAllUserServlet", urlPatterns = {"/GetAllUserServlet"})
+public class GetAllUserServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,35 +43,17 @@ public class AdddDimensionServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
-        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = mapping.get(FAIL);
+        HttpSession session = request.getSession();
+        Map<String, String> listmapping = (Map<String, String>) context.getAttribute("MAPPING");
+        String url = listmapping.get(FAIL);
         try {
-
-            String dimensionName = request.getParameter("dimensonName");
-            Dimension newdimension = new Dimension();
-
-            DimensionRepositoryImp urp = new DimensionRepositoryImp();
-            newdimension.setDimensionName(dimensionName);
-
-            System.out.println("Dimension new: " + newdimension.getDimensionName());
-            System.out.println("Before Error");
-            List<String> errors = DoValidate.validateD(newdimension);
-            for (String error : errors) {
-                System.out.println("Loi: " + error);
-            }
-            System.out.println("After Error");
-            System.out.println("Number of Error: " + errors.size());
-            if (!errors.isEmpty()) {
-                session.setAttribute("ERROR_UPDATE", errors);
-            } else {
-                urp.addDimension(newdimension);
-                url = mapping.get(SUCCESS);
-
-            }
-        } finally {
-            System.out.println(url);
+            UserRepositoryImp urp = new UserRepositoryImp();
+            List<User> listuser;
+            listuser=urp.getAllUser();
+            session.setAttribute("listuser", listuser);
+        }catch (Exception e){  
+        }finally{
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

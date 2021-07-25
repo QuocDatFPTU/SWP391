@@ -32,8 +32,9 @@ import org.hibernate.validator.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Dimension implements Serializable{
-     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "dimensionID", nullable = false, updatable = false)
     private Long dimensionID;
     
     @NotBlank(message = "dimensionName can't be empty")
