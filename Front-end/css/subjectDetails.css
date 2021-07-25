@@ -195,7 +195,6 @@
 .pricePackageContent{
   display: flex;
   flex-direction: column;
-  
 }
 
 .pricePackageContent a{
@@ -207,3 +206,4 @@
 .pricePackageAction :first-child{
   margin-right: 5px;
 }
+
