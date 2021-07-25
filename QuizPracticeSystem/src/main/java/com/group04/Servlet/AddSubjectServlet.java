@@ -66,12 +66,12 @@ public class AddSubjectServlet extends HttpServlet {
             CourseRepositoryImp crs = new CourseRepositoryImp();
 
             SubjectRepositoryImp urp = new SubjectRepositoryImp();
-            subjectnew.setSubjectName("CSD101");
-            subjectnew.setCategory("toan");
-            subjectnew.setOwner("thay khanh");
+            subjectnew.setSubjectName(subjectName);
+            subjectnew.setCategory(category);
+            subjectnew.setOwner(owner);
             subjectnew.setStatus(true);
             subjectnew.setUpdateDate(updateDate);
-            subjectnew.setDescription("mon nay de vl ay");
+            subjectnew.setDescription(description);
             subjectnew.setActive(true);
 
             Course course = crs.getCourse(courseID);

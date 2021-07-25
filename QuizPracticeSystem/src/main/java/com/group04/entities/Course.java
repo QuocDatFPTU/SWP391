@@ -6,6 +6,7 @@
 package com.group04.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -60,7 +61,7 @@ public class Course implements Serializable {
     private String thumbnailLink;
 
     @Column(name = "createDate")
-    private String createDate;
+    private Date createDate;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
     private Set<Subject> subject=new HashSet<>();
