@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "GetSubjectPagingServlet", urlPatterns = {"/GetSubjectPagingServlet"})
 public class GetSubjectPagingServlet extends HttpServlet {
     public static final String SUCCESS = "viewdetailcourse";
-    public static final String FAIL = "error";
+    public static final String FAIL = "errorPage";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -49,6 +49,9 @@ public class GetSubjectPagingServlet extends HttpServlet {
         try {
             Long courseID = Long.parseLong(request.getParameter("CourseID"));
             List<Subject> subject=dao.getAllSubjectPaging(courseID, 0, 5);
+            for (Subject x : subject) {
+                System.out.println(x.getCategory());
+            }
             session.setAttribute("listSubjectPaging", subject);
             url = mapping.get(SUCCESS);
         }catch (Exception e){

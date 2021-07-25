@@ -249,7 +249,7 @@
               <img class="card-img-top" src="..." alt="Course Image" />
               <div class="card-body">
                 <p class="card-text">Course Description</p>
-                <a href="#" class="btn btn-primary">Payment</a>
+                <a href="subjectListDetail" class="btn btn-primary">Payment</a>
               </div>
             </div>
           </div>
@@ -261,7 +261,7 @@
               <img class="card-img-top" src="..." alt="Course Image" />
               <div class="card-body">
                 <p class="card-text">Course Description</p>
-                <a href="#" class="btn btn-primary">Payment</a>
+                <a href="subjectListDetail" class="btn btn-primary">Payment</a>
               </div>
             </div>
           </div>
@@ -286,7 +286,7 @@
             />
             <div class="card-body">
               <p class="card-text">Course Description</p>
-              <a href="#" class="btn btn-primary">Payment</a>
+              <a href="subjectListDetail?CourseID=2" class="btn btn-primary">Payment</a>
             </div>
           </div>
         </div>
@@ -301,7 +301,7 @@
             />
             <div class="card-body">
               <p class="card-text">Course Description</p>
-              <a href="#" class="btn btn-primary">Payment</a>
+              <a href="subjectListDetail" class="btn btn-primary">Payment</a>
             </div>
           </div>
         </div>
@@ -316,7 +316,7 @@
             />
             <div class="card-body">
               <p class="card-text">Course Description</p>
-              <a href="#" class="btn btn-primary">Payment</a>
+              <a href="subjectListDetail" class="btn btn-primary">Payment</a>
             </div>
           </div>
         </div>
@@ -331,7 +331,7 @@
             />
             <div class="card-body">
               <p class="card-text">Course Description</p>
-              <a href="#" class="btn btn-primary">Payment</a>
+              <a href="subjectListDetail" class="btn btn-primary">Payment</a>
             </div>
           </div>
         </div>
@@ -357,7 +357,7 @@
             />
             <div class="card-body">
               <p class="card-text">Course Description</p>
-              <a href="#" class="btn btn-primary">Payment</a>
+              <a href="subjectListDetail" class="btn btn-primary">Payment</a>
             </div>
           </div>
           <!--end of card-->
@@ -373,7 +373,7 @@
             />
             <div class="card-body">
               <p class="card-text">Course Description</p>
-              <a href="#" class="btn btn-primary">Payment</a>
+              <a href="subjectListDetail" class="btn btn-primary">Payment</a>
             </div>
           </div>
           <!--end of card-->
@@ -390,7 +390,7 @@
             />
             <div class="card-body">
               <p class="card-text">Course Description</p>
-              <a href="#" class="btn btn-primary">Payment</a>
+              <a href="subjectListDetail" class="btn btn-primary">Payment</a>
             </div>
           </div>
           <!--end of card-->
