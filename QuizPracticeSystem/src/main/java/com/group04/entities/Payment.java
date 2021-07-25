@@ -51,11 +51,8 @@ public class Payment implements Serializable{
     
     @Column(name = "payDate")
     private String payDate;
-    
-    @ManyToOne
-    @JoinColumn(name = "PaymentID", nullable = false)
-    
-    @OneToOne(mappedBy = "StudentRegistration", cascade = CascadeType.ALL)
+       
+    @OneToOne(mappedBy = "payment", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn 
     private StudentRegistration StudentRegistration;
     

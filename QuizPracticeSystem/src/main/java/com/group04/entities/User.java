@@ -93,7 +93,7 @@ public class User implements Serializable {
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
-            name = "Users_Roles",
+            name = "Users_roles",
             joinColumns = {
                 @JoinColumn(name = "user_id")},
             inverseJoinColumns = {
@@ -101,7 +101,7 @@ public class User implements Serializable {
     )
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<StudentRegistration> Register = new HashSet<>();
 
     public User(User user) {

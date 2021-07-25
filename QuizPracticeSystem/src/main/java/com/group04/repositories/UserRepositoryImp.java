@@ -248,7 +248,7 @@ public class UserRepositoryImp implements UserRepository {
             transaction.commit();
             session.close();
         } catch (Exception e) {
-            System.out.println("Logging: " + e.getMessage());
+            System.out.println("Logging: " + e);
             if (transaction != null) {
                 transaction.rollback();
             }

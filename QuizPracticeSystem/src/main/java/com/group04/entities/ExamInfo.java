@@ -69,6 +69,10 @@ public class ExamInfo implements Serializable {
     @JoinColumn(name="userID")
     private User user;
     
+    @OneToOne(mappedBy = "examInfo", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn 
+    private ExamSetting examSetting;
+    
     @OneToOne
     @JoinColumn(name = "examDetailID")
     private ExamDetail examDetail;

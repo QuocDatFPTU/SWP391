@@ -10,6 +10,7 @@ import com.group04.entities.Course;
 import com.group04.entities.Dimension;
 import com.group04.entities.ExamDetail;
 import com.group04.entities.ExamInfo;
+import com.group04.entities.ExamSetting;
 import com.group04.entities.Lesson;
 import com.group04.entities.Option;
 import com.group04.entities.OptionExam;
@@ -36,18 +37,16 @@ import org.hibernate.service.ServiceRegistry;
 public class HibernateUtil {
 
     private static SessionFactory sessionFactory;
-    
-    
-    
-      public static SessionFactory getSessionFactory() {
-        if(sessionFactory == null){
-            try{
+
+    public static SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            try {
                 Configuration configuration = new Configuration();
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                 settings.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=QuizPractice");
+                settings.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=QuizPractice");
                 settings.put(Environment.USER, "sa");
-                settings.put(Environment.PASS, "Ngoctam3112000");
+                settings.put(Environment.PASS, "123456");
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
                 settings.put(Environment.SHOW_SQL, "true");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
@@ -70,13 +69,14 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(ExamDetail.class);
                 configuration.addAnnotatedClass(QuestionExam.class);
                 configuration.addAnnotatedClass(OptionExam.class);
+                configuration.addAnnotatedClass(ExamSetting.class);
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                    .applySettings(configuration.getProperties()).build();
+                        .applySettings(configuration.getProperties()).build();
                 System.out.println("Hibernate Java Config serviceRegistry created");
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
                 return sessionFactory;
-            } catch (Exception e){
-                e.printStackTrace();
+            } catch (Exception e) {
+                System.out.println("Hibernate bugs: " + e);
             }
         }
         return sessionFactory;
