@@ -18,6 +18,7 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
+import org.hibernate.query.NativeQuery;
 
 /**
  *
@@ -107,6 +108,8 @@ public class UserRepositoryImp implements UserRepository {
     public User getListUserHaveUsernameLike(String username) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
 
     @Override
     public Role getRole(String name) {
@@ -132,6 +135,21 @@ public class UserRepositoryImp implements UserRepository {
     }
 
     @Override
+    public User getUserById(Long userID) {
+        Transaction transaction = null;
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            transaction = session.beginTransaction();
+            User user = (User) session.createQuery("FROM User U WHERE U.userID = :userID").setParameter("userID",userID)
+                    .getSingleResult();
+            transaction.commit();
+            return user;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
     public void updateUser(User user) {
         Transaction transaction = null;
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -149,22 +167,9 @@ public class UserRepositoryImp implements UserRepository {
 
     @Override
     public void deleteUser(Long userID) {
-        Transaction transaction = null;
-        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            User user = session.get(User.class, userID);
-            if (user != null) {
-                session.delete(user);
-                System.out.println("user is deleted");
-            }
-            transaction.commit();
-            session.close();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-
-        }
+        User user = this.getUserById(userID);
+        user.setActive(false);
+        this.updateUser(user);
     }
 
     @Override

@@ -14,8 +14,14 @@ import java.util.List;
  * @author HP
  */
 public interface LessonRepository {
+
     List<Lesson> getLessonBySubjectId(Long subjectId);
+
+    public Lesson getLessonById(Long id);
+
     public void deleteLesson(Long lessonID);
+
     public void updateLesson(Lesson lesson);
+
     public void addLesson(Lesson lesson);
 }

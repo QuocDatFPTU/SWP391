@@ -5,7 +5,10 @@
  */
 package com.group04.Servlet;
 
-import com.group04.repositories.PackageRepositoryImp;
+import static com.group04.Servlet.DeleteCourseServlet.FAIL;
+import static com.group04.Servlet.DeleteCourseServlet.SUCCESS;
+import com.group04.repositories.SubjectRepositoryImp;
+import com.group04.repositories.UserRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Long.parseLong;
@@ -21,13 +24,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ntdun
+ * @author HP
  */
-@WebServlet(name = "DeletePackageServlet", urlPatterns = {"/DeletePackageServlet"})
-public class DeletePackageServlet extends HttpServlet {
-
-    public static final String SUCCESS = "viewprofile";
-    public static final String FAIL = "error";
+@WebServlet(name = "DeleteUserServlet", urlPatterns = {"/DeleteUserServlet"})
+public class DeleteUserServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,11 +45,12 @@ public class DeletePackageServlet extends HttpServlet {
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
         Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = mapping.get(SUCCESS);
+        String url = mapping.get(FAIL);
         try {
-            Long packageID = parseLong(request.getParameter("txtpackageID"));
-            PackageRepositoryImp urp = new PackageRepositoryImp();
-            urp.deletePackage(packageID);
+            Long userID = parseLong(request.getParameter("txtuserID"));
+            UserRepositoryImp urp = new UserRepositoryImp();
+            urp.deleteUser(userID);
+            url = mapping.get(SUCCESS);
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

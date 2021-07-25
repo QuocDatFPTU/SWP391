@@ -6,6 +6,7 @@
 package com.group04.repositories;
 
 import com.group04.entities.Packages;
+import java.util.List;
 
 /**
  *
@@ -15,4 +16,5 @@ public interface PackageRepository {
     public void addPackage(Packages packages);
     public void deletePackage(Long packageID);
     public void updatePackage(Packages packages);
+    Package getPackageByPackageId(Long packageId);
 }

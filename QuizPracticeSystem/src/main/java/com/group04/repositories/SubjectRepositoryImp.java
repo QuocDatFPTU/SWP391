@@ -53,8 +53,7 @@ public class SubjectRepositoryImp implements SubjectRepository {
     public Subject getSubjectById(Long subjectId) {
         Transaction transaction = null;
         Subject Subject = null;
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
+        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
             transaction = session.beginTransaction();
             Subject = (Subject) session.createQuery("FROM Subject S WHERE S.subjectID = :id").setParameter("id", subjectId)
                     .uniqueResult();
@@ -96,22 +95,10 @@ public class SubjectRepositoryImp implements SubjectRepository {
     }
 
     @Override
-    public void deleteSubject(Long id) {
-        Transaction transaction = null;
-        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            Subject subject = session.get(Subject.class, id);
-            if (subject != null) {
-                session.delete(subject);
-                System.out.println("subject is deleted");
-            }
-            transaction.commit();
-            session.close();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        }
+    public void deleteSubject(Long subjectID) {
+        Subject subject = this.getSubjectById(subjectID);
+        subject.setActive(false);
+        this.updateSubject(subject);
     }
 
     @Override
@@ -146,7 +133,7 @@ public class SubjectRepositoryImp implements SubjectRepository {
     }
 
     @Override
-    public List<String> getAllcategory() {
+    public List<String> getAllCategory() {
         Transaction transaction = null;
         List<String> category;
         category = null;
@@ -156,7 +143,7 @@ public class SubjectRepositoryImp implements SubjectRepository {
             category = session.createQuery("FROM Subject S WHERE S.category ")
                     .getResultList();
             if (category != null) {
-                return category ;
+                return category;
             }
             transaction.commit();
             session.close();
@@ -194,7 +181,7 @@ public class SubjectRepositoryImp implements SubjectRepository {
 
     @Override
     public List<Subject> getAllSubject() {
-Transaction transaction = null;
+        Transaction transaction = null;
         List<Subject> listOfSubject = null;
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -206,8 +193,7 @@ Transaction transaction = null;
                 transaction.rollback();
             }
         }
-        return listOfSubject;    }
+        return listOfSubject;
+    }
 
-    
-    
 }
