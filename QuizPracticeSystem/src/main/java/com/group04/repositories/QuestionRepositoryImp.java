@@ -22,11 +22,15 @@ public class QuestionRepositoryImp implements QuestionRepository {
     public List<Question> getQuestionByLessonId(Long questionId) {
         Transaction transaction = null;
         List<Question> Question = null;
+        Lesson lesson = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Question = session.createQuery("FROM Question WHERE lessonID = :id").setParameter("id", questionId)
-                    .getResultList();
+            //Lesson{
+            //Question
+            //}
+            lesson = <Lesson> session.createQuery("FROM Lesson WHERE lessonID = :id").setParameter("id", questionId)
+                    .getSingleResult();
             if (Question != null) {
                 return Question;
             }

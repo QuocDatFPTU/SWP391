@@ -98,7 +98,5 @@ public class Subject implements Serializable{
         this.description = subject.description;
         this.isActive = subject.isActive;
     }
-    
-    
-       
+           
 }

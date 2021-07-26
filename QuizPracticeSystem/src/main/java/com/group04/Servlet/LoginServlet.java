@@ -43,9 +43,9 @@ public class LoginServlet extends HttpServlet {
             if (isExisted) {
                 User currentuser = dao.login(username, password);
                 session.setAttribute("USER", currentuser);
-                url = mapping.get(SUCCESS);
+                url = mapping.get(SUCCESS);             
             }else{
-                session.setAttribute("mess", "username or password is incorrect !");
+                session.setAttribute("messlogin", "username or password is incorrect !");
             }
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

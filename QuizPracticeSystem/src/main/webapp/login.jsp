@@ -5,65 +5,92 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+  <title>Login Form</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/login.css">
+  <!-----------------------------------Roboto Font--------------------------------->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <!-------------------------------------------------------------------------------->
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
 
-    <title>Login Page</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="signin.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+  <!-------------------------------------------------------------------------------->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 </head>
-
-<body style="background-color: #f5f5f5"  class="text-center" data-new-gr-c-s-check-loaded="14.1016.0" data-gr-ext-installed="">
-<form action="LoginServlet" method="POST">
-    <img class="mb-4" src="https://lh3.googleusercontent.com/proxy/wIs8-k2bUkZpQxeZIoYXpuEChdqH9XUhCVdTu9XQ5ClPMntFj-fd5dDFAjSRTEaQx06ovHZgd-LH1rY8jsRttj49vva0p0Ob85_5AJ0T7kT_JpRuzdWkb0swYw" alt="" width="150" height="150">
-    <h1 class="h3 mb-3 font-weight-normal">Login</h1>
-    <p class="text-danger">${mess}</p>
-    <div  style="display: inline-block;" borde>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" name="username" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
-        <div >
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" name="password" id="inputPassword" class="form-control"S placeholder="Password" required="">
-        </div>
-        <div class="checkbox mb-0">
-            <label>
-                <input type="checkbox" name="remember-me" value="remember-me"> Remember me
-            </label>
+<body>
+  <div class="container">
+    <div class="row px-3 ">
+      <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
+        <div class="img-left d-none d-md-flex">
+          <img src="img/img.jpg" alt="sky view">
         </div>
 
-        <div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <div class="card-body ml-2">
+          <h4 class="title text-center mt-4">
+            Login to QPS
+          </h4>
+            <p class="text-danger ml-4">${messlogin}</p>
+            <form class="form-box px-3 pl-5" action="LoginServlet" method="POST">
+            <div class="form-input">
+              <span><i class="fa fa-envelope-o"></i></span>
+              <input type="text"  placeholder="User Name" name="username" id="inputEmail" tabindex="10" required>
+            </div>
+            <div class="form-input">
+              <span><i class="fa fa-key"></i></span>
+              <input type="password"  placeholder="Password" name="password" id="inputPassword" required>
+            </div>
+
+            <div class="mb-3">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="cb1" name="">
+                <label class="custom-control-label" for="cb1">Remember me</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <button type="submit" class="btn btn-block text-uppercase">
+                Login
+              </button>
+            </div>
+
+            <div class="text-right">
+              <a href="#" class="forget-link">
+                Forget Password?
+              </a>
+            </div>
+
+            <div class="text-center mb-3">
+              or login with
+            </div>
+
+            <div class="row login-google mb-3">              
+              <div class="col-8 ">
+                <a class="btn btn-outline-dark" href="#" role="button" style="text-transform:none">
+                  <img  alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+                   <p>Login with google</p> 
+                </a>
+              </div>
+             
+            </div>
+
+            <hr class="my-4">
+
+            <div class="text-center mb-2">
+              Don't have an account?             
+              <a href="registerPage">Register here</a>
+            </div>
+          </form>
         </div>
-        <div class="col-md-12" >
-            <p class="mt-4 mb-1 text-muted">Or with</p>
-            <a class="btn btn-lg btn-block " href="#"><img src="https://img.icons8.com/color/16/000000/google-logo.png">
-                Google
-            </a>
-        </div>
+      </div>
     </div>
-    <p class="mt-5 mb-3 text-muted">
-        Doesn't have an account yet? <a href="registerPage">Sign up now</a>
-    </p>
-    <p class="mt-5 mb-3 text-muted">©Tam</p>
-</form>
-
-
+  </div>
 </body>
 </html>
