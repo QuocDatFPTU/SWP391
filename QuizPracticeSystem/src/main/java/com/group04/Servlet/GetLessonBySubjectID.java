@@ -55,7 +55,7 @@ public class GetLessonBySubjectID extends HttpServlet {
 //            listlesson=new ArrayList<>(sub.getSubjectById(1L).getLesson());
 //            Subject subject =sub.getSubjectById(subjectID);
               LessonRepository lessonRepo = new LessonRepositoryImp();
-              lessonRepo.getLessonById(1L);
+              System.out.println(lessonRepo.getLessonById(1L).toString());
 //            String subjectname= subject.getSubjectName();
         }catch (Exception e){ 
             e.printStackTrace();

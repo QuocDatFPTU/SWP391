@@ -48,7 +48,7 @@ public class DeleteLessonServlet extends HttpServlet {
         try {
             //Long lessonID = Long.parseLong(request.getParameter("txtlessonID"));
             LessonRepositoryImp lrp = new LessonRepositoryImp();
-            lrp.deleteLesson(9L);
+            lrp.deleteLesson(8L);
             url = mapping.get(SUCCESS);
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

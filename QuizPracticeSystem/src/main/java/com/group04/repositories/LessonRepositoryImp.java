@@ -80,11 +80,13 @@ public class LessonRepositoryImp implements LessonRepository {
         Transaction transaction = null;
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
+            session.evict(lesson);
             session.merge(lesson);
             transaction.commit();
             session.close();
         } catch (Exception e) {
             if (transaction != null) {
+                e.printStackTrace();
                 transaction.rollback();
             }
         }
