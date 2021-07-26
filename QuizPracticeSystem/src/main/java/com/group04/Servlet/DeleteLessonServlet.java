@@ -46,9 +46,9 @@ public class DeleteLessonServlet extends HttpServlet {
         Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
         String url = mapping.get(FAIL);
         try {
-            Long lessonID = Long.parseLong(request.getParameter("txtlessonID"));
+            //Long lessonID = Long.parseLong(request.getParameter("txtlessonID"));
             LessonRepositoryImp lrp = new LessonRepositoryImp();
-            lrp.deleteLesson(lessonID);
+            lrp.deleteLesson(9L);
             url = mapping.get(SUCCESS);
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

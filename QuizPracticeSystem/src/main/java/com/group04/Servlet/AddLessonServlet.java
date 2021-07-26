@@ -5,13 +5,15 @@
  */
 package com.group04.Servlet;
 
-import static com.group04.Servlet.GetAllCategoryServlet.FAIL;
+import static com.group04.Servlet.AddDimensionServlet.FAIL;
+import static com.group04.Servlet.AddDimensionServlet.SUCCESS;
+import com.group04.entities.Lesson;
 import com.group04.entities.Subject;
+import com.group04.repositories.LessonRepositoryImp;
 import com.group04.repositories.SubjectRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import static java.lang.Integer.parseInt;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -24,10 +26,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ntdun
+ * @author HP
  */
-@WebServlet(name = "GetAllSubjectServlet", urlPatterns = {"/GetAllSubjectServlet"})
-public class GetAllSubjectServlet extends HttpServlet {
+@WebServlet(name = "AddLessonServlet", urlPatterns = {"/AddLessonServlet"})
+public class AddLessonServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,20 +44,35 @@ public class GetAllSubjectServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        ServletContext context = request.getServletContext();
         HttpSession session = request.getSession();
-        Map<String, String> listmapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = listmapping.get(FAIL);
+        ServletContext context = request.getServletContext();
+        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
+        System.out.println("Map:" + mapping);
+        String url = mapping.get(FAIL);
         try {
-            SubjectRepositoryImp urp = new SubjectRepositoryImp();
-            List<Subject> listsubject;
-            listsubject=urp.getAllSubject();
-                      for(int i=0;i<listsubject.size();i++){
-            System.out.println(listsubject.get(i));
-            } 
-            session.setAttribute("listsubject", listsubject);
-        }catch (Exception e){  
-        }finally{
+            String lessonName = request.getParameter("txtlessonName");
+            String topic = request.getParameter("txttopic");
+            int priority = parseInt(request.getParameter("txtpriority"));
+            String youtubeLink = request.getParameter("txtyoutubeLink");
+            String HTMLContent = request.getParameter("txtHTMLContent");
+            String type = request.getParameter("txttype");
+            // Long subjectID = Long.parseLong(request.getParameter("txtsubjectID"));
+            Lesson newLesson = new Lesson();
+            LessonRepositoryImp lrp = new LessonRepositoryImp();
+            SubjectRepositoryImp srp = new SubjectRepositoryImp();
+            newLesson.setLessonName(lessonName);
+            newLesson.setTopic(topic);
+            newLesson.setPriority(priority);
+            newLesson.setYoutubeLink(youtubeLink);
+            newLesson.setHTMLContent(HTMLContent);
+            newLesson.setType(type);
+            newLesson.setActive(true);
+            Subject subject = srp.getSubjectById(3L);
+            newLesson.setSubject(subject);
+            lrp.addLesson(newLesson);
+            url = mapping.get(SUCCESS);
+        } finally {
+            System.out.println(url);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

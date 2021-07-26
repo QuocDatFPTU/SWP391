@@ -5,15 +5,12 @@
  */
 package com.group04.Servlet;
 
-import static com.group04.Servlet.GetAllCategoryServlet.FAIL;
-import com.group04.entities.Subject;
-import com.group04.repositories.SubjectRepositoryImp;
+import com.group04.repositories.LessonRepository;
+import com.group04.repositories.LessonRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,10 +21,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ntdun
+ * @author HP
  */
-@WebServlet(name = "GetAllSubjectServlet", urlPatterns = {"/GetAllSubjectServlet"})
-public class GetAllSubjectServlet extends HttpServlet {
+@WebServlet(name = "GetLessonServlet", urlPatterns = {"/GetLessonServlet"})
+public class GetLessonServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,37 +39,29 @@ public class GetAllSubjectServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        ServletContext context = request.getServletContext();
         HttpSession session = request.getSession();
-        Map<String, String> listmapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = listmapping.get(FAIL);
-        try {
-            SubjectRepositoryImp urp = new SubjectRepositoryImp();
-            List<Subject> listsubject;
-            listsubject=urp.getAllSubject();
-                      for(int i=0;i<listsubject.size();i++){
-            System.out.println(listsubject.get(i));
-            } 
-            session.setAttribute("listsubject", listsubject);
-        }catch (Exception e){  
-        }finally{
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-            out.close();
-        }
+        ServletContext context = request.getServletContext();
+        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
+
+        LessonRepository lesRepo = new LessonRepositoryImp();
+        out.write(lesRepo.getLessonById(3L).toString());
+        out.close();
+
+                
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+/**
+ * Handles the HTTP <code>GET</code> method.
+ *
+ * @param request servlet request
+ * @param response servlet response
+ * @throws ServletException if a servlet-specific error occurs
+ * @throws IOException if an I/O error occurs
+ */
+@Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -86,7 +75,7 @@ public class GetAllSubjectServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -97,7 +86,7 @@ public class GetAllSubjectServlet extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

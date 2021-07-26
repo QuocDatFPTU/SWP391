@@ -65,17 +65,17 @@ public class Lesson implements Serializable {
     private boolean isActive;
     
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinTable(
             name = "Exams_Lessons",
             joinColumns = {
-                @JoinColumn(name = "lessonID")},
+                @JoinColumn(name = "lesson_id")},
             inverseJoinColumns = {
-                @JoinColumn(name = "examInfoID")}
+                @JoinColumn(name = "examInfo_id")}
     )
     private Set<ExamInfo> examInfos = new HashSet<>();
     
-    @OneToMany(mappedBy = "lesson", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "lesson", fetch = FetchType.LAZY)
     private Set<Question> Question = new HashSet<>();
     
     @ManyToOne

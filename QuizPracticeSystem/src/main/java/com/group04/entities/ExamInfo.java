@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -69,7 +70,7 @@ public class ExamInfo implements Serializable {
     @OneToOne(mappedBy = "examInfo", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn 
     private ExamSetting examSetting;
-    
+       
     @OneToOne
     @JoinColumn(name = "examDetailID")
     private ExamDetail examDetail;

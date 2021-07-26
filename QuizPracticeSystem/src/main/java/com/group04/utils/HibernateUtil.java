@@ -11,7 +11,6 @@ import com.group04.entities.Dimension;
 import com.group04.entities.ExamDetail;
 import com.group04.entities.ExamInfo;
 import com.group04.entities.ExamSetting;
-import com.group04.entities.Exams_Lessons;
 import com.group04.entities.Lesson;
 import com.group04.entities.Option;
 import com.group04.entities.OptionExam;
@@ -71,7 +70,6 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(QuestionExam.class);
                 configuration.addAnnotatedClass(OptionExam.class);
                 configuration.addAnnotatedClass(ExamSetting.class);
-                configuration.addAnnotatedClass(Exams_Lessons.class);
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();
                 System.out.println("Hibernate Java Config serviceRegistry created");

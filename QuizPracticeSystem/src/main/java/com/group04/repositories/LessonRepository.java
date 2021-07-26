@@ -17,7 +17,7 @@ public interface LessonRepository {
 
     List<Lesson> getLessonBySubjectId(Long subjectId);
 
-    public Lesson getLessonById(Long id);
+    public Lesson getLessonById(Long lessonID);
 
     public void deleteLesson(Long lessonID);
 

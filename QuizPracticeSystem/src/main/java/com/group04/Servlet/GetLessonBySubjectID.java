@@ -10,6 +10,7 @@ import com.group04.repositories.LessonRepositoryImp;
 import com.group04.repositories.SubjectRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
@@ -52,7 +53,7 @@ public class GetLessonBySubjectID extends HttpServlet {
             SubjectRepositoryImp sub =new SubjectRepositoryImp();
             List<Lesson> listlesson;
             
-            listlesson=sub.getLessonBySubjectId(1L);           
+            listlesson=new ArrayList<>(sub.getSubjectById(1L).getLesson());
 //            Subject subject =sub.getSubjectById(subjectID);
             System.out.println(listlesson);
 //            String subjectname= subject.getSubjectName();
