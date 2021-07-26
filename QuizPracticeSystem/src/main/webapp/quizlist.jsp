@@ -246,10 +246,11 @@
                     <div class="modal-body">
                         <form action="#">
                             <h2>Practice Details</h2>
+                            
                             <div class="form-group">
 
                                 <select class="custom-select my-1 mr-sm-2" id="subject-name-preference">
-                                    <option selected>Choose...</option>
+                                    <option selected>Subject Name</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
                                     <option value="3">Three</option>

@@ -23,11 +23,11 @@ errorPage=error.html
 loginPage=login.jsp
 practiceDetail=CreatePracticeServlet
 quizListPage=quizlist.jsp
-quizPage=QuizPage.jsp
+quizPage=quizPage.jsp
 practiceList=PracticeListServlet
 homepage=GetAllCourseServlet
 viewdetailcourse=subjectlist.jsp
 subjectListDetail=GetSubjectPagingServlet
 subjectlesson=GetLessonBySubjectID
-
-
+loadQuestion=LoadQuestionServlet
+getRandomQuestion=GetRandomQuestionServlet

@@ -37,7 +37,7 @@ public class LessonRepositoryImp implements LessonRepository {
             if (transaction != null) {
                 e.printStackTrace();
                 System.err.println(e.getMessage());
-                System.out.println("Loop Function");
+                System.out.println("Loop Function get lesson");
                 transaction.rollback();
             }
         }

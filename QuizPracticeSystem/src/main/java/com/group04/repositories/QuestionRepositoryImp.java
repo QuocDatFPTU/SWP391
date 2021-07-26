@@ -36,7 +36,7 @@ public class QuestionRepositoryImp implements QuestionRepository {
             if (transaction != null) {
                 e.printStackTrace();
                 System.out.println(e.getMessage());
-                System.out.println("Loop Function");
+                System.out.println("Loop Function in get Question");
                 transaction.rollback();
             }
         }

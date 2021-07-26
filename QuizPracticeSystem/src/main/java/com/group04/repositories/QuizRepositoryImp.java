@@ -50,6 +50,7 @@ public class QuizRepositoryImp implements QuizRepository {
     @Override
     public List<Question> getQuestionsBySubject(Long subjectID) {
         List<Lesson> lessonList = getLessonBySubject(subjectID);
+        System.out.println("Done get Lesson by id");
         List<Question> questions = new ArrayList<>();
         QuestionRepository questionRepo = QuestionRepository.createInstance();
         for (Lesson lesson : lessonList) {          
@@ -63,6 +64,7 @@ public class QuizRepositoryImp implements QuizRepository {
     @Override
     public List<Question> getRandomQuestionsBySubject(Long subjectID, int n) {
         List<Question> questions = getQuestionsBySubject(subjectID);
+        System.out.println("Done");
         Collections.shuffle(questions);
         for(Question quest : questions){
             System.out.println(quest.toString());

@@ -53,14 +53,14 @@ public class Question implements Serializable{
     @JoinColumn(name = "lessonID")
     private Lesson lesson;
 
-   @OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
-    private Set<Option> Option = new HashSet<>();
-   
+   @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
+    private Set<Option> Option;
    public Question(Question question) {
         this.questionID = question.questionID;
         this.status = question.status;
         this.content = question.content;
         this.level = question.level;
         this.explanation = question.explanation;
+         Option =new HashSet<>(); 
     }
 }

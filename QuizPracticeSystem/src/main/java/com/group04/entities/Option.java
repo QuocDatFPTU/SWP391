@@ -6,6 +6,7 @@
 package com.group04.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -51,6 +52,35 @@ public class Option implements Serializable {
         this.optionID = option.optionID;
         this.content = option.content;
         this.isRight = option.isRight;
-
     }
+    
+    public Option(Long optionID) {
+        this.optionID = optionID;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Option other = (Option) obj;
+        if (!Objects.equals(this.optionID, other.optionID)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }
