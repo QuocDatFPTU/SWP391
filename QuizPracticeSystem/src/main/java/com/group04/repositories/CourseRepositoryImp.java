@@ -41,8 +41,7 @@ public class CourseRepositoryImp implements CourseRepository {
     @Override
     public void addCourse(Course course) {
         Transaction transaction = null;
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
+        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
             transaction = session.beginTransaction();
             session.save(course);
             transaction.commit();
@@ -64,6 +63,7 @@ public class CourseRepositoryImp implements CourseRepository {
             session.close();
         } catch (Exception e) {
             if (transaction != null) {
+                e.printStackTrace();
                 transaction.rollback();
             }
         }
@@ -71,53 +71,28 @@ public class CourseRepositoryImp implements CourseRepository {
 
     @Override
     public void deleteCourse(Long courseID) {
-        Transaction transaction = null;
-        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            Course course = session.get(Course.class, courseID);
-            if (course != null) {
-                session.delete(course);
-                System.out.println("course is deleted");
-            }
-            transaction.commit();
-            session.close();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-
-        }
+        Course course = this.getCourse(courseID);
+        course.setActive(false);
+        this.updateCourse(course);
     }
 
     @Override
-    public Long getRandomID() {
-        ArrayList<Long> listID = new ArrayList<>();
-        Random rand = new Random();
-        Long num;
-        do {
-            num = Long.valueOf(rand.nextInt(9000000) + 1000000);
-        } while (!listID.contains(num));
-        listID.add(num);
-        return num;
-    }
-
-    @Override
-    public Course getCourse(Long id) {
+    public Course getCourse(Long courseID) {
         Transaction transaction = null;
         Course course = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            course = (Course) session.createQuery("FROM Course C WHERE C.courseID = :id").setParameter("id", id)
-                    .uniqueResult();
+            course = (Course) session.createQuery("FROM Course C WHERE C.courseID = :courseID").setParameter("courseID", courseID)
+                    .getSingleResult();
             if (course != null) {
                 return course;
             }
             transaction.commit();
-            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 System.out.println("Loop Function");
+                e.printStackTrace();
                 transaction.rollback();
             }
         }

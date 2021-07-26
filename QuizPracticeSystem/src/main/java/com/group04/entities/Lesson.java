@@ -49,8 +49,8 @@ public class Lesson implements Serializable {
     @Column(name = "topic")
     private String topic;
 
-    @Column(name = "order")
-    private String order;
+    @Column(name = "priority")
+    private int priority;
 
     @Column(name = "youtubeLink")
     private String youtubeLink;
@@ -86,7 +86,7 @@ public class Lesson implements Serializable {
         this.lessonID = lesson.lessonID;
         this.lessonName = lesson.lessonName;
         this.topic = lesson.topic;
-        this.order = lesson.order;
+        this.priority = lesson.priority;
         this.youtubeLink = lesson.youtubeLink;
         this.HTMLContent = lesson.HTMLContent;
         this.type = lesson.type;

@@ -18,10 +18,10 @@ public interface SubjectRepository {
    List<Subject> getAllSubjectPaging(Long courseID, int position, int pageSize);
    Subject getSubjectById(Long subjectId);
    List<Subject> getSubjectByCourseId(Long courseId);
-   public void deleteSubject(Long id);
+   public void deleteSubject(Long subjectID);
    public void updateSubject(Subject subject);
    public void addSubject(Subject subject);
-   List<String> getAllcategory();
+   List<String> getAllCategory();
    Subject getSubjectByName(String subjectName);
    List<Subject> getAllSubject();
 }

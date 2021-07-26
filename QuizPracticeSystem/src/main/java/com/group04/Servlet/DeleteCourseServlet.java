@@ -5,7 +5,9 @@
  */
 package com.group04.Servlet;
 
-import com.group04.repositories.PackageRepositoryImp;
+import static com.group04.Servlet.DeleteDimension.FAIL;
+import static com.group04.Servlet.DeleteDimension.SUCCESS;
+import com.group04.repositories.CourseRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Long.parseLong;
@@ -21,14 +23,12 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ntdun
+ * @author HP
  */
-@WebServlet(name = "DeletePackageServlet", urlPatterns = {"/DeletePackageServlet"})
-public class DeletePackageServlet extends HttpServlet {
-
+@WebServlet(name = "DeleteCourseServlet", urlPatterns = {"/DeleteCourseServlet"})
+public class DeleteCourseServlet extends HttpServlet {
     public static final String SUCCESS = "viewprofile";
     public static final String FAIL = "error";
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,13 +44,14 @@ public class DeletePackageServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
-        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = mapping.get(SUCCESS);
-        try {
-            Long packageID = parseLong(request.getParameter("txtpackageID"));
-            PackageRepositoryImp urp = new PackageRepositoryImp();
-            urp.deletePackage(packageID);
-        } finally {
+        Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
+        String url = mapping.get(FAIL);
+        try{
+            Long courseID = parseLong(request.getParameter("txtcourseID"));
+            CourseRepositoryImp crp = new CourseRepositoryImp();
+            crp.deleteCourse(courseID);
+            url = mapping.get(SUCCESS);
+        }finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

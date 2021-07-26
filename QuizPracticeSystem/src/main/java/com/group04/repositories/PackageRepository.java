@@ -17,4 +17,5 @@ public interface PackageRepository {
     public void deletePackage(Long packageID);
     public void updatePackage(Packages packages);
     List<Package> getAllPackageBySubjectID(Long subjectID);
+    Package getPackageByPackageId(Long packageId);
 }

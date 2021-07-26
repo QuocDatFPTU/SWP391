@@ -19,8 +19,8 @@ public class PackageRepositoryImp implements PackageRepository {
 
     @Override
     public void addPackage(Packages packages) {
-Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        Transaction transaction = null;
+        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             session.save(packages);
             transaction.commit();
@@ -29,12 +29,12 @@ Transaction transaction = null;
             if (transaction != null) {
                 transaction.rollback();
             }
-        }      
+        }
     }
 
     @Override
     public void deletePackage(Long packageID) {
-Transaction transaction = null;
+        Transaction transaction = null;
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             Packages packages = session.get(Packages.class, packageID);
@@ -49,11 +49,12 @@ Transaction transaction = null;
                 transaction.rollback();
             }
 
-        }    }
+        }
+    }
 
     @Override
     public void updatePackage(Packages packages) {
-Transaction transaction = null;
+        Transaction transaction = null;
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             session.merge(packages);
@@ -64,7 +65,22 @@ Transaction transaction = null;
                 transaction.rollback();
             }
         }
-    }    
+    }
+
+    @Override
+    public Package getPackageByPackageId(Long packageId) {
+        Transaction transaction = null;
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            transaction = session.beginTransaction();
+            Package pkg = (Package) session.createQuery("FROM Package P WHERE P.packageId = :packageId").setParameter("packageId",packageId)
+                    .getSingleResult();
+            transaction.commit();
+            return pkg;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     @Override
     public List<Package> getAllPackageBySubjectID(Long subjectID) {

@@ -22,6 +22,7 @@ public interface UserRepository {
     Role getRole(String id);
     void updateUser(User user);
     void deleteUser(Long id);
+    User getUserById(Long userID);
     void updatePassword(String password, String newpassword);
     void SendMail(String email);
     void resetPassword(String usermail, String newpassword);
