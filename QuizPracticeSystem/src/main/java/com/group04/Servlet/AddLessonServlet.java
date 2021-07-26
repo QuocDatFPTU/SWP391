@@ -56,7 +56,7 @@ public class AddLessonServlet extends HttpServlet {
             String youtubeLink = request.getParameter("txtyoutubeLink");
             String HTMLContent = request.getParameter("txtHTMLContent");
             String type = request.getParameter("txttype");
-            // Long subjectID = Long.parseLong(request.getParameter("txtsubjectID"));
+            Long subjectID = Long.parseLong(request.getParameter("txtsubjectID"));
             Lesson newLesson = new Lesson();
             LessonRepositoryImp lrp = new LessonRepositoryImp();
             SubjectRepositoryImp srp = new SubjectRepositoryImp();
@@ -67,7 +67,7 @@ public class AddLessonServlet extends HttpServlet {
             newLesson.setHTMLContent(HTMLContent);
             newLesson.setType(type);
             newLesson.setActive(true);
-            Subject subject = srp.getSubjectById(3L);
+            Subject subject = srp.getSubjectById(subjectID);
             newLesson.setSubject(subject);
             lrp.addLesson(newLesson);
             url = mapping.get(SUCCESS);

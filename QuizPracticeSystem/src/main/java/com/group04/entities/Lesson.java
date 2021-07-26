@@ -69,9 +69,9 @@ public class Lesson implements Serializable {
     @JoinTable(
             name = "Exams_Lessons",
             joinColumns = {
-                @JoinColumn(name = "lesson_id")},
+                @JoinColumn(name = "lessonID")},
             inverseJoinColumns = {
-                @JoinColumn(name = "examInfo_id")}
+                @JoinColumn(name = "examInfoID")}
     )
     private Set<ExamInfo> examInfos = new HashSet<>();
     

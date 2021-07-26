@@ -6,6 +6,7 @@
 package com.group04.Servlet;
 
 import com.group04.entities.Lesson;
+import com.group04.repositories.LessonRepository;
 import com.group04.repositories.LessonRepositoryImp;
 import com.group04.repositories.SubjectRepositoryImp;
 import java.io.IOException;
@@ -49,16 +50,13 @@ public class GetLessonBySubjectID extends HttpServlet {
         String url = listmapping.get(FAIL);
         try {
 //            Long subjectID =parseLong(request.getParameter("subjectID"));
-            LessonRepositoryImp urp= new LessonRepositoryImp();
-            SubjectRepositoryImp sub =new SubjectRepositoryImp();
-            List<Lesson> listlesson;
-            
-            listlesson=new ArrayList<>(sub.getSubjectById(1L).getLesson());
+//            SubjectRepositoryImp sub =new SubjectRepositoryImp();
+//            List<Lesson> listlesson;            
+//            listlesson=new ArrayList<>(sub.getSubjectById(1L).getLesson());
 //            Subject subject =sub.getSubjectById(subjectID);
-            System.out.println(listlesson);
+              LessonRepository lessonRepo = new LessonRepositoryImp();
+              lessonRepo.getLessonById(1L);
 //            String subjectname= subject.getSubjectName();
-//            session.setAttribute("listLesson", listlesson);
-//            session.setAttribute("subjectname", subjectname);
         }catch (Exception e){ 
             e.printStackTrace();
         }finally{
