@@ -75,6 +75,9 @@ public class Subject implements Serializable{
     @OneToMany(mappedBy="subject", fetch = FetchType.LAZY)
     private Set<Dimension> dimension = new HashSet<>();
     
+    @OneToMany(mappedBy = "subject")
+    private Set<Lesson> lesson ;
+    
     @ManyToOne
     @JoinColumn(name="courseID")
     private Course course;

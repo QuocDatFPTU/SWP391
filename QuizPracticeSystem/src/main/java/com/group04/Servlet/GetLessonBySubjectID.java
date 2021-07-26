@@ -5,7 +5,8 @@
  */
 package com.group04.Servlet;
 
-import com.group04.entities.Subject;
+import com.group04.entities.Lesson;
+import com.group04.repositories.LessonRepositoryImp;
 import com.group04.repositories.SubjectRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,10 +25,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author ntdun
  */
-@WebServlet(name = "GetSubjectPagingServlet", urlPatterns = {"/GetSubjectPagingServlet"})
-public class GetSubjectPagingServlet extends HttpServlet {
-    public static final String SUCCESS = "viewdetailcourse";
-    public static final String FAIL = "errorPage";
+@WebServlet(name = "GetLessonBySubjectID", urlPatterns = {"/GetLessonBySubjectID"})
+public class GetLessonBySubjectID extends HttpServlet {
+    public static final String SUCCESS = "subjectlesson";
+    public static final String FAIL = "viewdetailcourse";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,22 +41,26 @@ public class GetSubjectPagingServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();       
-        HttpSession session = request.getSession();
+        PrintWriter out = response.getWriter();
         ServletContext context = request.getServletContext();
-        Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
-        String url = mapping.get(FAIL);
-        SubjectRepositoryImp subRepo=new SubjectRepositoryImp();        
+        HttpSession session = request.getSession();
+        Map<String, String> listmapping = (Map<String, String>) context.getAttribute("MAPPING");
+        String url = listmapping.get(FAIL);
         try {
+//            Long subjectID =parseLong(request.getParameter("subjectID"));
+            LessonRepositoryImp urp= new LessonRepositoryImp();
+            SubjectRepositoryImp sub =new SubjectRepositoryImp();
+            List<Lesson> listlesson;
             
-            Long courseID = Long.parseLong(request.getParameter("CourseID"));
-            List<Subject> subject=subRepo.getAllSubjectPaging(courseID, 0, 5);
-            System.out.println(subject);
-            session.setAttribute("listSubjectPaging", subject);
-            url = mapping.get(SUCCESS);
-        }catch (Exception e){
-            System.out.println("Error: "+e);
-        } finally {
+            listlesson=sub.getLessonBySubjectId(1L);           
+//            Subject subject =sub.getSubjectById(subjectID);
+            System.out.println(listlesson);
+//            String subjectname= subject.getSubjectName();
+//            session.setAttribute("listLesson", listlesson);
+//            session.setAttribute("subjectname", subjectname);
+        }catch (Exception e){ 
+            e.printStackTrace();
+        }finally{
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

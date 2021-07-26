@@ -6,6 +6,7 @@
 package com.group04.repositories;
 
 import com.group04.entities.Dimension;
+import com.group04.entities.Lesson;
 import com.group04.entities.Subject;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,4 +25,6 @@ public interface SubjectRepository {
    List<String> getAllCategory();
    Subject getSubjectByName(String subjectName);
    List<Subject> getAllSubject();
+   Subject getSubjectNameBySubjectID(String subjectID);
+   List<Lesson> getLessonBySubjectId(Long subjectId);
 }
