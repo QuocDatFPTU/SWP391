@@ -21,7 +21,7 @@ public class QuestionRepositoryImp implements QuestionRepository {
     @Override
     public List<Question> getQuestionByLessonId(Long questionId) {
         Transaction transaction = null;
-        List<Question> Question = null;
+        List<Question> questions = null;
         Lesson lesson = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -29,10 +29,11 @@ public class QuestionRepositoryImp implements QuestionRepository {
             //Lesson{
             //Question
             //}
-            lesson = <Lesson> session.createQuery("FROM Lesson WHERE lessonID = :id").setParameter("id", questionId)
+            lesson = session.createQuery("FROM Lesson WHERE lessonID = :id",Lesson.class).setParameter("id", questionId)
                     .getSingleResult();
-            if (Question != null) {
-                return Question;
+            questions = new ArrayList<>(lesson.getQuestion());
+            if (question != null) {
+                return question;
             }
             transaction.commit();
             session.close();
