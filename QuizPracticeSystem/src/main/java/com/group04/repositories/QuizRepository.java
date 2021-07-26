@@ -5,8 +5,10 @@
  */
 package com.group04.repositories;
 
+import com.group04.entities.ExamInfo;
 import com.group04.entities.Lesson;
 import com.group04.entities.Question;
+import com.group04.entities.QuestionExam;
 import java.util.List;
 
 /**
@@ -18,6 +20,7 @@ public interface QuizRepository {
     List<Lesson> getLessonBySubject(Long subjectID);
     List<Question> getQuestionsBySubject(Long subjectID);
     List<Question> getRandomQuestionsBySubject(Long subjectID,int n);
+    List<ExamInfo> getAllExam();
     public static QuizRepository createInstance(){
         return new QuizRepositoryImp();
     }

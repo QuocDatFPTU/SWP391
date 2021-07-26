@@ -4,6 +4,7 @@
     Author     : HP
 --%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 
@@ -24,7 +25,7 @@
         <title>Quiz list</title>
     </head>
     <body>
-        
+
 
         <h2>Practice list</h2>
         <div class="container">
@@ -57,158 +58,41 @@
                         </tr>                    
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <div class="subjectname">
-                                    Subject Name 
-                                </div>
-                                <div class="quizname">
-                                    Quiz name
-                                </div>                          
-                            </td>
-                            <td ><p>10/09/2021</p></td>
-                            <td >
-                                <div class="content1">
-                                    <p>xx correct</p>
-                                    <p>yy questions</p>
-                                </div>
-                            </td>
-                            <td ><p> 50% correct</p></td>
-                            <td > 
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                    View details
-                                </button>
-                            </td>                       
-                        </tr>
+                        <c:forEach  items="${sessionScope.EXAM_LIST}" var="item">
+                            <tr>
+                                <td>
+                                    <div class="subjectname">
+                                        ${item.subject.subjectName}
+                                    </div>
+                                    <div class="quizname">
+                                        ${item.examName}
+                                    </div>                          
+                                </td>
+                                <td ><p class="timer">${item.examDetail.timeStart}</p>
+                                </td>
+                                <td >
+                                    <div class="content1">                                   
+                                        <p>${item.numberOfQuestion}</p>
+                                    </div>
+                                </td>
+                                <td ><p> ${item.passRate} correct</p></td>
+                                <td > 
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                        View details
+                                    </button>
+                                </td>                       
+                            </tr>
 
-                        <!--Subarea-->
-                        <tr>
-                            <td colspan="5" class="subarea">
-                                <p>Test type</p> <p>Duration - hh:mm:ss</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="subjectname">
-                                    Subject Name 
-                                </div>
-                                <div class="quizname">
-                                    Quiz name
-                                </div>                          
-                            </td>
-                            <td ><p>10/09/2021</p></td>
-                            <td >
-                                <div class="content1">
-                                    <p>xx correct</p>
-                                    <p>yy questions</p>
-                                </div>
-                            </td>
-                            <td ><p> 50% correct</p></td>
-                            <td > 
-                                <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModal">
-                                    View details
-                                </button>
-                            </td>       
-                        </tr>
+                            <!--Subarea-->
+                            <tr>
+                                <td colspan="5" class="subarea">
+                                    <p>${item.examType}</p> <p>Duration - ${item.duration}</p>
+                                </td>
+                            </tr>
 
-                        <!--Subarea-->
-                        <tr>
-                            <td colspan="5" class="subarea">
-                                <p>Test type</p> <p>Duration - hh:mm:ss</p>
-                            </td>
-                        </tr>
+                        </c:forEach>
 
-                        <tr>
-                            <td>
-                                <div class="subjectname">
-                                    Subject Name 
-                                </div>
-                                <div class="quizname">
-                                    Quiz name
-                                </div>                          
-                            </td>
-                            <td ><p>10/09/2021</p></td>
-                            <td >
-                                <div class="content1">
-                                    <p>xx correct</p>
-                                    <p>yy questions</p>
-                                </div>
-                            </td>
-                            <td ><p> 50% correct</p></td>
-                            <td > 
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                    View details
-                                </button>
-                            </td>            
-                        </tr>
 
-                        <!--Subarea-->
-                        <tr>
-                            <td colspan="5" class="subarea">
-                                <p>Test type</p> <p>Duration - hh:mm:ss</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="subjectname">
-                                    Subject Name 
-                                </div>
-                                <div class="quizname">
-                                    Quiz name
-                                </div>                          
-                            </td>
-                            <td ><p>10/09/2021</p></td>
-                            <td >
-                                <div class="content1">
-                                    <p>xx correct</p>
-                                    <p>yy questions</p>
-                                </div>
-                            </td>
-                            <td ><p> 50% correct</p></td>
-                            <td > 
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                    View details
-                                </button>
-                            </td>                    
-                        </tr>
-
-                        <!--Subarea-->
-                        <tr>
-                            <td colspan="5" class="subarea">
-                                <p>Test type</p> <p>Duration - hh:mm:ss</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="subjectname">
-                                    Subject Name 
-                                </div>
-                                <div class="quizname">
-                                    Quiz name
-                                </div>                          
-                            </td>
-                            <td ><p>10/09/2021</p></td>
-                            <td >
-                                <div class="content1">
-                                    <p>xx correct</p>
-                                    <p>yy questions</p>
-                                </div>
-                            </td>
-                            <td ><p> 50% correct</p></td>
-                            <td > 
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                    View details
-                                </button>
-                            </td>                    
-                        </tr>
-                        <!--Subarea-->
-                        <tr>
-                            <td colspan="5" class="subarea">
-                                <p>Test type</p> <p>Duration - hh:mm:ss</p>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -246,41 +130,36 @@
                     <div class="modal-body">
                         <form action="#">
                             <h2>Practice Details</h2>
-                            
+
                             <div class="form-group">
 
-                                <select class="custom-select my-1 mr-sm-2" id="subject-name-preference">
+                                <select class="custom-select my-1 mr-sm-2 subject-sel" id="subject-name-preference">
                                     <option selected>Subject Name</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <c:forEach items="${sessionScope.SUBJECT_LIST}" var="subject">
+                                        <option value="${subject.subjectID}">${subject.subjectName}</option>                                     
+                                    </c:forEach>
+
                                 </select>
                             </div>
 
-                            
+                            <div class='hidden-part' > 
                                 <div class="form-group">
                                     <label for="number-questions">Number of practicing questions</label>
                                     <input type="text" class="form-control" id="number-questions">   
                                 </div>
-                                <div class="form-group">
-                                    <label class="my-1 mr-2" for="question-by-topic-dimension">Question group(choose one or all topic/dimension)</label>
-                                    <select class="custom-select my-1 mr-sm-2" id="question-by-topic-dimension">
-                                        <option selected>Choose...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
+
                                 <div class="form-group">
                                     <label class="my-1 mr-2" for="question-by-all-dimension">Question are selected by topic(s) or a specific dimension?</label>
                                     <select class="custom-select my-1 mr-sm-2" id="question-by-all-dimension">
                                         <option selected>Choose...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <c:if test="${not empty sessionScope.DIMENSION_LIST} ">
+                                            <c:forEach items="sessionScope.DIMENSION_LIST" var="dimension">
+                                                <option value="${dimension.dimensionID}">${dimension.dimensionName}</option>
+                                            </c:forEach>
+                                        </c:if>
                                     </select>
                                 </div>
-                            
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -299,6 +178,13 @@
         <script>
             $('#myModal').on('shown.bs.modal', function () {
                 $('#myInput').trigger('focus')
+            })
+            
+
+            document.querySelector('select.subject-sel').addEventListener('change', () => {
+                var currentVal = $('#question-by-all-dimension :selected').text();
+                window.location.href = 'http://localhost:8080/PracticeListServlet?subjectID=' + currentVal;
+
             })
         </script>
     </body>

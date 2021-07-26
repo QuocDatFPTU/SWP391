@@ -7,3 +7,4 @@ QuizPracticeSystem/nb-configuration.xml
 QuizPracticeSystem/nb-configuration.xml
 QuizPracticeSystem/pom.xml
 QuizPracticeSystem/pom.xml
+QuizPracticeSystem/src/main/java/com/group04/utils/HibernateUtils.java

@@ -42,6 +42,9 @@ public class ExamInfo implements Serializable {
     @Column(name = "examInfoID", nullable = false, updatable = false)
     private Long examInfoID;
     
+    @Column(name = "examName")
+    private String examName;
+    
     @Column(name = "numberOfQuestion")
     private int numberOfQuestion;
     
@@ -74,6 +77,12 @@ public class ExamInfo implements Serializable {
     @OneToOne
     @JoinColumn(name = "examDetailID")
     private ExamDetail examDetail;
+    
+    @ManyToOne
+    @JoinColumn(name= "subjectID")
+    private Subject subject;
+    
+    
     
     public ExamInfo(ExamInfo examInfoID) {
         this.examInfoID = examInfoID.examInfoID;

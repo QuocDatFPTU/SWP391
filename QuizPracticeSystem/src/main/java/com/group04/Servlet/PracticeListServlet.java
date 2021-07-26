@@ -5,13 +5,27 @@
  */
 package com.group04.Servlet;
 
+import com.group04.entities.Dimension;
+import com.group04.entities.ExamInfo;
+import com.group04.entities.Subject;
+import com.group04.repositories.DimensionRepository;
+import com.group04.repositories.DimensionRepositoryImp;
+import com.group04.repositories.QuizRepository;
+import com.group04.repositories.SubjectRepository;
+import com.group04.repositories.SubjectRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -19,13 +33,37 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "PracticeListServlet", urlPatterns = {"/PracticeListServlet"})
 public class PracticeListServlet extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-      //Step 1: Get Subject Líst trong database lên 
-      //2: Lưu vào request scope 
-      //3: Forward qua trang quizlist.jsp 
-      
+        //Step 1: Get Subject Líst trong database lên 
+        //2: Lưu vào request scope 
+        //3: Forward qua trang quizlist.jsp 
+        ServletContext context = request.getServletContext();
+        HttpSession session = request.getSession();
+        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
+        QuizRepository quizRepo = QuizRepository.createInstance();
+        SubjectRepository subRepo = new SubjectRepositoryImp();
+        DimensionRepository dimRepo = new DimensionRepositoryImp();
+        List<ExamInfo> exams = new ArrayList<>(quizRepo.getAllExam());
+        List<Subject> subjects = new ArrayList<>(subRepo.getAllSubject());
+        List<Dimension> dimensions = null;
+        try {
+       
+            Long subjectParam = Long.parseLong(request.getParameter("subjectID"));
+            dimensions = dimRepo.getDimensionBySubjectID(subjectParam);
+        } catch (Exception e) {
+            e.printStackTrace();
+            dimensions = new ArrayList<>();
+        }
+
+        session.setAttribute("EXAM_LIST", exams);
+        session.setAttribute("SUBJECT_LIST", subjects);
+        session.setAttribute("DIMENSION_LIST", dimensions);
+        RequestDispatcher rd = request.getRequestDispatcher(mapping.get("quizListPage"));
+        rd.forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

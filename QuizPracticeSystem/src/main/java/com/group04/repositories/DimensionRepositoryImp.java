@@ -6,7 +6,10 @@
 package com.group04.repositories;
 
 import com.group04.entities.Dimension;
+import com.group04.entities.Subject;
 import com.group04.utils.HibernateUtil;
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -65,6 +68,14 @@ public class DimensionRepositoryImp implements DimensionRepository {
                 transaction.rollback();
             }
         }
+    }
+    
+    @Override
+    public List<Dimension> getDimensionBySubjectID(Long subjectID){
+        SubjectRepository subRepo = new SubjectRepositoryImp();
+        Subject subject = subRepo.getSubjectById(subjectID);
+        List<Dimension> dimensions = new ArrayList<>(subject.getDimension());
+        return dimensions;
     }
 
 }

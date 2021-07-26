@@ -8,6 +8,7 @@ package com.group04.repositories;
 import com.group04.entities.Lesson;
 import com.group04.entities.Question;
 import com.group04.utils.HibernateUtil;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -19,7 +20,7 @@ import org.hibernate.Transaction;
 public class QuestionRepositoryImp implements QuestionRepository {
 
     @Override
-    public List<Question> getQuestionByLessonId(Long questionId) {
+    public List<Question> getQuestionByLessonId(Long lessonId) {
         Transaction transaction = null;
         List<Question> questions = null;
         Lesson lesson = null;
@@ -29,11 +30,11 @@ public class QuestionRepositoryImp implements QuestionRepository {
             //Lesson{
             //Question
             //}
-            lesson = session.createQuery("FROM Lesson WHERE lessonID = :id",Lesson.class).setParameter("id", questionId)
+            lesson = session.createQuery("FROM Lesson WHERE lessonID = :id",Lesson.class).setParameter("id", lessonId)
                     .getSingleResult();
             questions = new ArrayList<>(lesson.getQuestion());
-            if (question != null) {
-                return question;
+            if (questions != null) {
+                return questions;
             }
             transaction.commit();
             session.close();

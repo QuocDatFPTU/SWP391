@@ -6,8 +6,10 @@
 package com.group04.repositories;
 
 import com.group04.entities.Course;
+import com.group04.entities.ExamInfo;
 import com.group04.entities.Lesson;
 import com.group04.entities.Question;
+import com.group04.entities.QuestionExam;
 import com.group04.utils.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,25 +53,54 @@ public class QuizRepositoryImp implements QuizRepository {
     public List<Question> getQuestionsBySubject(Long subjectID) {
         List<Lesson> lessonList = getLessonBySubject(subjectID);
         System.out.println("Done get Lesson by id");
-        List<Question> questions = new ArrayList<>();
+        List<Question> quizzes = new ArrayList<>();
         QuestionRepository questionRepo = QuestionRepository.createInstance();
-        for (Lesson lesson : lessonList) {          
-                questionRepo.getQuestionByLessonId(lesson.getLessonID()).forEach(question -> {
-                    questions.add(question);
-                });
-            }
-        return questions;
+        for (Lesson lesson : lessonList) {
+            questionRepo.getQuestionByLessonId(lesson.getLessonID()).forEach(question -> {
+                quizzes.add(question);
+            });
         }
-    
+        return quizzes;
+    }
+
     @Override
     public List<Question> getRandomQuestionsBySubject(Long subjectID, int n) {
-        List<Question> questions = getQuestionsBySubject(subjectID);
+        List<Question> quizzes = getQuestionsBySubject(subjectID);
         System.out.println("Done");
-        Collections.shuffle(questions);
-        for(Question quest : questions){
+        Collections.shuffle(quizzes);
+        for (Question quest : quizzes) {
             System.out.println(quest.toString());
         }
-        return new ArrayList(questions.subList(0, n));
+        return new ArrayList(quizzes.subList(0, n));
     }
-    
+
+    @Override
+    public List<ExamInfo> getAllExam() {
+        Transaction transaction = null;
+        List<ExamInfo> quizzes = null;
+        
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            //Lesson{
+            //Question
+            //}
+            quizzes = new ArrayList<ExamInfo>(session.createQuery("FROM ExamInfo", ExamInfo.class).getResultList());
+            
+            if (quizzes != null) {
+                return quizzes;
+            }
+            transaction.commit();
+            session.close();
+        } catch (Exception e) {
+            if (transaction != null) {
+                e.printStackTrace();
+                System.out.println(e.getMessage());
+                System.out.println("Loop Function in get Question");
+                transaction.rollback();
+            }
+        }
+        return null;
+    }
+
 }

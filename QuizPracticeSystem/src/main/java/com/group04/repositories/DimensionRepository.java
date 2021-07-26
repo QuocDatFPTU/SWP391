@@ -6,6 +6,7 @@
 package com.group04.repositories;
 
 import com.group04.entities.Dimension;
+import java.util.List;
 
 /**
  *
@@ -15,4 +16,5 @@ public interface DimensionRepository {
     public void addDimension(Dimension dimension);
     public void deleteDimension(Long dimensionID);
     public void updateDimension(Dimension dimension);
+    public List<Dimension> getDimensionBySubjectID(Long subjectID);
 }

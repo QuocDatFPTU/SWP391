@@ -43,7 +43,7 @@ public class Subject implements Serializable{
 
     @NotBlank(message = "subjectname can't be empty")
     @Size(max = 100, min = 5, message="subjectname must have more than 5 characters")
-    @Column(name = "subjectName")
+    @Column(name = "subjectName", unique = true)
     private String subjectName;
     
     @NotBlank(message = "category can't be empty")
@@ -87,6 +87,9 @@ public class Subject implements Serializable{
    
     @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
     private Set<Packages> packages;
+    
+    @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
+    private Set<ExamInfo> examInfo;
     
     public Subject(Subject subject) {
         this.subjectID = subject.subjectID;
