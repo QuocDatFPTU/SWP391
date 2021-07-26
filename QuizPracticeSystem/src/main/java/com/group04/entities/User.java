@@ -122,4 +122,8 @@ public class User implements Serializable {
         return "User{" + "userID=" + userID + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + ", gender=" + gender + ", avatar=" + avatar + ", isActive=" + isActive + ", roles=" + roles + ", Register=" + Register + '}';
     }
 
+    public boolean isIsActive() {
+        return isActive;
+    }
+
 }

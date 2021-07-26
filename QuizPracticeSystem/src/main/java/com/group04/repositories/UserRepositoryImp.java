@@ -146,7 +146,6 @@ public class UserRepositoryImp implements UserRepository {
         Transaction transaction = null;
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.evict(user);
             session.merge(user);
             transaction.commit();
             session.close();
