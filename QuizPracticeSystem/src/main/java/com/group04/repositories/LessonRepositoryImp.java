@@ -26,7 +26,7 @@ public class LessonRepositoryImp implements LessonRepository {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Lesson =  session.createQuery("FROM Lesson L WHERE L.subject.subjectID = :id").setParameter("id", subjectId)
+            Lesson =  session.createQuery("FROM Subject S WHERE S.subjectID = :id").setParameter("id", subjectId)
                     .getResultList();
             if (Lesson != null) {
                 return Lesson;

@@ -5,13 +5,13 @@
  */
 package com.group04.Servlet;
 
-import static com.group04.Servlet.DeleteCourseServlet.FAIL;
-import static com.group04.Servlet.DeleteCourseServlet.SUCCESS;
-import com.group04.repositories.SubjectRepositoryImp;
-import com.group04.repositories.UserRepositoryImp;
+import static com.group04.Servlet.GetAllCourseServlet.FAIL;
+import static com.group04.Servlet.GetAllCourseServlet.SUCCESS;
+import com.group04.entities.Course;
+import com.group04.repositories.CourseRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Long.parseLong;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -24,12 +24,11 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author HP
+ * @author ntdun
  */
-@WebServlet(name = "DeleteUserServlet", urlPatterns = {"/DeleteUserServlet"})
-public class DeleteUserServlet extends HttpServlet {
-    public static final String SUCCESS = "userprofile";
-    public static final String FAIL = "index";
+@WebServlet(name = "HomeServlet", urlPatterns = {"/HomeServlet"})
+public class HomeServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,15 +42,21 @@ public class DeleteUserServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
-        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = mapping.get(FAIL);
+        Map<String, String> listmapping = (Map<String, String>) context.getAttribute("MAPPING");
+        String url = listmapping.get(FAIL);
         try {
-            Long userID = parseLong(request.getParameter("txtuserID"));
-            UserRepositoryImp urp = new UserRepositoryImp();
-            urp.deleteUser(userID);
-            url = mapping.get(SUCCESS);
+            HttpSession session = request.getSession();
+            CourseRepositoryImp urp = new CourseRepositoryImp();
+            List<Course> listcourse;
+            listcourse = urp.getAllCourse();
+
+            if (!listcourse.isEmpty()) {
+                session.setAttribute("listCourse", listcourse);
+                url = listmapping.get(SUCCESS);
+            }
+        } catch (Exception e) {
+            System.out.println("Exception " + e);
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

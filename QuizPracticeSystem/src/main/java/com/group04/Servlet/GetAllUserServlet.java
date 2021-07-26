@@ -6,12 +6,15 @@
 package com.group04.Servlet;
 
 import static com.group04.Servlet.GetAllCategoryServlet.FAIL;
+import com.group04.entities.Role;
 import com.group04.entities.Subject;
 import com.group04.entities.User;
+import com.group04.payload.PayloadUserInfor;
 import com.group04.repositories.SubjectRepositoryImp;
 import com.group04.repositories.UserRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
@@ -29,6 +32,9 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "GetAllUserServlet", urlPatterns = {"/GetAllUserServlet"})
 public class GetAllUserServlet extends HttpServlet {
+
+    public static final String SUCCESS = "userprofile";
+    public static final String FAIL = "index";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,10 +56,23 @@ public class GetAllUserServlet extends HttpServlet {
         try {
             UserRepositoryImp urp = new UserRepositoryImp();
             List<User> listuser;
-            listuser=urp.getAllUser();
-            session.setAttribute("listuser", listuser);
-        }catch (Exception e){  
-        }finally{
+            listuser = urp.getAllUser();
+            List<String> listRole;
+            ArrayList<PayloadUserInfor> ListPayloadUser = new ArrayList<>();
+            for (User user : listuser) {
+                listRole = new ArrayList<>();
+                for (Role role : user.getRoles()) {
+                    listRole.add(role.getName());
+                }
+                ListPayloadUser.add(new PayloadUserInfor(user, listRole.toString()));
+
+            }
+            session.setAttribute("listSize", listuser.size());
+            session.setAttribute("listUser", ListPayloadUser);
+            url = listmapping.get(SUCCESS);
+        } catch (Exception e) {
+            log("GetAllUserServlet_Exception: " + e);
+        } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

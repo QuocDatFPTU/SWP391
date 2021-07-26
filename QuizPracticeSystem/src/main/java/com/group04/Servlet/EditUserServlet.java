@@ -31,8 +31,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "EditUserServlet", urlPatterns = {"/EditUserServlet"})
 public class EditUserServlet extends HttpServlet {
 
-    public static final String SUCCESS = "edit";
-    public static final String FAIL = "profile";
+    public static final String SUCCESS = "userprofile";
+    public static final String FAIL = "index";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
