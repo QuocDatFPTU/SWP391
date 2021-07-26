@@ -111,3 +111,49 @@ footer {
   
   margin-bottom:0;
 }
+
+.mr-95{
+    margin-right: 660px;
+}
+
+/*Drop down*/
+.user-profile{
+    position: relative;
+    display: inline-block;
+    height: 60px;
+   
+}
+.user{
+  padding: 10px;  
+  outline:none;
+  margin-top: 10px;
+  border-radius: 50px;
+  
+}
+.dropdown-menu {
+    display:none;
+    position:absolute;
+    background: #fff;
+    width:100px;
+    top:55px;  
+    z-index: 10000;
+}
+.dropdown-menu a{
+    display:block;
+    text-decoration: none;
+    margin-left: 10px;
+    line-height: fit;
+    margin-top: 5px;
+    
+}
+
+.dropdown-menu a:last-child{
+    margin-bottom: 5px;
+}
+.dropdown-menu a:hover {
+    background:#adb5bd;
+    color: black;
+}
+.user-profile:hover .dropdown-menu{
+    display:block !important;
+}

@@ -13,7 +13,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="css/userProfile.css">
+        <link rel="stylesheet" href="css/editUserProfile.css">
         <script src="https://kit.fontawesome.com/64bb7a6643.js" crossorigin="anonymous"></script>
         <title>User Profile</title>
 </head>
@@ -57,21 +57,13 @@
                                 <div class="tab-content profile-tab" id="myTabContent">
                                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <form action="editUser">                  
-                                                <div class="row mt-3">
-                                                    <div class="col-md-6">
-                                                        <label>User Id</label>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        
-                                                        <input name="" type="text" class="form-control"  readonly>
-                                                    </div>
-                                                </div>
+                                               
                                                 <div class="row mt-3">
                                                     <div class="col-md-6">
                                                         <label>Name</label>
                                                     </div>
                                                     <div class="col-md-6">                                                 
-                                                        <input type="text" class="form-control"  placeholder="User Name">
+                                                        <input name="username" type="text" class="form-control"  placeholder="User Name">
                                                     </div>
                                                 </div>
                                                 <div class="row mt-3">
@@ -80,7 +72,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         
-                                                        <input type="text" class="form-control"  placeholder="Email">
+                                                        <input name="email" type="text" class="form-control"  placeholder="Email">
                                                     </div>
                                                 </div>
                                                 <div class="row mt-3">
@@ -88,7 +80,7 @@
                                                         <label>Phone</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control"  placeholder="Phone Number">
+                                                        <input name="phone" type="text" class="form-control"  placeholder="Phone Number">
                                                     </div>
                                                 </div>
                                                 <div class="row mt-3">
@@ -96,7 +88,7 @@
                                                         <label>Gender</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control"  placeholder="Gender">
+                                                        <input name="gender" type="text" class="form-control"  placeholder="Gender">
                                                     </div>
                                                 </div>
                                                 

@@ -2,7 +2,7 @@
 <%@ page pageEncoding="UTF-8" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -90,7 +90,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav mr-95">
                     <li class="nav-item active">
                         <a class="nav-link" href="homepage"
                            >Home <span class="sr-only">(current)</span></a>
@@ -99,8 +99,8 @@
                         <a class="nav-link" href="#">Course List</a>
                     </li>
                     <li class="nav-item">
-                          <a class="nav-link" href="#">About</a>
-                        
+                        <a class="nav-link" href="#">About</a>
+
                     </li>
                     <li class="nav-item dropdown">
                         <a
@@ -123,14 +123,30 @@
                 </ul>
 
                 <!--Search box-->
-                <form class="form-inline my-2 my-lg-0">             
-                    
-                    <a href="loginPage" type="submit" class="btn btn-secondary mx-3">Login</a>
-                    <a href="registerPage" type="submit" class="btn btn-secondary mx-2">Register</a>
-                    <a href="practiceList" >
-                            <input type="button" value="PracticeList" class="btn btn-secondary mx-3" />
-                        </a>
-                </form>
+                          
+                    <c:if test="${sessionScope.USER ==null}">
+                        <a href="loginPage" type="submit" class="btn btn-secondary mx-3">Login</a>
+                        <a href="registerPage" type="submit" class="btn btn-secondary mx-2">Register</a>
+                    </c:if>
+                        
+                    <a href="psracticeList" >
+                        <input type="button" value="PracticeList" class="btn btn-secondary mx-3" />
+                    </a>
+                        <a href="WEB-INF/mapping.txt"></a>
+                    <div class="user-profile ">
+                          <c:if test="${sessionScope.USER != null}">                        
+                   
+                        <button class="user">Hi, ${sessionScope.USER.username}</button>
+                        <div class="dropdown-menu">
+                            
+                            <a href="">My Learning</a>
+                            
+                            <a href="viewProfile?userID=${sessionScope.USER.userID}">User Profile</a>                           
+                            <a href="logout">Logout</a>
+                        </div>
+                        </c:if>
+                    </div>
+                
             </div>
         </nav>
         <!--end nav bar-->

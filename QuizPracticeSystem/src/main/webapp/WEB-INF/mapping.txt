@@ -25,3 +25,6 @@ userprofile=userManagement.jsp
 getAllUser=GetAllUserServlet
 editUser=EditUserServlet
 deleteUser=DeleteUserServlet
+viewProfile=getUserByIDServlet
+profilePage=userProfile.jsp
+
