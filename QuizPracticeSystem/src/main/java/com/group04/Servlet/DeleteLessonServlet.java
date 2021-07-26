@@ -5,10 +5,12 @@
  */
 package com.group04.Servlet;
 
-import com.group04.repositories.PackageRepositoryImp;
+import static com.group04.Servlet.DeleteCourseServlet.FAIL;
+import static com.group04.Servlet.DeleteCourseServlet.SUCCESS;
+import com.group04.repositories.LessonRepositoryImp;
+import com.group04.repositories.UserRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Long.parseLong;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -21,13 +23,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ntdun
+ * @author HP
  */
-@WebServlet(name = "DeletePackageServlet", urlPatterns = {"/DeletePackageServlet"})
-public class DeletePackageServlet extends HttpServlet {
-
-    public static final String SUCCESS = "viewprofile";
-    public static final String FAIL = "error";
+@WebServlet(name = "DeleteLessonServlet", urlPatterns = {"/DeleteLessonServlet"})
+public class DeleteLessonServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,11 +44,12 @@ public class DeletePackageServlet extends HttpServlet {
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
         Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = mapping.get(SUCCESS);
+        String url = mapping.get(FAIL);
         try {
-            Long packageID = parseLong(request.getParameter("txtpackageID"));
-            PackageRepositoryImp urp = new PackageRepositoryImp();
-            urp.deletePackage(packageID);
+            //Long lessonID = Long.parseLong(request.getParameter("txtlessonID"));
+            LessonRepositoryImp lrp = new LessonRepositoryImp();
+            lrp.deleteLesson(8L);
+            url = mapping.get(SUCCESS);
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

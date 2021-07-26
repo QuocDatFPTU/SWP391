@@ -5,9 +5,6 @@
  */
 package com.group04.Servlet;
 
-import static com.group04.Servlet.AddSubjectServlet.FAIL;
-import static com.group04.Servlet.AddSubjectServlet.SUCCESS;
-import com.group04.entities.Course;
 import com.group04.entities.Dimension;
 import com.group04.entities.Subject;
 import com.group04.repositories.DimensionRepositoryImp;
@@ -35,6 +32,7 @@ public class AddDimensionServlet extends HttpServlet {
 
     public static final String SUCCESS = "detailpage";
     public static final String FAIL = "errorPage";
+
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

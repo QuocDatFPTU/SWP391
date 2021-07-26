@@ -50,6 +50,9 @@ public class GetAllSubjectServlet extends HttpServlet {
             SubjectRepositoryImp urp = new SubjectRepositoryImp();
             List<Subject> listsubject;
             listsubject=urp.getAllSubject();
+                      for(int i=0;i<listsubject.size();i++){
+            System.out.println(listsubject.get(i));
+            } 
             session.setAttribute("listsubject", listsubject);
         }catch (Exception e){  
         }finally{

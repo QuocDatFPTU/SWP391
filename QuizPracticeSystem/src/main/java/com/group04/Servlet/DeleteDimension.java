@@ -37,9 +37,9 @@ public class DeleteDimension extends HttpServlet {
         Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
         String url = mapping.get(SUCCESS);
         try {
-           // Long dimensionID = parseLong(request.getParameter("dimensionID"));
+            Long dimensionID = parseLong(request.getParameter("txtdimensionID"));
             DimensionRepositoryImp urp = new DimensionRepositoryImp();
-            urp.deleteDimension(4L);
+            urp.deleteDimension(dimensionID);
         }catch(Exception e){
             System.out.println(e);
         } 

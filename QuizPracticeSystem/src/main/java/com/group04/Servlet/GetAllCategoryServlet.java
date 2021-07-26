@@ -48,7 +48,7 @@ public class GetAllCategoryServlet extends HttpServlet {
         try {
             SubjectRepositoryImp urp=new SubjectRepositoryImp();
             List<String> listdup;
-            listdup = urp.getAllcategory();
+            listdup = urp.getAllCategory();
             List<String> listnodup=new ArrayList<>();
             for(String element : listdup){
                 if(!listnodup.contains(element)){

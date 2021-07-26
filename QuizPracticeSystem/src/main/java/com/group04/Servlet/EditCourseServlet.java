@@ -12,6 +12,7 @@ import com.group04.repositories.CourseRepositoryImp;
 import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Long.parseLong;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class EditCourseServlet extends HttpServlet {
         Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
         String url = mapping.get(FAIL);
         try {
-
+            Long courseID =parseLong(request.getParameter("courseID"));
             String courseName = request.getParameter("courseName");
             boolean isFeatured = Boolean.parseBoolean(request.getParameter("isFeatured"));
             boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
@@ -60,6 +61,7 @@ public class EditCourseServlet extends HttpServlet {
             Course UpdateCourse = new Course();
 
             CourseRepositoryImp urp = new CourseRepositoryImp();
+            UpdateCourse.setCourseID(5L);
             UpdateCourse.setCourseName(courseName);
             UpdateCourse.setFeatured(isFeatured);
             UpdateCourse.setActive(isActive);

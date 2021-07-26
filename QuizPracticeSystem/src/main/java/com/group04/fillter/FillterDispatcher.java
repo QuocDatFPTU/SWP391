@@ -121,7 +121,7 @@ public class FillterDispatcher implements Filter {
             if (!resource.isEmpty()) {
                 url = map.get(resource);
             } else {
-                url = map.get("index");
+                url = map.get("homepage");
             }
             
             boolean registered = true;
@@ -149,9 +149,7 @@ public class FillterDispatcher implements Filter {
             }
             //co user
             //dang nhap
-            System.out.println(url);
             if (url != null) {
-                System.out.println("ditme");
                 RequestDispatcher rd = req.getRequestDispatcher(url);
                 rd.forward(request, response);
             } else {

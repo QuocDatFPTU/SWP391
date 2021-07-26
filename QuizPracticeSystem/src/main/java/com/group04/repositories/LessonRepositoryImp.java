@@ -5,6 +5,7 @@
  */
 package com.group04.repositories;
 
+import com.group04.entities.Course;
 import com.group04.entities.Lesson;
 import com.group04.entities.Subject;
 import com.group04.utils.HibernateUtil;
@@ -16,7 +17,7 @@ import org.hibernate.Transaction;
  *
  * @author HP
  */
-public class LessonRepositoryImp implements LessonRepository{
+public class LessonRepositoryImp implements LessonRepository {
 
     @Override
     public List<Lesson> getLessonBySubjectId(Long subjectId) {
@@ -25,7 +26,7 @@ public class LessonRepositoryImp implements LessonRepository{
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Lesson = session.createQuery("FROM Lesson WHERE subjectID = :id").setParameter("id", subjectId)
+            Lesson =  session.createQuery("FROM Lesson L WHERE L.subject.subjectID = :id").setParameter("id", subjectId)
                     .getResultList();
             if (Lesson != null) {
                 return Lesson;
@@ -44,23 +45,34 @@ public class LessonRepositoryImp implements LessonRepository{
     }
 
     @Override
-    public void deleteLesson(Long lessonID) {
+    public Lesson getLessonById(Long id) {
         Transaction transaction = null;
-        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
+        Lesson lesson = null;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Lesson lesson = session.get(Lesson.class, lessonID);
+            lesson = (Lesson) session.createQuery("FROM Lesson L WHERE L.lessonID = :lessonID").setParameter("lessonID", id)
+                    .getSingleResult();
             if (lesson != null) {
-                session.delete(lesson);
-                System.out.println("lesson is deleted");
+                return lesson;
             }
             transaction.commit();
-            session.close();
         } catch (Exception e) {
             if (transaction != null) {
+                System.out.println("Loop Function");
+                e.printStackTrace();
                 transaction.rollback();
-            }
-
+            }         
         }
+        return null;
+    }
+
+    @Override
+    public void deleteLesson(Long lessonID) {
+       Lesson lesson = this.getLessonById(lessonID);
+       lesson.setActive(false);
+       this.updateLesson(lesson);
+       
     }
 
     @Override
@@ -74,6 +86,7 @@ public class LessonRepositoryImp implements LessonRepository{
             session.close();
         } catch (Exception e) {
             if (transaction != null) {
+                e.printStackTrace();
                 transaction.rollback();
             }
         }
@@ -93,8 +106,5 @@ public class LessonRepositoryImp implements LessonRepository{
             }
         }
     }
-    
-    
-    
-    
+
 }

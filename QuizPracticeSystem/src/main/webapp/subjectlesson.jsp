@@ -1,3 +1,9 @@
+<%-- 
+    Document   : subjectlesson
+    Created on : Jul 26, 2021, 9:35:34 AM
+    Author     : ntdun
+--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,8 +30,9 @@
         <div class="container-fluid" style="padding:3rem">
             <h1>Subject Lesson</h1>
             <div>
-                <p>Subject name:"Name of subject"</p>
+                <p>Subject name: ${subjectname}</p>
             </div>
+            
             <div>
                 <div class="d-flex bd-highlight mb-3">
                     <div class="p-2 ">
@@ -58,57 +65,24 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <c:forEach var="lesson" items="${sessionScope.listLesson}">
                             <tr>
-                                <th scope="row">1</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <th scope="row">${lession.lessonID}</th>
+                                <td>${lession.lessonID}</td>
+                                <td>${lession.lessonID}</td>
+                                <td>${lession.lessonID}</td>
+                                <td>${lession.lessonID}</td>
                                 <td>
                                     <a href="" style="text-decoration: underline; padding-right: 5px;">Edit</a>
                                     <a href="" style="text-decoration: underline;">Inactive</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <a href="" style="text-decoration: underline; padding-right: 5px;">Edit</a>
-                                    <a href="" style="text-decoration: underline;">Inactive</a>
-                                </td>
-                            </tr>
-                            <tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <a href="" style="text-decoration: underline; padding-right: 5px;">Edit</a>
-                                    <a href="" style="text-decoration: underline;">Inactive</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <a href="" style="text-decoration: underline; padding-right: 5px;">Edit</a>
-                                    <a href="" style="text-decoration: underline;">Inactive</a>
-                                </td>
-                              </tr>
+                            </c:forEach>
                               <tr>
                             <tr>
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>

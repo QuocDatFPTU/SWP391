@@ -1,3 +1,9 @@
+<%-- 
+    Document   : LessonDetail
+    Created on : Jul 26, 2021, 9:31:50 AM
+    Author     : ntdun
+--%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +11,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lession Detail</title>
+    <title>Lesson Detail</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -25,7 +31,7 @@
     <div class="container-fluid">
         <div>
             <div class="container-fluid">
-                <h1>Lession Deatail</h1>
+                <h1>Lesson Detail</h1>
                 <div class="d-flex">
                     <div class="p-2" style="width: 75%;">
                         <label for="fname">Name</label><br>

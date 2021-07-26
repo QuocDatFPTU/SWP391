@@ -5,29 +5,20 @@
  */
 package com.group04.Servlet;
 
-import com.group04.repositories.PackageRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Long.parseLong;
-import java.util.Map;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ntdun
  */
-@WebServlet(name = "DeletePackageServlet", urlPatterns = {"/DeletePackageServlet"})
-public class DeletePackageServlet extends HttpServlet {
-
-    public static final String SUCCESS = "viewprofile";
-    public static final String FAIL = "error";
+@WebServlet(name = "GetAllPackageBySubjectIDServlet", urlPatterns = {"/GetAllPackageBySubjectIDServlet"})
+public class GetAllPackageBySubjectIDServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,19 +32,17 @@ public class DeletePackageServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        ServletContext context = request.getServletContext();
-        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = mapping.get(SUCCESS);
-        try {
-            Long packageID = parseLong(request.getParameter("txtpackageID"));
-            PackageRepositoryImp urp = new PackageRepositoryImp();
-            urp.deletePackage(packageID);
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-            out.close();
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet GetAllPackageBySubjectIDServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet GetAllPackageBySubjectIDServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

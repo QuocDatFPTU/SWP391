@@ -30,7 +30,6 @@ public class QuizRepositoryImp implements QuizRepository {
             transaction = session.beginTransaction();
             listOfQuestion = session.createQuery("FROM Question Q WHERE Q.lessonID = :lessonID ORDER BY newid()").
                     setParameter("lessonID", lessonID).getResultList();
-
             transaction.commit();
             session.close();
         } catch (Exception e) {

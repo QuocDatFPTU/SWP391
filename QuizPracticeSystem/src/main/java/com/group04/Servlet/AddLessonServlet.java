@@ -5,10 +5,15 @@
  */
 package com.group04.Servlet;
 
-import com.group04.repositories.PackageRepositoryImp;
+import static com.group04.Servlet.AddDimensionServlet.FAIL;
+import static com.group04.Servlet.AddDimensionServlet.SUCCESS;
+import com.group04.entities.Lesson;
+import com.group04.entities.Subject;
+import com.group04.repositories.LessonRepositoryImp;
+import com.group04.repositories.SubjectRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Long.parseLong;
+import static java.lang.Integer.parseInt;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -21,13 +26,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ntdun
+ * @author HP
  */
-@WebServlet(name = "DeletePackageServlet", urlPatterns = {"/DeletePackageServlet"})
-public class DeletePackageServlet extends HttpServlet {
-
-    public static final String SUCCESS = "viewprofile";
-    public static final String FAIL = "error";
+@WebServlet(name = "AddLessonServlet", urlPatterns = {"/AddLessonServlet"})
+public class AddLessonServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,12 +47,32 @@ public class DeletePackageServlet extends HttpServlet {
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
         Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = mapping.get(SUCCESS);
+        System.out.println("Map:" + mapping);
+        String url = mapping.get(FAIL);
         try {
-            Long packageID = parseLong(request.getParameter("txtpackageID"));
-            PackageRepositoryImp urp = new PackageRepositoryImp();
-            urp.deletePackage(packageID);
+            String lessonName = request.getParameter("txtlessonName");
+            String topic = request.getParameter("txttopic");
+            int priority = parseInt(request.getParameter("txtpriority"));
+            String youtubeLink = request.getParameter("txtyoutubeLink");
+            String HTMLContent = request.getParameter("txtHTMLContent");
+            String type = request.getParameter("txttype");
+            Long subjectID = Long.parseLong(request.getParameter("txtsubjectID"));
+            Lesson newLesson = new Lesson();
+            LessonRepositoryImp lrp = new LessonRepositoryImp();
+            SubjectRepositoryImp srp = new SubjectRepositoryImp();
+            newLesson.setLessonName(lessonName);
+            newLesson.setTopic(topic);
+            newLesson.setPriority(priority);
+            newLesson.setYoutubeLink(youtubeLink);
+            newLesson.setHTMLContent(HTMLContent);
+            newLesson.setType(type);
+            newLesson.setActive(true);
+            Subject subject = srp.getSubjectById(subjectID);
+            newLesson.setSubject(subject);
+            lrp.addLesson(newLesson);
+            url = mapping.get(SUCCESS);
         } finally {
+            System.out.println(url);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

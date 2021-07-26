@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<%-- 
+    Document   : QuizPage
+    Created on : Jul 26, 2021, 9:33:10 AM
+    Author     : ntdun
+--%>
+
 <html lang="en">
 
 <head>

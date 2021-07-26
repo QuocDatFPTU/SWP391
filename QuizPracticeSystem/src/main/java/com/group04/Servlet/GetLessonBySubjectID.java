@@ -5,10 +5,14 @@
  */
 package com.group04.Servlet;
 
-import com.group04.repositories.PackageRepositoryImp;
+import com.group04.entities.Lesson;
+import com.group04.repositories.LessonRepository;
+import com.group04.repositories.LessonRepositoryImp;
+import com.group04.repositories.SubjectRepositoryImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Long.parseLong;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -23,12 +27,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author ntdun
  */
-@WebServlet(name = "DeletePackageServlet", urlPatterns = {"/DeletePackageServlet"})
-public class DeletePackageServlet extends HttpServlet {
-
-    public static final String SUCCESS = "viewprofile";
-    public static final String FAIL = "error";
-
+@WebServlet(name = "GetLessonBySubjectID", urlPatterns = {"/GetLessonBySubjectID"})
+public class GetLessonBySubjectID extends HttpServlet {
+    public static final String SUCCESS = "subjectlesson";
+    public static final String FAIL = "viewdetailcourse";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,15 +44,22 @@ public class DeletePackageServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
-        Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
-        String url = mapping.get(SUCCESS);
+        HttpSession session = request.getSession();
+        Map<String, String> listmapping = (Map<String, String>) context.getAttribute("MAPPING");
+        String url = listmapping.get(FAIL);
         try {
-            Long packageID = parseLong(request.getParameter("txtpackageID"));
-            PackageRepositoryImp urp = new PackageRepositoryImp();
-            urp.deletePackage(packageID);
-        } finally {
+//            Long subjectID =parseLong(request.getParameter("subjectID"));
+//            SubjectRepositoryImp sub =new SubjectRepositoryImp();
+//            List<Lesson> listlesson;            
+//            listlesson=new ArrayList<>(sub.getSubjectById(1L).getLesson());
+//            Subject subject =sub.getSubjectById(subjectID);
+              LessonRepository lessonRepo = new LessonRepositoryImp();
+              System.out.println(lessonRepo.getLessonById(1L).toString());
+//            String subjectname= subject.getSubjectName();
+        }catch (Exception e){ 
+            e.printStackTrace();
+        }finally{
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();

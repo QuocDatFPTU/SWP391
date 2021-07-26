@@ -13,6 +13,7 @@ import com.group04.validators.DoValidate;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Integer.parseInt;
+import static java.lang.Long.parseLong;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +53,7 @@ public class EditSubjectServlet extends HttpServlet {
         String url = mapping.get(FAIL);
         try {
 
+            Long subjectID =parseLong(request.getParameter("SubjectID"));
             String subjectName = request.getParameter("subjectName");
             String category = request.getParameter("category");
             String owner = request.getParameter("owner");

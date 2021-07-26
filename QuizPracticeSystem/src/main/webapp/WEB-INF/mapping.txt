@@ -25,5 +25,9 @@ practiceDetail=CreatePracticeServlet
 quizListPage=quizlist.jsp
 quizPage=QuizPage.jsp
 practiceList=PracticeListServlet
+homepage=GetAllCourseServlet
 viewdetailcourse=subjectlist.jsp
 subjectListDetail=GetSubjectPagingServlet
+subjectlesson=GetLessonBySubjectID
+
+

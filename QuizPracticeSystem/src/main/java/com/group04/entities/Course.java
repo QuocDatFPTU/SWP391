@@ -46,7 +46,7 @@ public class Course implements Serializable {
     private Long courseID;
 
     @NotBlank(message = "coursename cannot be empty")
-    @Size(max = 100, min = 5, message = "course name must be 5 characters")
+    @Size(max = 100, min = 1, message = "course name must be at least 1 character")
     @Column(name = "courseName")
     private String courseName;
 
@@ -56,7 +56,7 @@ public class Course implements Serializable {
     @Column(name = "isActive")
     private boolean isActive;
 
-    @Size(max = 100, min = 5)
+    @Size(max = 100, min = 1)
     @Column(name = "thumbnailLink")
     private String thumbnailLink;
 
