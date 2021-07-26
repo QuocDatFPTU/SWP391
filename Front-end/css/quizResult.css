@@ -1,0 +1,33 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
+
+
+.mt-8{
+    margin-top: 30px
+}
+
+.mb-10{
+    margin-bottom: 60px;
+}
+
+.resultRow{
+    text-align:center;
+}
+
+table{
+    border: 1.5px solid black;
+}
+table td{
+    border: 1.5px solid black;
+}
+table th{
+    font-size: 2rem;
+}
+.banner h1{
+    text-align:center;
+    font-family: 'Hammersmith One', sans-serif;
+}
+
+.action button{
+    text-align:center;
+}
