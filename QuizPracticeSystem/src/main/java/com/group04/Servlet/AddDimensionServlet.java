@@ -5,9 +5,6 @@
  */
 package com.group04.Servlet;
 
-import static com.group04.Servlet.AddSubjectServlet.FAIL;
-import static com.group04.Servlet.AddSubjectServlet.SUCCESS;
-import com.group04.entities.Course;
 import com.group04.entities.Dimension;
 import com.group04.entities.Subject;
 import com.group04.repositories.DimensionRepositoryImp;

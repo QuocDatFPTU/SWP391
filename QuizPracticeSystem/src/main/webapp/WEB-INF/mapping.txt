@@ -29,3 +29,4 @@ homepage=GetAllCourseServlet
 viewdetailcourse=subjectlist.jsp
 subjectListDetail=GetSubjectPagingServlet
 
+

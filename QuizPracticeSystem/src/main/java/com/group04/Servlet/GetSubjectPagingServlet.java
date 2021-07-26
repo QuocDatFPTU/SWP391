@@ -45,13 +45,13 @@ public class GetSubjectPagingServlet extends HttpServlet {
         ServletContext context = request.getServletContext();
         Map<String,String> mapping = (Map<String,String>) context.getAttribute("MAPPING");
         String url = mapping.get(FAIL);
-        SubjectRepositoryImp dao=new SubjectRepositoryImp();
+        SubjectRepositoryImp subRepo=new SubjectRepositoryImp();        
         try {
+            
             Long courseID = Long.parseLong(request.getParameter("CourseID"));
-            List<Subject> subject=dao.getAllSubjectPaging(courseID, 0, 5);
-            for (Subject x : subject) {
-                System.out.println(x.getCategory());
-            }
+            List<Subject> subject=subRepo.getAllSubjectPaging(courseID, 0, 5);
+            System.out.println(subject);
+            System.out.println("aaaaa");
             session.setAttribute("listSubjectPaging", subject);
             url = mapping.get(SUCCESS);
         }catch (Exception e){

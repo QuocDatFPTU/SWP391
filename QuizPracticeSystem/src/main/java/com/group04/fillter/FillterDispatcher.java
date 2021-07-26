@@ -149,9 +149,7 @@ public class FillterDispatcher implements Filter {
             }
             //co user
             //dang nhap
-            System.out.println(url);
             if (url != null) {
-                System.out.println("ditme");
                 RequestDispatcher rd = req.getRequestDispatcher(url);
                 rd.forward(request, response);
             } else {
