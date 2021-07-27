@@ -6,7 +6,6 @@
 package com.group04.repositories;
 
 import com.group04.entities.Lesson;
-import com.group04.entities.Subject;
 import java.util.List;
 
 /**

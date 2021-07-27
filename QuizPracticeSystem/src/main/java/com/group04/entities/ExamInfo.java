@@ -36,47 +36,55 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExamInfo implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "examInfoID", nullable = false, updatable = false)
     private Long examInfoID;
+
+    @Column(name = "examName")
+    private String examName;
     
     @Column(name = "numberOfQuestion")
     private int numberOfQuestion;
-    
+
     @Column(name = "isFinished")
     private boolean isFinished;
-    
+
     @Column(name = "passRate")
     private float passRate;
-    
+
     @Column(name = "duration")
     private String duration;
-    
+
     @Column(name = "examLevel")
     private String examLevel;
-    
+
     @Column(name = "examType")
     private String examType;
-    
+
     @Column(name = "description")
     private String description;
-        
-    @ManyToMany(mappedBy ="examInfos")
+
+    @ManyToMany(mappedBy = "examInfos")
     private Set<Lesson> lessons = new HashSet<>();
-    
+
     @ManyToOne
-    @JoinColumn(name="userID")
+    @JoinColumn(name = "userID")
     private User user;
-    
+
     @OneToOne(mappedBy = "examInfo", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn 
+    @PrimaryKeyJoinColumn
     private ExamSetting examSetting;
-    
+
     @OneToOne
     @JoinColumn(name = "examDetailID")
     private ExamDetail examDetail;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "subjectID")
+    private Subject subject;
+
     public ExamInfo(ExamInfo examInfoID) {
         this.examInfoID = examInfoID.examInfoID;
         this.numberOfQuestion = examInfoID.numberOfQuestion;

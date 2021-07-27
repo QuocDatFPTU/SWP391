@@ -39,9 +39,6 @@ public class ExamDetail implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long examDetailID;
     
-    @Column(name = "examName")
-    private String examName;
-    
     @Column(name = "score")
     private float score;
     
@@ -64,13 +61,4 @@ public class ExamDetail implements Serializable {
     @OneToMany(mappedBy = "examDetail", fetch = FetchType.EAGER)
     private Set<QuestionExam> QuestionExam = new HashSet<>();
     
-    public ExamDetail(ExamDetail examDetail) {
-        this.examDetailID = examDetail.examDetailID;
-        this.examName = examDetail.examName;
-        this.score = examDetail.score;
-        this.createDate = examDetail.createDate;
-        this.timeStart = examDetail.timeStart;
-        this.timeEnd = examDetail.timeEnd;
-        this.totalTime = examDetail.totalTime;
-    }
 }

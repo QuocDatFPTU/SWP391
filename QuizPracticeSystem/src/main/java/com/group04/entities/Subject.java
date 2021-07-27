@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.group04.entities;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -25,6 +26,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotBlank;
+
 /**
  *
  * @author HP
@@ -35,56 +37,60 @@ import org.hibernate.validator.constraints.NotBlank;
 @AllArgsConstructor
 @Entity
 @Table(name = "Subject")
-public class Subject implements Serializable{
+public class Subject implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subjectID", nullable = false, updatable = false)
     private Long subjectID;
 
     @NotBlank(message = "subjectname can't be empty")
-    @Size(max = 100, min = 5, message="subjectname must have more than 5 characters")
+    @Size(max = 100, min = 5, message = "subjectname must have more than 5 characters")
     @Column(name = "subjectName")
     private String subjectName;
-    
+
     @NotBlank(message = "category can't be empty")
-    @Size(max = 100, min = 1, message="category must have more than 1 characters")
+    @Size(max = 100, min = 1, message = "category must have more than 1 characters")
     @Column(name = "category")
     private String category;
-    
+
     @NotBlank(message = "owner can't be empty")
-    @Size(max = 100, min = 1, message="owner must have more than 1 characters")
+    @Size(max = 100, min = 1, message = "owner must have more than 1 characters")
     @Column(name = "owner")
     private String owner;
-    
+
     @Column(name = "status")
     private boolean status;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(name = "updateDate")
     private Date updateDate;
-    
+
     @NotBlank(message = "description can't be empty")
-    @Size(max = 100, min = 5, message="description must have more than 5 characters")
+    @Size(max = 100, min = 5, message = "description must have more than 5 characters")
     @Column(name = "description")
     private String description;
-    
+
     @Column(name = "isActive")
     private boolean isActive;
-    
-    
-    @OneToMany(mappedBy="subject", fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
     private Set<Dimension> dimension = new HashSet<>();
-    
+
     @ManyToOne
-    @JoinColumn(name="courseID")
+    @JoinColumn(name = "courseID")
     private Course course;
 
     @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
     private Set<StudentRegistration> studentRegistration;
-   
+
     @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
     private Set<Packages> packages;
-    
+    @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
+    private Set<ExamInfo> examInfor;
+    @OneToMany(mappedBy = "subject", fetch = FetchType.EAGER)
+    private Set<Lesson> lesson;
+
     public Subject(Subject subject) {
         this.subjectID = subject.subjectID;
         this.subjectName = subject.subjectName;
@@ -95,7 +101,5 @@ public class Subject implements Serializable{
         this.description = subject.description;
         this.isActive = subject.isActive;
     }
-    
-    
-       
+
 }

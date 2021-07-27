@@ -46,7 +46,7 @@ public class HibernateUtil {
                 settings.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 settings.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=QuizPractice");
                 settings.put(Environment.USER, "sa");
-                settings.put(Environment.PASS, "Ngoctam3112000");
+                settings.put(Environment.PASS, "Zoro2000");
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
                 settings.put(Environment.SHOW_SQL, "true");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");

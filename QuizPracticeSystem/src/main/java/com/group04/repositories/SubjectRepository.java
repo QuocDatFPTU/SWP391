@@ -5,9 +5,7 @@
  */
 package com.group04.repositories;
 
-import com.group04.entities.Dimension;
 import com.group04.entities.Subject;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
