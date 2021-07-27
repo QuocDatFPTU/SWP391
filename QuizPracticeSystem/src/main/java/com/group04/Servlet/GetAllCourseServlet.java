@@ -29,7 +29,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "GetAllCourseServlet", urlPatterns = {"/GetAllCourseServlet"})
 public class GetAllCourseServlet extends HttpServlet {
 
-    public static final String SUCCESS = "index";
+    public static final String SUCCESS = "adminCourse";
     public static final String FAIL = "error";
 
     /**
@@ -56,6 +56,7 @@ public class GetAllCourseServlet extends HttpServlet {
 
             if (!listcourse.isEmpty()) {
                 session.setAttribute("listCourse", listcourse);
+                System.out.println(listcourse);
                 url = listmapping.get(SUCCESS);
             }
         } catch (Exception e) {

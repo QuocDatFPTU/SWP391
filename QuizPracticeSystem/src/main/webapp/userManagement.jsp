@@ -34,12 +34,12 @@
             <div class="sidebar-menu">
                 <ul>
                     <li>
-                        <a href="admin.html" class="active"
+                        <a href="adminUser" class="active"
                            ><i class="fas fa-user-circle"></i><span>User</span></a
                         >
                     </li>
                     <li>
-                        <a href="admin_course.html"
+                        <a href="adminCourseSer"
                            ><i class="fas fa-book-open"></i><span>Course</span></a
                         >
                     </li>
@@ -49,7 +49,7 @@
                         >
                     </li>
                     <li>
-                        <a href="admin_subject.html" 
+                        <a href="adminSubject" 
                            ><i class="fas fa-laptop"></i>
                             <span>Subject</span></a
                         >
@@ -65,21 +65,19 @@
                     </label>
                     Dashboard
                 </h2>
-                <div class="search-wrapper">
-                    <span class="class las la-search"></span>
-                    <input type="search" placeholder="Search here" />
-                </div>
+                
                 <div class="user-wrapper">
                     <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEAoTadQ4n5Oe-rLqJz9j_UCkUhtcLoZlacA&usqp=CAU"
+                        src="https://static2.yan.vn/YanNews/2167221/202102/facebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-e4abd14d.jpg"
                         width="40px"
                         height="40px"
                         alt="Error"
                         />
                     <div>
-                        <h4>Eminem</h4>
-                        <small>Slim Shady</small>
+                        <h4>Hi Dung</h4>
+                        <small></small>
                     </div>
+                    <a href="logout"class="btn btn-primary">Logout</a>
                 </div>
             </header>
 
@@ -176,20 +174,20 @@
                     <div class="modal-body">
                         <form action="#">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
+                                <label for="exampleInputEmail1">User Name</label>
                                 <input
-                                    type="email"
+                                    type="text"
                                     class="form-control"
                                     id="exampleInputEmail1"
                                     aria-describedby="emailHelp"
-                                    placeholder="Enter email"
+                                    placeholder="Enter User Name"
                                     />               
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
+                                <label for="exampleInputPassword1">First Name</label>
                                 <input
-                                    type="password"
+                                    type="text"
                                     class="form-control"
                                     id="exampleInputPassword1"
                                     placeholder="Password"
@@ -197,7 +195,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
+                                <label for="exampleInputEmail1">Email</label>
                                 <input
                                     type="email"
                                     class="form-control"
@@ -207,9 +205,9 @@
                                     />               
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
+                                <label for="exampleInputEmail1">Phone</label>
                                 <input
-                                    type="email"
+                                    type="text"
                                     class="form-control"
                                     id="exampleInputEmail1"
                                     aria-describedby="emailHelp"
@@ -217,58 +215,16 @@
                                     />               
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
+                                <label for="exampleInputEmail1">Status</label>
                                 <input
-                                    type="email"
+                                    type="text"
                                     class="form-control"
                                     id="exampleInputEmail1"
                                     aria-describedby="emailHelp"
                                     placeholder="Enter email"
                                     />               
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input
-                                    type="email"
-                                    class="form-control"
-                                    id="exampleInputEmail1"
-                                    aria-describedby="emailHelp"
-                                    placeholder="Enter email"
-                                    />               
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input
-                                    type="email"
-                                    class="form-control"
-                                    id="exampleInputEmail1"
-                                    aria-describedby="emailHelp"
-                                    placeholder="Enter email"
-                                    />               
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input
-                                    type="email"
-                                    class="form-control"
-                                    id="exampleInputEmail1"
-                                    aria-describedby="emailHelp"
-                                    placeholder="Enter email"
-                                    />               
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input
-                                    type="email"
-                                    class="form-control"
-                                    id="exampleInputEmail1"
-                                    aria-describedby="emailHelp"
-                                    placeholder="Enter email"
-                                    />               
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
                     <div class="modal-footer">

@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "DeleteUserServlet", urlPatterns = {"/DeleteUserServlet"})
 public class DeleteUserServlet extends HttpServlet {
-    public static final String SUCCESS = "userprofile";
+    public static final String SUCCESS = "getAllUser";
     public static final String FAIL = "index";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

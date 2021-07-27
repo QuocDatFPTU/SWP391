@@ -462,8 +462,8 @@
                             </div>
                             <div class="location-footer">
                                 <p>
-                                    LÃ´ E2a-7, DÆ°á»ngd D1, Khu CÃ´ng Nghá» Cao, Long Tháº¡nh Má»¹, Quáº­n 9,
-                                    ThÃ nh phá» Há» ChÃ­ Minh
+                                    Lô E2a-7, Đường D1, Khu Công nghệ Cao, Long Thạnh Mỹ, Quậ­n 9,
+                                    Thành phố Hồ Chí Minh
                                 </p>
                             </div>
                         </li>

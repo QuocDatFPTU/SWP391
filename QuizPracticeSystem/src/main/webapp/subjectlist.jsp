@@ -32,7 +32,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="index">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Course List</a>
@@ -197,8 +197,8 @@
                                 </div>
                                 <div class="location-footer">
                                     <p>
-                                        Lï¿½ E2a-7, ???ng D1, Khu Cï¿½ng Ngh? Cao, Long Th?nh M?, Qu?n 9,
-                                        Thï¿½nh ph? H? Chï¿½ Minh
+                                        Lô E2a-7, ???ng D1, Khu Công ngh? Cao, Long Th?nh M?, Qu?­n 9,
+                                    Thành ph? H? Chí Minh
                                     </p>
                                 </div>
                             </li>

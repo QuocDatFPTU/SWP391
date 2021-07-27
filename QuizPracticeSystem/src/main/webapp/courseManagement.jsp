@@ -3,7 +3,7 @@
     Created on : Jul 26, 2021, 9:21:29 PM
     Author     : ntdun
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,12 +34,12 @@
           <div class="sidebar-menu">
             <ul>
               <li>
-                <a href="admin.html" 
+                <a href="getAllUser" 
                   ><i class="fas fa-user-circle"></i> <span>User</span></a
                 >
               </li>
               <li>
-                <a href="admin_course.html" class="active"
+                <a href="adminCourseSer" class="active"
                   ><i class="fas fa-book-open"></i><span>Course</span></a
                 >
               </li>
@@ -49,7 +49,7 @@
                 >
               </li>
               <li>
-                <a href="admin_subject.html" 
+                <a href="adminSubject" 
                   ><i class="fas fa-laptop"></i>
                   <span>Subject</span></a
                 >
@@ -93,42 +93,24 @@
                 <table class="table table-bordered">
                     <thead>
                       <tr>
-                        <th>#</th>
+         
                         <th>Id</th>
-                        <th>Name</th>                                                               
-                        <th>Status</th>              
+                        <th>Name</th>                                                                             
                         <th>Delete</th>
                         <th>Update</th>            
                                    
                       </tr>
                     </thead>
                     <tbody>
+                        <c:forEach var="courselist" items="${sessionScope.listCourse}">
                       <tr>               
-                        <td>1</td>
-                        <td>S001</td>
-                        <td>FA2021</td>
-                        <td>Active</td>
+                        
+                          <td>${courselist.courseID}</td>
+                        <td>${courselist.courseName}</td>
                         <td><button type="button" class="btn btn-primary">Delete</button></td>
                         <td><a href="subjectDetails.html" class="btn btn-primary">Update</a></td>                                           
                       </tr>
-        
-                      <tr>               
-                        <td>1</td>
-                        <td>S001</td>
-                        <td>FA2021</td>
-                        <td>Active</td>
-                        <td><button type="button" class="btn btn-primary">Delete</button></td>
-                        <td><a href="subjectDetails.html" class="btn btn-primary">Update</a></td>                                           
-                      </tr>
-
-                      <tr>               
-                        <td>1</td>
-                        <td>S001</td>
-                        <td>FA2021</td>
-                        <td>Active</td>
-                        <td><button type="button" class="btn btn-primary">Delete</button></td>
-                        <td><a href="subjectDetails.html" class="btn btn-primary">Update</a></td>                                           
-                      </tr>
+        </c:forEach>
                       
                     </tbody>
                   </table>

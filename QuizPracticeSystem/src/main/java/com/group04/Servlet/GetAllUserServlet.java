@@ -33,7 +33,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "GetAllUserServlet", urlPatterns = {"/GetAllUserServlet"})
 public class GetAllUserServlet extends HttpServlet {
 
-    public static final String SUCCESS = "userprofile";
+    public static final String SUCCESS = "adminUser";
     public static final String FAIL = "index";
 
     /**

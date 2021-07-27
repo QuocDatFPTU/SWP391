@@ -28,12 +28,12 @@
       <div class="sidebar-menu">
         <ul>
           <li>
-            <a href="admin.html" 
+            <a href="getAllUser" 
               ><i class="fas fa-user-circle"></i> <span>User</span></a
             >
           </li>
           <li>
-            <a href="admin_course.html"
+            <a href="adminCourseSer"
               ><i class="fas fa-book-open"></i><span>Course</span></a
             >
           </li>
@@ -43,7 +43,7 @@
             >
           </li>
           <li>
-            <a href="admin_subject.html" class="active"
+            <a href="adminSubject" class="active"
               ><i class="fas fa-laptop"></i>
               <span>Subject</span></a
             >

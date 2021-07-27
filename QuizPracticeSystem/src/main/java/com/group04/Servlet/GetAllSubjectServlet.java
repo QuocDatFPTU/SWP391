@@ -28,7 +28,8 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "GetAllSubjectServlet", urlPatterns = {"/GetAllSubjectServlet"})
 public class GetAllSubjectServlet extends HttpServlet {
-
+    public static final String SUCCESS = "adminSubject";
+    public static final String FAIL = "error";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -53,7 +54,7 @@ public class GetAllSubjectServlet extends HttpServlet {
                       for(int i=0;i<listsubject.size();i++){
             System.out.println(listsubject.get(i));
             } 
-            session.setAttribute("listsubject", listsubject);
+            session.setAttribute("listSubject", listsubject);
         }catch (Exception e){  
         }finally{
             RequestDispatcher rd = request.getRequestDispatcher(url);

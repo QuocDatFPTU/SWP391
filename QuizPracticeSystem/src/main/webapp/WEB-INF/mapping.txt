@@ -11,13 +11,14 @@ practiceDetail=CreatePracticeServlet
 quizListPage=quizlist.jsp
 quizPage=quizPage.jsp
 practiceList=PracticeListServlet
-homepage=GetAllCourseServlet
+homepage=HomeServlet
+adminCourseSer=GetAllCourseServlet
 viewdetailcourse=subjectlist.jsp
 subjectListDetail=GetSubjectPagingServlet
 subjectlesson=GetLessonBySubjectID
 loadQuestion=LoadQuestionServlet
 getRandomQuestion=GetRandomQuestionServlet
-userprofile=userManagement.jsp
+adminUser=userManagement.jsp
 getAllUser=GetAllUserServlet
 editUser=EditUserServlet
 deleteUser=DeleteUserServlet
@@ -25,5 +26,6 @@ viewProfile=getUserByIDServlet
 profilePage=userProfile.jsp
 getProfileToEdit=GetUserToEditServlet
 editPage=editUserProfile.jsp
-
+adminCourse=courseManagement.jsp
+adminSubject=subjectManagement.jsp
 

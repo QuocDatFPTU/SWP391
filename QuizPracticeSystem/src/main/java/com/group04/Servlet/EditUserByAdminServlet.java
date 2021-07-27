@@ -5,6 +5,8 @@
  */
 package com.group04.Servlet;
 
+import static com.group04.Servlet.EditUserServlet.FAIL;
+import static com.group04.Servlet.EditUserServlet.SUCCESS;
 import com.group04.entities.Role;
 import com.group04.entities.User;
 import com.group04.repositories.UserRepositoryImp;
@@ -26,14 +28,12 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author HP
+ * @author ntdun
  */
-@WebServlet(name = "EditUserServlet", urlPatterns = {"/EditUserServlet"})
-public class EditUserServlet extends HttpServlet {
-
-    public static final String SUCCESS = "getAllUser";
+@WebServlet(name = "EditUserByAdminServlet", urlPatterns = {"/EditUserByAdminServlet"})
+public class EditUserByAdminServlet extends HttpServlet {
+    public static final String SUCCESS = "profilePage";
     public static final String FAIL = "index";
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -95,9 +95,9 @@ public class EditUserServlet extends HttpServlet {
             }
         } finally {
             System.out.println(url);
-            response.sendRedirect(url);
-//            RequestDispatcher rd = request.getRequestDispatcher(url);
-//            rd.forward(request, response);
+          
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
             out.close();
         }
     }
