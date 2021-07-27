@@ -34,9 +34,12 @@ public class GetRandomQuestionServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter pw = response.getWriter();
-        System.out.println("Hello Cac be loli");
+        Long subjectID = Long.parseLong(request.getParameter("txtSubjectID"));
+        Integer numOfQuest = Integer.parseInt(request.getParameter("txtNumOfQuest"));
+        
+        
         QuizRepository questRepo = QuizRepository.createInstance();
-        List<Question> quests = questRepo.getRandomQuestionsBySubject((Long) 4L, 10);
+        List<Question> quests = questRepo.getRandomQuestionsBySubject((Long) subjectID, numOfQuest);
 
         for (Question quest : quests) {
             System.out.println("est Optin: " + quest.getOption().size());

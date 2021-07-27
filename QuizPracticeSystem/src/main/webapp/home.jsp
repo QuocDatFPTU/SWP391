@@ -129,7 +129,7 @@
                         <a href="registerPage" type="submit" class="btn btn-secondary mx-2">Register</a>
                     </c:if>
                         
-                    <a href="psracticeList" >
+                    <a href="practiceList" >
                         <input type="button" value="PracticeList" class="btn btn-secondary mx-3" />
                     </a>
                         <a href="WEB-INF/mapping.txt"></a>

@@ -127,14 +127,15 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <form action="#">
+                    <form action='GetRandomQuestionServlet'>
+                        <div class="modal-body">
+
                             <h2>Practice Details</h2>
 
                             <div class="form-group">
 
-                                <select class="custom-select my-1 mr-sm-2 subject-sel" id="subject-name-preference">
-                                    <option selected>Subject Name</option>
+                                <select class="custom-select my-1 mr-sm-2 subject-sel" id="subject-name-preference" name='txtSubjectID'>
+                                    <option value='default'>Subject Name</option>
                                     <c:forEach items="${sessionScope.SUBJECT_LIST}" var="subject">
                                         <option value="${subject.subjectID}">${subject.subjectName}</option>                                     
                                     </c:forEach>
@@ -145,28 +146,31 @@
                             <div class='hidden-part' > 
                                 <div class="form-group">
                                     <label for="number-questions">Number of practicing questions</label>
-                                    <input type="text" class="form-control" id="number-questions">   
+                                    <input type="number" class="form-control" id="number-questions" name='txtNumOfQuest'>   
                                 </div>
 
                                 <div class="form-group">
                                     <label class="my-1 mr-2" for="question-by-all-dimension">Question are selected by topic(s) or a specific dimension?</label>
-                                    <select class="custom-select my-1 mr-sm-2" id="question-by-all-dimension">
+                                    <select class="custom-select my-1 mr-sm-2" id="question-by-all-dimension" name='txtDimensionID'>
                                         <option selected>Choose...</option>
-                                        <c:if test="${not empty sessionScope.DIMENSION_LIST} ">
-                                            <c:forEach items="sessionScope.DIMENSION_LIST" var="dimension">
+                                        <c:if test="${not empty sessionScope.DIMENSION_LIST}">                                           
+                                            <c:forEach items="${sessionScope.DIMENSION_LIST}" var="dimension">                                            
                                                 <option value="${dimension.dimensionID}">${dimension.dimensionName}</option>
                                             </c:forEach>
                                         </c:if>
                                     </select>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Create Practice Exam</button>
+                        </div>
+                    </form>
+
                 </div>
+
             </div>
         </div>
 
@@ -176,14 +180,26 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>
+            loadSelectionFromParameter();
             $('#myModal').on('shown.bs.modal', function () {
-                $('#myInput').trigger('focus')
-            })
-            
 
+                $('#myInput').trigger('focus')
+
+            })
+
+            function loadSelectionFromParameter() {
+
+                let subjectID = decodeURIComponent(location.search.substr(1).split('&')[0].split('=')[1]);
+
+                if (subjectID != null) {
+                    $('#subject-name-preference').val(subjectID).change();
+                } else {
+                    $('#subject-name-preference').val('default').change();
+                }
+            }
             document.querySelector('select.subject-sel').addEventListener('change', () => {
-                var currentVal = $('#question-by-all-dimension :selected').text();
-                window.location.href = 'http://localhost:8080/PracticeListServlet?subjectID=' + currentVal;
+                var currentVal = $('#subject-name-preference :selected').val();
+                window.location.href = 'http://localhost:8080/QuizPracticeSystem/PracticeListServlet?subjectID=' + currentVal;
 
             })
         </script>

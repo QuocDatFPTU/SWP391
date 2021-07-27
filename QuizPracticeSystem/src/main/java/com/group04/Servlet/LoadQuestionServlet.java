@@ -49,7 +49,7 @@ public class LoadQuestionServlet extends HttpServlet {
                     //check khac null moi parse dc 
                     Long answerId = Long.parseLong(answerIdString);
                     //option tam thoi chua id cau tra loi
-                    Option chosenAnswer = new Option(answerId);
+//                    Option chosenAnswer = new Option(answerId);
                     
                     List<QuestionStatus> questionStatusList = (List<QuestionStatus>) session.getAttribute("questionStatus");
                     QuestionStatus questionStatus = questionStatusList.get(recentQuestion);
@@ -59,13 +59,13 @@ public class LoadQuestionServlet extends HttpServlet {
                     //tim cau hoi dang dc chon 
                     for (Option option : quest.getOption()) {
                         //tim cau tra loi trong options so với câu trả lời đang 
-                        if (chosenAnswer.equals(option)) {
-                            questionStatus.setChosenOption(option);
-                            
-                            session.setAttribute("questionStatus", questionStatusList);
-                            
-                            break;
-                        }
+//                        if (chosenAnswer.equals(option)) {
+//                            questionStatus.setChosenOption(option);
+//                            
+//                            session.setAttribute("questionStatus", questionStatusList);
+//                            
+//                            break;
+//                        }
                     }
                 }
             }

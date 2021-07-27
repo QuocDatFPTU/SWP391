@@ -51,21 +51,29 @@ public class QuizRepositoryImp implements QuizRepository {
 
     @Override
     public List<Question> getQuestionsBySubject(Long subjectID) {
-        List<Lesson> lessonList = getLessonBySubject(subjectID);
-        System.out.println("Done get Lesson by id");
-        List<Question> quizzes = new ArrayList<>();
-        QuestionRepository questionRepo = QuestionRepository.createInstance();
-        for (Lesson lesson : lessonList) {
-            questionRepo.getQuestionByLessonId(lesson.getLessonID()).forEach(question -> {
-                quizzes.add(question);
-            });
+        try {
+            List<Lesson> lessonList = getLessonBySubject(subjectID);
+            System.out.println("Done get Lesson by id");
+            List<Question> quizzes = new ArrayList<>();
+            QuestionRepository questionRepo = QuestionRepository.createInstance();
+            for (Lesson lesson : lessonList) {
+                questionRepo.getQuestionByLessonId(lesson.getLessonID()).forEach(question -> {
+
+                    quizzes.add(question);
+                });
+            }
+            return quizzes;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
         }
-        return quizzes;
+
     }
 
     @Override
     public List<Question> getRandomQuestionsBySubject(Long subjectID, int n) {
         List<Question> quizzes = getQuestionsBySubject(subjectID);
+        System.out.println(quizzes);
         System.out.println("Done");
         Collections.shuffle(quizzes);
         for (Question quest : quizzes) {
@@ -78,7 +86,7 @@ public class QuizRepositoryImp implements QuizRepository {
     public List<ExamInfo> getAllExam() {
         Transaction transaction = null;
         List<ExamInfo> quizzes = null;
-        
+
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
@@ -86,7 +94,7 @@ public class QuizRepositoryImp implements QuizRepository {
             //Question
             //}
             quizzes = new ArrayList<ExamInfo>(session.createQuery("FROM ExamInfo", ExamInfo.class).getResultList());
-            
+
             if (quizzes != null) {
                 return quizzes;
             }
