@@ -23,7 +23,7 @@
 <!------ Include the above in your HEAD tag ---------->
 <body>
         <div class="container emp-profile">
-                    <form method="post">
+            <form action="editUser" method="post">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="profile-img">
@@ -49,21 +49,43 @@
                             <div class="col-md-4">
                                 <div class="profile-work">
                                     <p>OPTION</p>
-                                    <a href="#">Back to Home</a><br/>
+                                    <a href="index">Back to Home</a><br/>
                                     <a href="#" class="">Update Password</a><br/>                                                              
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="tab-content profile-tab" id="myTabContent">
                                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <form action="editUser">                  
-                                               
+                                        <form action="editUser?userID=${sessionScope.singleUserToEdit.userID}"> 
+                                            
+                                            <div class="row mt-3">
+                                                   
+                                                <input type="hidden" name="password" value="${sessionScope.singleUserToEdit.password}"/>
+                                                    
+                                                </div>
+                                            
                                                 <div class="row mt-3">
                                                     <div class="col-md-6">
-                                                        <label>Name</label>
+                                                        <label>User Name</label>
                                                     </div>
                                                     <div class="col-md-6">                                                 
-                                                        <input name="username" type="text" class="form-control"  placeholder="User Name">
+                                                        <input  name="username" type="text" class="form-control"  placeholder="${sessionScope.singleUserToEdit.username}">
+                                                    </div>
+                                                </div>
+                                            <div class="row mt-3">
+                                                    <div class="col-md-6">
+                                                        <label>First Name</label>
+                                                    </div>
+                                                    <div class="col-md-6">                                                 
+                                                        <input  name="firstname" type="text" class="form-control"  placeholder="${sessionScope.singleUserToEdit.firstName}">
+                                                    </div>
+                                                </div>
+                                            <div class="row mt-3">
+                                                    <div class="col-md-6">
+                                                        <label> Last Name</label>
+                                                    </div>
+                                                    <div class="col-md-6">                                                 
+                                                        <input  name="lastname" type="text" class="form-control"  placeholder="${sessionScope.singleUserToEdit.lastName}">
                                                     </div>
                                                 </div>
                                                 <div class="row mt-3">
@@ -72,7 +94,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         
-                                                        <input name="email" type="text" class="form-control"  placeholder="Email">
+                                                        <input  name="email" type="text" class="form-control"  placeholder="${sessionScope.singleUserToEdit.email}">
                                                     </div>
                                                 </div>
                                                 <div class="row mt-3">
@@ -80,7 +102,7 @@
                                                         <label>Phone</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input name="phone" type="text" class="form-control"  placeholder="Phone Number">
+                                                        <input  name="phonenumber" type="text" class="form-control"  placeholder="${sessionScope.singleUserToEdit.phone}">
                                                     </div>
                                                 </div>
                                                 <div class="row mt-3">
@@ -88,7 +110,10 @@
                                                         <label>Gender</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input name="gender" type="text" class="form-control"  placeholder="Gender">
+                                                        <select name="gender">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                </select>
                                                     </div>
                                                 </div>
                                                 

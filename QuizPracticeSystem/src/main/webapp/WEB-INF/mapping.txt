@@ -1,14 +1,10 @@
 login=LoginServlet
 search=SearchLastnameServlet
 logout=LogoutServlet
-updateAccount=UpdateAccountServlet
-addItem=AddItemToCartServlet
-updateItem=UpdateItemInCartServlet
 register=RegisterServlet
 deleteAccount=DeleteAccountServlet
 index=home.jsp
 registerPage=register.jsp
-createErrorPage=register.jsp
 errorPage=error.html
 loginPage=login.jsp
 practiceDetail=CreatePracticeServlet
@@ -27,4 +23,7 @@ editUser=EditUserServlet
 deleteUser=DeleteUserServlet
 viewProfile=getUserByIDServlet
 profilePage=userProfile.jsp
+getProfileToEdit=GetUserToEditServlet
+editPage=editUserProfile.jsp
+
 

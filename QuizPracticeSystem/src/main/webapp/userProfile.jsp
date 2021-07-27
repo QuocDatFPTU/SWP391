@@ -34,10 +34,10 @@
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                        Kshiti Ghelani
+                                      USER PROFILE
                                     </h5>
                                     <h6>
-                                        User
+                                    
                                     </h6>
                                    
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">                      
-                        <a href="editUserProfile.jsp"  class="profile-edit-btn">Edit Profile</a>
+                        <a href="getProfileToEdit?userID=${sessionScope.singleUser.userID}"  class="profile-edit-btn">Edit Profile</a>
                     </div>
                 </div>
                 <div class="row">

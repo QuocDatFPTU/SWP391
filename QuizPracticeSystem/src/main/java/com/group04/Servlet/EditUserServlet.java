@@ -31,7 +31,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "EditUserServlet", urlPatterns = {"/EditUserServlet"})
 public class EditUserServlet extends HttpServlet {
 
-    public static final String SUCCESS = "userprofile";
+    public static final String SUCCESS = "profilePage";
     public static final String FAIL = "index";
 
     /**
@@ -52,8 +52,7 @@ public class EditUserServlet extends HttpServlet {
         Map<String, String> mapping = (Map<String, String>) context.getAttribute("MAPPING");
         String url = mapping.get(FAIL);
         try {
-            
-            Long userID =parseLong(request.getParameter("userID"));
+            Long userID = parseLong(request.getParameter("userID"));
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String lastname = request.getParameter("lastname");
@@ -64,6 +63,7 @@ public class EditUserServlet extends HttpServlet {
             String avatar = " ";
             User UpdateUser = new User();
             //Create New User
+            UpdateUser.setUserID(userID);
             UpdateUser.setUsername(username);
             UserRepositoryImp urp = new UserRepositoryImp();
             Role newUserRole = urp.getRole("Customer");
@@ -90,7 +90,7 @@ public class EditUserServlet extends HttpServlet {
             } else {
                 urp.updateUser(UpdateUser);
                 url = mapping.get(SUCCESS);
-
+                session.setAttribute("singleUser", UpdateUser);
             }
         } finally {
             System.out.println(url);
