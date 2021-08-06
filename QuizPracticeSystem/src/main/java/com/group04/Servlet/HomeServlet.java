@@ -28,7 +28,8 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "HomeServlet", urlPatterns = {"/HomeServlet"})
 public class HomeServlet extends HttpServlet {
-
+    public static final String SUCCESS = "index";
+    public static final String FAIL = "index";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
