@@ -53,6 +53,9 @@ public class PracticeListServlet extends HttpServlet {
        
             Long subjectParam = Long.parseLong(request.getParameter("subjectID"));
             dimensions = dimRepo.getDimensionBySubjectID(subjectParam);
+            for(Dimension dim : dimensions){
+                System.out.println(dim);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             dimensions = new ArrayList<>();

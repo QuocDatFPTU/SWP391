@@ -56,7 +56,7 @@ public class Question implements Serializable {
     @JoinColumn(name = "lessonID")
     private Lesson lesson;
 
-    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
     private Set<Option> Option;
    
 }

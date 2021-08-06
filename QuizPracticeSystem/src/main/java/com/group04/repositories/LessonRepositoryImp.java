@@ -9,6 +9,7 @@ import com.group04.entities.Course;
 import com.group04.entities.Lesson;
 import com.group04.entities.Subject;
 import com.group04.utils.HibernateUtil;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -22,14 +23,16 @@ public class LessonRepositoryImp implements LessonRepository {
     @Override
     public List<Lesson> getLessonBySubjectId(Long subjectId) {
         Transaction transaction = null;
-        List<Lesson> Lesson = null;
+        List<Lesson> lesson = null;
+        Subject subject = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Lesson =  session.createQuery("FROM Subject S WHERE S.subjectID = :id").setParameter("id", subjectId)
-                    .getResultList();
-            if (Lesson != null) {
-                return Lesson;
+            subject =  (Subject) session.createQuery("FROM Subject S WHERE S.subjectID = :id").setParameter("id", subjectId)
+                    .getSingleResult();
+            if (subject != null) {
+                lesson = new ArrayList<>(subject.getLesson());
+                
             }
             transaction.commit();
             session.close();
@@ -40,8 +43,10 @@ public class LessonRepositoryImp implements LessonRepository {
                 System.out.println("Loop Function get lesson");
                 transaction.rollback();
             }
+        } finally{
+            return lesson;
         }
-        return null;
+        
     }
 
     @Override

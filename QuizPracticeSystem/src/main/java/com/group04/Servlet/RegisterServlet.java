@@ -97,7 +97,7 @@ public class RegisterServlet extends HttpServlet {
                 }
             }
         } catch (Exception e) {
-            log("Register: " + e);
+            e.printStackTrace();
         } finally {
             System.out.println(url);
             RequestDispatcher rd = request.getRequestDispatcher(url);

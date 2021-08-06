@@ -72,8 +72,8 @@ public class Subject implements Serializable{
     private boolean isActive;
     
     
-    @OneToMany(mappedBy="subject", fetch = FetchType.LAZY)
-    private Set<Dimension> dimension = new HashSet<>();
+    @OneToMany(mappedBy="subject", fetch = FetchType.EAGER)
+    private Set<Dimension> dimension;
     
     @OneToMany(mappedBy = "subject", fetch = FetchType.EAGER)
     private Set<Lesson> lesson ;
